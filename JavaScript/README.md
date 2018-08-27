@@ -39,8 +39,9 @@
             a2.__proto__ === a.constructor.prototype    // false（此处即为图1中的例外情况）
             ```
         3. 什么是原型链
+
             <img src="https://note.youdao.com/yws/public/resource/0c7e34c500438947463771cc1073655a/xmlnote/WEBRESOURCEb5e2c35f3974cb59743a6b86f2e23410/897" width="500" />
-            
+
             ```js
             var A = function() {};
             var a = new A();
