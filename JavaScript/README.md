@@ -1,7 +1,6 @@
 ### 《JavaScript》学习笔记
 > 基于《JavaScript高级程序设计》第三版目录结构
 
-183页
 #### 第6章 面向对象的程序设计
 3. 继承
     1. **原型对象与原型链（_重点内容_）**
@@ -20,6 +19,7 @@
         2. __proto__属性指向谁
 
             <img src="https://note.youdao.com/yws/public/resource/0c7e34c500438947463771cc1073655a/xmlnote/WEBRESOURCEf94f0664c6cc8dec86029683129a504c/901" width="500" />
+
             ```js
             // 1. 字面量方式
             var a = {};
@@ -40,7 +40,7 @@
             ```
         3. 什么是原型链
             <img src="https://note.youdao.com/yws/public/resource/0c7e34c500438947463771cc1073655a/xmlnote/WEBRESOURCEb5e2c35f3974cb59743a6b86f2e23410/897" width="500" />
-
+            
             ```js
             var A = function() {};
             var a = new A();
