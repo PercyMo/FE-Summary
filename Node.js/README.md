@@ -23,6 +23,41 @@ $ npm view socket.io
     ```
     尽管在浏览器端很少使用，但非常重要，很多流行的Node.js框架就是通过此属性根据不同参数个数提供不同的功能
 
+##### 3. 阻塞与非阻塞IO
+1. PHP与Node在基础架构上有明显区别。Node采用一个长期运行的进程，相反，Apache会产出多个线程（每个请求一个线程），每次都会刷新状态。在PHP中，当解释器再次执行时，变量会被重新赋值，而Node则不然。因此，在Node中，需要对回调函数如何修改当前内存中的变量（状态）特别小心。
+2. 事件轮询是Node IO的基础核心。许多优秀的Node模块都是非阻塞的，执行任务也都采用了异步的方式。
+
+##### 4. Node中的js
+1. 在默认情况下，每个模块都会暴露出一个空对象。如果想在该对象上添加属性，那么使用`exports`即可。
+    ```js
+    exports.name = 'john';
+    exports.data = 'this is some data';
+
+    var privateVariable = 5;
+
+    exports.getPrivate = function() {
+        return privateVariable;
+    };
+    ```
+    或者，彻底重写`module.exports`
+    ```js
+    // module.js
+    function Person(name) {
+        this.name = 'Tom';
+    };
+
+    Person.prototype.talk = function() {
+        console.log('name:', this.name);
+    };
+
+    module.exports = Person;
+
+    // main.js
+    var Person = require('./module_a');
+
+    var tom = new Person();
+    tom.talk();
+    ```
 
 
 #### 第一章 node简介
