@@ -65,6 +65,7 @@ $ npm view socket.io
     例如读取文件内容的函数有异步的 `fs.readFile()` 和同步的 `fs.readFileSync()`。
 
     建议大家使用异步方法，比起同步，异步方法性能更高，速度更快，而且没有阻塞。
+
 2. 流
 
     process全局对象中包含了三个流对象，分别对应对应三个UNIX标准流：
@@ -72,6 +73,7 @@ $ npm view socket.io
     * ** srdout **  :   标准输出
     * ** stderr **  :   标准错误
     简而言之，当持续不断地对数据进行读写时，流就出现了。
+
 3. ANSI转义码
     ```js
     console.log('\033[90m' + '这里是一段文本' + '\033[39m');
@@ -80,7 +82,9 @@ $ npm view socket.io
     * [表示开始颜色设置
     * 90表示前景色为灰亮色
     * m表示颜色设置结束
+
 3. Stream
+
     `fs.createReadStream`方法允许为一个文件创建一个可读的stream对象   
     例如：要上传一个很大的文件到web服务器，这是你无需读取完所有的文件内容在开始上传，使用stream可以大大提速上传过程。
     ```js
@@ -98,7 +102,9 @@ $ npm view socket.io
         // 文件读取完毕
     });
     ```
+    
 4. 监视
+
     Node允许监视文件或目录是否发生变化。发生变化时，分发一个事件，触发指定的回调函数。
     ```js
     var stream = fs.createReadStream('test.txt');
