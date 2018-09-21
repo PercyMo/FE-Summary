@@ -59,6 +59,63 @@ $ npm view socket.io
     tom.talk();
     ```
 
+##### 5. 命令行工具(CLI)以及FS API
+1. Node.js 文件系统（fs 模块），是唯一一个同时提供同步和异步API的模块。
+
+    例如读取文件内容的函数有异步的 `fs.readFile()` 和同步的 `fs.readFileSync()`。
+
+    建议大家使用异步方法，比起同步，异步方法性能更高，速度更快，而且没有阻塞。
+2. 流
+
+    process全局对象中包含了三个流对象，分别对应对应三个UNIX标准流：
+    * ** stdin **   :   标准输入
+    * ** srdout **  :   标准输出
+    * ** stderr **  :   标准错误
+    简而言之，当持续不断地对数据进行读写时，流就出现了。
+3. ANSI转义码
+    ```js
+    console.log('\033[90m' + '这里是一段文本' + '\033[39m');
+    ```
+    * \033表示转义序列的开始
+    * [表示开始颜色设置
+    * 90表示前景色为灰亮色
+    * m表示颜色设置结束
+3. Stream
+    `fs.createReadStream`方法允许为一个文件创建一个可读的stream对象   
+    例如：要上传一个很大的文件到web服务器，这是你无需读取完所有的文件内容在开始上传，使用stream可以大大提速上传过程。
+    ```js
+    // 必须等到文件读取完毕，载入到RAM，才能处理
+    var stream = fs.readFile('input.txt', function(err, contents) {
+        // 对文件进行处理
+    });
+
+    // 每次读取可变大小的内容快，并且每次读取后触发回调函数
+    var stream = fs.createReadStream('input.txt');
+    stream.on('data', function(chunk) {
+        // 处理文件部分内容
+    });
+    stream.on('end', function(chunk) {
+        // 文件读取完毕
+    });
+    ```
+4. 监视
+    Node允许监视文件或目录是否发生变化。发生变化时，分发一个事件，触发指定的回调函数。
+    ```js
+    var stream = fs.createReadStream('test.txt');
+
+    var files = fs.readdirSync(process.cwd());
+    files.forEach(function(file) {
+        if (/\.css/.test(file)) {
+            fs.watchFile(process.cwd() + '/' + file, function() {
+                console.log('  -  ' + file + 'changed!');
+            });
+        }
+    });
+    ```
+    除`fs.watchFile`之外，还可以使用`fs.watch`来监视整个目录。
+
+##### 6. TCP
+
 
 #### 第一章 node简介
 
