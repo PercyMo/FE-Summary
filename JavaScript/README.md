@@ -107,3 +107,12 @@
 
 4. JSON对象有两个方法：JSON.stringify()和JSON.parse()。分别用于将JSON对象序列化为JSON字符串，和把JSON字符串解析为原生JavaScript值。
     * 值为`undefined`的任何属性都会被跳过
+
+#### 补充内容
+1. Event Loop事件循环
+
+    [Event Loop详细解析](./EventLoop.md)
+
+2. JS单线程与Web Worker
+
+    Html5提出Web Worker标准，允许js创建多个线程，但子线程完全受主线程控制，且不得操作DOM，所以并没有改变js单线程的本质。
