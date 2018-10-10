@@ -49,6 +49,11 @@
             a.__proto__.__proto__;                      // Object {} (即构造器function Object 的原型对象)
             a.__proto__.__proto__.__proto__;            // null
             ```
+            
+            <img src="./images/03.png" width="500" />
+
+            图中由相互关联的原型组成的链状结构就是原型链，也就是蓝色的这条线。
+
 
     2. 确定原型和实例的关系
         * 通过`instanceof`操作符，用来测试实例与原型链中出现过的构造函数，结果就会返回`true`
