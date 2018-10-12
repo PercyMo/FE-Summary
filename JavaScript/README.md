@@ -1,6 +1,36 @@
 ### 《JavaScript》学习笔记
 > 基于《JavaScript高级程序设计》第三版目录结构
 
+#### 第4章 变量、作用域和内存问题
+2. 执行环境及作用域
+
+    JavaScript采用的是词法作用域，函数的作用域在函数定义的时候就决定了。   
+    而与词法作用域相对的是动态作用域，函数的作用域是在函数调用的时候才决定的。  
+    例子：
+    ```js
+    // 在node下运行这段js代码
+    var value = 1;
+    function foo() {
+        console.log(value);
+    }
+    function bar() {
+        var value = 2;
+        foo();
+    }
+    bar();
+
+    // 在bash下运行这段bash代码 （bash语言是动态作用域）
+    value=1
+    function foo () {
+        echo $value;
+    }
+    function bar () {
+        local value=2;
+        foo;
+    }
+    bar
+    ```
+
 #### 第6章 面向对象的程序设计
 3. 继承
     1. **原型对象与原型链（_重点内容_）**
