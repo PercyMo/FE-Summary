@@ -33,17 +33,17 @@
 
 3. 变量提升和函数提升
 
-    [变量提升和函数提升详解](./Hoisting.md)
+    [变量提升和函数提升详解 =>>](./Hoisting.md)
 
 #### 第6章 面向对象的程序设计
 3. 继承
 
-    [原型对象与原型链、继承详解](./Prototype.md)
+    [原型对象与原型链、继承详解 =>>](./Prototype.md)
         
 #### 第7章 函数表达式
 5. 立即执行函数表达式(IIFE)
 
-    [立即执行函数表达式(IIFE)详解](./IIFE.md)
+    [立即执行函数表达式(IIFE)详解 =>>](./IIFE.md)
 
 #### 第20章 JSON
 1. JSON可以表示三种类型的值：简单值，对象，数组
@@ -77,7 +77,7 @@
 #### 补充内容
 1. Event Loop事件循环
 
-    [Event Loop详细解析](./EventLoop.md)
+    [Event Loop详细解析 =>>](./EventLoop.md)
 
 2. JS单线程与Web Worker
 
