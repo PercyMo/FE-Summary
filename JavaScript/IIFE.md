@@ -38,20 +38,20 @@ i;//ReferenceError: i is not defined(它只存在于makeCounter里)
 // 它的运行结果可能并不像你想的那样，因为`i`的值从来没有被锁定。相反的，当setTimeout执行时(循环已经被很好的执行完毕)，因此会打印所有元素的总数，因为这是`i`此时的真实值。
 // 5 5 5 5 5
 for (var i = 0; i < 5; i++) {
-	setTimeout(function() {
-		console.log(i);
-	}, 200);
+    setTimeout(function() {
+        console.log(i);
+    }, 200);
 }
 
 
 // 而像下面这样改写，便可以了，因为在IIFE里，`i`值被锁定在了`lockedIndex`里。在循环结束执行时，尽管`i`值的数值是所有元素的总和，但每一次函数表达式被调用时，IIFE里的`lockedIndex`值都是`i`传给它的值,所以正确的值被打印。
 // 0 1 2 3 4
 for (var i = 0; i < 5; i++) {
-	(function function_name(lockedIndex) {
-		setTimeout(function() {
-			console.log(lockedIndex);
-		}, 200);
-	})(i);
+    (function function_name(lockedIndex) {
+        setTimeout(function() {
+            console.log(lockedIndex);
+        }, 200);
+    })(i);
 }
 ```
 
@@ -62,18 +62,18 @@ for (var i = 0; i < 5; i++) {
 模块模式方法不仅相当的厉害而且简单。非常少的代码，你可以有效的利用与方法和属性相关的命名，在一个对象里，组织全部的模块代码即最小化了全局变量的污染也创造了私人变量。
 ```js
 var counter = (function(){
-var i = 0;
-return {
-	get: function(){
-		return i;
-	},
-	set: function(val){
-		i = val;
-	},
-	increment: function(){
-		return ++i;
-	}
-}
+    var i = 0;
+    return {
+        get: function(){
+            return i;
+        },
+        set: function(val){
+            i = val;
+        },
+        increment: function(){
+            return ++i;
+        }
+    }
 }());
 counter.get();//0
 counter.set(3);
