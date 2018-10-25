@@ -148,6 +148,59 @@ HTTP属于TCP上层协议
         尽管我们可以通过`req.connection`获取TCP连接对象，Node为了不让我们担心到底是请求还是连接，为我们提供了请求和响应的抽象。因此，即使你能通过`req.connection`获取TCP连接对象，但大多数情况下你还是在与请求和响应的抽象打交道。
 
 ##### 8. Connect
+Connect是基于http模块的中间件框架。
+[Connect框架官方文档](https://www.npmjs.com/package/connect)
+[Connect第三方的中文文档（部分内容已过时，许多中间件已被废弃，仅做参考）](http://blog.fens.me/nodejs-connect/)
+
+1. 关于中间件
+    中间件由函数组成，除了处理req和res对象之外，还接收一个next函数来做流程控制。
+    1. 书写可重用的中间件
+        ```js
+        // middleware.js
+        module.exports = function (opts) {
+            // ...
+            return function (req, res, next) {
+                // ...
+                next();
+            }
+        };
+        ```
+        ```js
+        // server.js
+        var middleware = require('./middleware');
+
+        app.use(middleware(opts));
+        ```
+        模块暴露一个函数，函数本身又返回一个函数，这对于可配置的中间件来说是非常常见的写法。   
+        最后，总是要让其他中间件能够处理请求，所以得调用next。否则程序不会做任何事情！
+
+2. Connect中的中间件
+    虽然在Connect和Express或者其他框架下使用中间的方式略微不同。但这些平台框架都会提供具有相似功能，解决同一类问题的中间件。
+    1. static
+
+        在旧版中，Connect自身提供static中间件，用于处理静态文件，设置root路径作为静态文件服务器,但已经被废弃。   
+        目前是使用`serve-static`，作为静态文件的处理中间件
+        ```js
+        // 引入
+        var serveStatic = require('serve-static');
+
+        // 通过use使用
+        app.use(serveStatic(__dirname + '/website'));
+        ```
+        1. 挂载
+
+            `static`允许将任意一个URL匹配到文件系统中的任意一个目录。
+            ```js
+            app.use('/static', serveStatic('/path/res/website'));
+
+            // 现在，可以访问位于 website 目录中的文件了
+            http://localhost:3000/images/kitten.jpg
+            http://localhost:3000/css/style.css
+            http://localhost:3000/js/app.js
+            ``` 
+        2. maxAge(最大缓存时间)
+
+
 
 #### 第一章 node简介
 
