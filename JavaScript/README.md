@@ -35,6 +35,10 @@
 
     [变量提升和函数提升详解 =>>](./Hoisting.md)
 
+4. 执行上下文和执行上下文栈
+
+    [执行上下文和执行上下文栈详解 =>>](./Context.md)
+
 #### 第6章 面向对象的程序设计
 3. 继承
 
@@ -70,8 +74,18 @@
         "age": 29
     }
     ```
+4. 何时是JSON，何时不是JSON？
 
-4. JSON对象有两个方法：JSON.stringify()和JSON.parse()。分别用于将JSON对象序列化为JSON字符串，和把JSON字符串解析为原生JavaScript值。
+    `{ "prop": "val" }` 这样的声明有可能是JavaScript对象字面量也有可能是JSON字符串，取决于什么上下文使用它，如果是用在string上下文（用单引号或双引号引住，或者从text文件读取）的话，那它就是JSON字符串，如果是用在对象字面量上下文中，那它就是对象字面量。
+    ```js
+    // 这是JSON字符串
+    var foo = '{ "prop": "val" }';
+    
+    // 这是对象字面量
+    var bar = { "prop": "val" };
+    ```
+
+5. JSON对象有两个方法：JSON.stringify()和JSON.parse()。分别用于将JSON对象序列化为JSON字符串，和把JSON字符串解析为原生JavaScript值。
     * 值为`undefined`的任何属性都会被跳过
 
 #### 补充内容

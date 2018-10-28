@@ -149,10 +149,13 @@ HTTP属于TCP上层协议
 
 ##### 8. Connect
 Connect是基于http模块的中间件框架。
+
 [Connect框架官方文档](https://www.npmjs.com/package/connect)
+
 [Connect第三方的中文文档（部分内容已过时，许多中间件已被废弃，仅做参考）](http://blog.fens.me/nodejs-connect/)
 
 1. 关于中间件
+
     中间件由函数组成，除了处理req和res对象之外，还接收一个next函数来做流程控制。
     1. 书写可重用的中间件
         ```js
@@ -175,10 +178,11 @@ Connect是基于http模块的中间件框架。
         最后，总是要让其他中间件能够处理请求，所以得调用next。否则程序不会做任何事情！
 
 2. Connect中的中间件
-    虽然在Connect和Express或者其他框架下使用中间的方式略微不同。但这些平台框架都会提供具有相似功能，解决同一类问题的中间件。
+
+    虽然在Connect和Express或者其他框架下使用中间件的方式略微不同。但这些平台框架都会提供具有相似功能，解决同一类问题的中间件。
     1. static
 
-        在旧版中，Connect自身提供static中间件，用于处理静态文件，设置root路径作为静态文件服务器,但已经被废弃。   
+        在旧版中，Connect自身提供static中间件，用于处理静态文件，设置root路径作为静态文件服务器，但已经被废弃。   
         目前是使用`serve-static`，作为静态文件的处理中间件
         ```js
         // 引入
@@ -194,13 +198,16 @@ Connect是基于http模块的中间件框架。
             app.use('/static', serveStatic('/path/res/website'));
 
             // 现在，可以访问位于 website 目录中的文件了
-            http://localhost:3000/images/kitten.jpg
-            http://localhost:3000/css/style.css
-            http://localhost:3000/js/app.js
+            http://localhost:3000/static/images/kitten.jpg
+            http://localhost:3000/static/css/style.css
+            http://localhost:3000/static/js/app.js
             ``` 
         2. maxAge(最大缓存时间)
 
+            资源在客户端缓存的最大时间
+    2. query中间件
 
+        解析查询url中的字符串，query中间件在Express中默认就是启用的。
 
 #### 第一章 node简介
 
