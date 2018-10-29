@@ -72,9 +72,9 @@ ECStack.pop();
     所以执行上下文在概念上表示如下：
     ```js
     ExecutionContext = {
-    ThisBinding = <this value>,
-    LexicalEnvironment = { ... },
-    VariableEnvironment = { ... },
+        ThisBinding = <this value>,
+        LexicalEnvironment = { ... },
+        VariableEnvironment = { ... },
     }
     ```
     1. This 绑定：
@@ -99,9 +99,12 @@ ECStack.pop();
                         // 没有指定引用对象
         ```
     2. 词法环境
-
+    ...
+    3. 变量环境
+    ...
 
 2. 执行阶段
+...
 
 #### 4. 例子
 ```js
@@ -145,4 +148,5 @@ ECStack.pop();
 
 #### 5. 引用
 [JavaScript深入之执行上下文栈](https://github.com/mqyqingfeng/Blog/issues/4)
+
 [ 理解 JavaScript 中的执行上下文和执行栈](https://juejin.im/post/5ba32171f265da0ab719a6d7)
