@@ -210,6 +210,23 @@ Connect是基于http模块的中间件框架。
         解析查询url中的字符串，query中间件在Express中默认就是启用的。
     3. ...还有很多中间件，用到再查文档
 
+3. session会话和Redis session
+
+    大多数web应用中，多个请求之间共享“用户会话”的概念是非常必要的。“登录”一个网站时，多多少少会使用某种形式的会话系统，它主要通过在浏览器中设置cookie来实现，该cookie信息会在随后所有的请求头信息中被带回到服务器。
+
+    尝试一件事情：开启一段session会话，登陆后，重启node服务器，然后刷新浏览器，注意到没有，session丢了！
+
+    原因就在于session默认的存储方式是在内存。这就意味着session数据都是存储在内存中的，当进程退出后，session数据自然也就丢失了。所以我们需要一种能够将session信息持久化存储下来的机制，如Redis。
+
+##### 9. 其它
+1. 不同平台下的文件路径
+```js
+var publicPath = path.resolve(__dirname, "public"); 
+```
+为什么使用 `path.resolve` ？
+之所以不直接使用 `/public` 是因为 `Mac` 和 `Linux` 中目录为 `/public` 而 `Windows` 使用万恶的反斜杠 `\public` 。`path.resolve` 就是用来解决多平台目录路径问题。
+
+
 #### 第一章 node简介
 
 ##### 1. 单线程
