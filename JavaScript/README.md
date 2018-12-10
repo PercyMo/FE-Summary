@@ -136,3 +136,7 @@
 2. JS单线程与Web Worker
 
     Html5提出Web Worker标准，允许js创建多个线程，但子线程完全受主线程控制，且不得操作DOM，所以并没有改变js单线程的本质。
+
+3. 架构模式MVC和MVVM
+
+    [架构模式MVC和MVVM =>>](./ArchitecturalPattern.md)
