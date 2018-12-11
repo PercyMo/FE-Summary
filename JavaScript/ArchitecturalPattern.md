@@ -100,7 +100,56 @@
     ```
 
 #### 2. MVVM
+1. 数据绑定
 
+    主流的MVVM框架实现数据绑定的方式大概分为以下几种：
+    * 数据劫持 (Vue)
+    * 发布-订阅模式 (Knockout、Backbone)
+    * 脏值检查 (Angular)
+
+2. 数据劫持的模拟实现
+    ```js
+    var data = {
+        vision: '1.0',
+        name: 'vue',
+        arr: [1, 2, 4],
+        obj: {
+            test: 'asd'
+        }
+    };
+
+    function observe(data) {
+        if (!data || typeof data !== 'object') {
+            return;
+        }
+
+        // 使用递归劫持对象属性
+        Object.keys(data).forEach((key) => {
+            defineReactive(data, key, data[key]);
+        });
+    };
+
+    function defineReactive(data, key, value) {
+        // 监听子属性
+        observe(value);
+
+        Object.defineProperty(data, key, {
+            get: function () {
+                return value;
+            },
+            set: function (val) {
+                if (val === value) {
+                    return;
+                }
+                console.log(`监听成功：${value} ==> ${val}`);
+                value = val;
+            }
+        });
+    };
+
+    observe(data);
+    data.arr[1] = 5;    // 监听成功：2 ==> 5
+    ```
 
 #### 3. 引用
 [浅析前端开发中的 MVC/MVP/MVVM 模式](https://juejin.im/post/593021272f301e0058273468)
