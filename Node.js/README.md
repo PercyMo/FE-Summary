@@ -226,6 +226,9 @@ var publicPath = path.resolve(__dirname, "public");
 为什么使用 `path.resolve` ？
 之所以不直接使用 `/public` 是因为 `Mac` 和 `Linux` 中目录为 `/public` 而 `Windows` 使用万恶的反斜杠 `\public` 。`path.resolve` 就是用来解决多平台目录路径问题。
 
+2. Mongoose
+    1. 如果没有对 Mongo 的服务端口号进行修改，那默认将使用 27017 端口
+
 
 #### 第一章 node简介
 
@@ -300,3 +303,25 @@ Node模块分为两类：一类是Node提供的模块，核心模块；另一类
         **_解决方案二_**：同步配合缓存，可以大幅缓解Node单线程中阻塞式调用的缺陷。
 3. 模块编译
 
+    每一个编译成功的模块都会将其文件路径作为索引缓存在`Module._cache`对象上，以提高二次引入的性能。
+
+    1. JS模块的编译
+
+        在编译过程中，Node对获取的JavaScript文件内容进行了头尾包装。在头部添加了`(function (exports, require, module, __filename, __dirname) {\n, 在尾部添加了\n})`。
+
+        一个正常的JS文件会被包装成如下的样子：
+        ```js
+        (function (exports, require, module, __filename, __dirname) {
+           var math = require('math');
+           exports.area = function(radius) {
+               return Math.PI * radius * radius;
+           };
+        });
+        ```
+
+        每个模块之间都进行了作用域隔离。包装后的代码会通过vm原生模块的`runInThisContext()`方法执行，返回一个具体的function对象。最后，将当前模块对象的exports属性、require()方法、module，以及在文件定位中得到的完整路径和文件目录作为参数传递给这个function()执行。
+
+        在执行之后，模块的exports属性被返回给了调用方。exports属性上的任何方法和属性都可以被外部调用到，但模块中的其余属性或方法则不可以直接被调用。
+
+        这就是Node对CommonJS模块规范的实现。
+        
