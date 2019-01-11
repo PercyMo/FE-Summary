@@ -126,20 +126,20 @@
         }
     };
 
-    function observe(data) {
+    function observeAllKey(data) {
         if (!data || typeof data !== 'object') {
             return;
         }
 
         // 使用递归劫持对象属性
         Object.keys(data).forEach((key) => {
-            defineReactive(data, key, data[key]);
+            observer(data, key, data[key]);
         });
     };
 
-    function defineReactive(data, key, value) {
+    function observer(data, key, value) {
         // 监听子属性
-        observe(value);
+        observeAllKey(value);
 
         Object.defineProperty(data, key, {
             get: function () {
@@ -155,7 +155,7 @@
         });
     };
 
-    observe(data);
+    observeAllKey(data);
     data.arr[1] = 5;    // 监听成功：2 ==> 5
     ```
 
