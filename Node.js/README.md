@@ -326,6 +326,30 @@ Node模块分为两类：一类是Node提供的模块，核心模块；另一类
 
     <img src="./images/01.png" width="400" />
 
+5. 兼容多种模块规范
+    ```js
+    (function (name, definition) {
+        // 检查上下文环境是否为AMD或CMD
+        var hasDefine = typeof define === 'function',
+            // 检查上下文环境是否为Node
+            hasExports = typeof module !== 'undefined' && module.exports;
+
+        if (hasDefine) {
+            // AMD 环境 or CMD 环境
+            define('definition');
+        } else if (hasExports) {
+            // Node.js 模块
+            module.exports = definition();
+        } else {
+            // 将模块的执行结果挂在window变量中，在浏览器中this指向window对象
+            this[name] = definition();
+        }
+    })('hello', function () {
+        var hello = function () { };
+        return hello;
+    });
+    ```
+
 #### 第三章 异步I/O
 
 >  PHP与Node在基础架构上有明显区别。Node采用一个长期运行的进程，相反，Apache会产出多个线程（每个请求一个线程），每次都会刷新状态。在PHP中，当解释器再次执行时，变量会被重新赋值，而Node则不然。因此，在Node中，需要对回调函数如何修改当前内存中的变量（状态）特别小心。
@@ -358,3 +382,90 @@ Node模块分为两类：一类是Node提供的模块，核心模块；另一类
     整个异步I/O的流程
 
     <img src="./images/04.png" width="500" />
+
+##### 3. 非 I/O 的异步API
+1. 定时器
+
+    `setTimeout()`和`setInterval()`与浏览器中的API是一致的。它们的实现原理与异步I/O比较类似，只是不需要I/O线程池的参与。调用`setTimeout()`或者`setInterval()`创建的定时器会被插入到定时器观察者内部的一个红黑树中。每次Tick执行时，会从该红黑定时器中迭代取出定时器对象，检查是否超过定时时间，如果超过，就形成一个事件，它的回调函数将立即执行。
+
+    定时器的问题在于，它并非准确的。尽管事件循环十分快，但如果某一次循环占用的时间较多，那么下一次循环时，它也许已经超时很久了。
+
+2. process.nextTick()
+
+    采用定时器需要动用红黑树，创建定时器对象和迭代等操作，而`setTimeout(fn, 0)`的方式较为浪费性能。`process.nextTick()`方法的操作较为轻量。
+
+##### 4. 事件驱动的高性能服务器
+Node通过事件驱动的方式处理请求，无需为每一个请求创建额外的对应线程，可以省掉创建线程和毁掉线程的开销，同时操作系统在调度任务时因为线程较少，上下文切换的成本很低。这使得服务器能有条不紊得处理请求，即使在大量连接的情况下，也不受线程上下文切换的影响，这是Node高性能的一个原因。
+
+Node具有与Nginx相同的特征，不同之处在于Nginx采用纯C写成，性能较高，但它仅适合于做web服务器，用于反向代理或负载均衡等服务，在处理具体业务方面较为欠缺。
+
+#### 第四章 异步编程
+（* 关于异步编程模式，promise，async，await后续补充）
+
+##### 1. 异步编程解决方案
+1. 事件发布/订阅模式
+Node自身提供events模块
+    1. 如果对一个事件添加了超过10个侦听器，将会得到一条警告。这一设计与Node自身单线程运行有关，设计者认为侦听器太多可能会导致内存泄漏，所以存在这样一条警告。调用`emitter.setMaxListeners(0)`；可以将这个限制去掉。
+
+    2. 为了处理异常，EventEmitter对象对error事件进行了特殊对待。如果外部没有捕获这个异常，将会引起线程退出。一个健壮的EventEmitter实例应该对error事件做处理。
+
+    3. 继承events模块
+
+        ```js
+        var events = require('events');
+        var util = require('util');
+
+        function Stream () {
+            events.EventEmitter.call(this);
+        }
+        util.inherits(Stream, events.EventEmitter);
+        ```
+
+    4. 利用事件队列解决雪崩问题
+
+        ```js
+        var events = require('events');
+
+        /**
+        * 数据库查询
+        */
+        var select = function (callback) {
+            db.select('SQL', function (results) {
+                callback(results);
+            });
+        };
+
+        /**
+        * 添加状态锁
+        * 问题：连续多次调用select()时，只有第一次调用是生效的，
+        * 后续的select()是没有数据服务的
+        */
+        var status = 'ready';
+        var select = function (callback) {
+            if (status === 'ready') {
+                status = 'pending';
+                db.select('SQL', function (results) {
+                    status = 'ready';
+                    callback(results);
+                });
+            }
+        };
+
+
+        var proxy = new events.EventEmitter();
+        var status = 'ready';
+        var select = function (callback) {
+            proxy.once('selected', callback);
+            if (status === 'ready') {
+                status = 'pending';
+                db.select('SQL', function (results) {
+                    proxy.emit('selected', results);
+                    status = 'ready';
+                });
+            }
+        };
+        ```
+        
+        利用once()方法，将所有请求的回调都压入事件队列中，利用其执行一次就将监视器移除的特点，保证每一个回调只被执行一次。
+
+        SQL在进行查询时，新到来的相同调用只需在队列中等待数据就绪即可，得到结果可以被这些调用共同使用。
