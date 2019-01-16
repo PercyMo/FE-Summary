@@ -451,7 +451,9 @@ Node自身提供events模块
             }
         };
 
-
+        /**
+        * 利用events模块once()方法
+        */
         var proxy = new events.EventEmitter();
         var status = 'ready';
         var select = function (callback) {
