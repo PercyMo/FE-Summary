@@ -400,7 +400,7 @@ Node通过事件驱动的方式处理请求，无需为每一个请求创建额�
 Node具有与Nginx相同的特征，不同之处在于Nginx采用纯C写成，性能较高，但它仅适合于做web服务器，用于反向代理或负载均衡等服务，在处理具体业务方面较为欠缺。
 
 #### 第四章 异步编程
-（* 关于异步编程模式，promise，async，await后续补充）
+（TODO: 关于异步编程模式，promise，async，await后续补充）
 
 ##### 1. 异步编程解决方案
 1. 事件发布/订阅模式
@@ -471,3 +471,97 @@ Node自身提供events模块
         利用once()方法，将所有请求的回调都压入事件队列中，利用其执行一次就将监视器移除的特点，保证每一个回调只被执行一次。
 
         SQL在进行查询时，新到来的相同调用只需在队列中等待数据就绪即可，得到结果可以被这些调用共同使用。
+
+#### 第五章 内存控制
+
+##### 1. V8的垃圾回收机制与内存限制
+
+1. V8的内存限制
+
+在Node中通过js使用内存时就会发现只能使用部分内存（64位系统下约为1.4GB，32位系统下约为0.7GB）。在这样的限制下，将会导致Node无法直接操作大内存对象。
+
+##### 2. 高效使用内存
+
+1. 变量的主动释放
+
+    如果是全局变量，由于全局作用域直到进程退出才能释放，此时将导致引用的对象常驻内存（常驻在老生代中）。如果需要释放常驻内存的对象，可以通过delete操作来删除引用关系。或将变量重新赋值。
+
+    但在v8中通过delete删除对象的属性有可能干扰v8的优化，所以通过赋值方式解除引用更好。
+
+2. 闭包
+
+    闭包是js的高级特性。问题在于一旦有变量引用这个中间函数。这个中间函数将不会释放，同时也会使原始的作用域不会得到释放，作用域中产生的内存占用也不会得到释放。除非不再有引用，才会逐步释放。
+
+正常的js执行中，无法立即回收的内存有闭包和全局变量引用这两种情况。
+
+##### 3. 内存指标
+
+Node的内存构成主要由通过V8进行分配的部分和Node自行分配的部分。受V8的垃圾回收限制的主要是V8的堆内存。
+
+1. Buffer对象不同于其他对象，它不经过V8的内存分配机制，所以也不会有堆内存的大小限制。这也意味着利用堆外内存可以突破内存限制的问题。
+
+##### 4. 内存泄漏
+
+原因：1. 缓存  2. 队列消费不及时  3. 作用域未释放
+
+1. 慎将内存当做缓存
+
+    Node中，任何试图将内存当缓存的行为都应当被限制。
+
+    1. 缓存限制策略
+
+        为了解决缓存中的对象永远无法释放的问题，需要加入一种策略来限制缓存的无限增长（例如限制缓存数量，先进先出方式淘汰缓存...）。
+
+        [node-lru-cache （Isaac Z. Schlueter采用LRU算法的缓存）](https://github.com/isaacs/node-lru-cache)
+
+    2. 缓存的解决方案
+
+        使用大量缓存，比较好的方案是使用进程外的缓存，进程自身不存储状态，不影响Node进程的性能。例如Redis和Memcached。
+
+        1. 将缓存转移到外部，减少常驻内存的对象的数量，让垃圾回收更高效。
+
+        2. 进程之间可以共享缓存。
+
+2. 关注队列状态
+
+    任意异步调用都应该包含超时机制，一旦在限定时间内未完成响应，通过回调函数传递超时异常，使得任意异步调用的回调都具备可控的响应时间，给消费速度一个下限值。
+
+    解决方案：Bagpipe，async...
+
+    [Bagpipe(风笛) github](https://github.com/JacksonTian/bagpipe/blob/master/README_CN.md)
+
+    [Nodejs大批量下载图片入坑指南（使用async和bagpipe处理大并发量请求）](https://linghucong.js.org/2016/08/06/nodejs-batch-download-images-with-async-and-bagpipe/)
+
+3. 内存泄漏排查
+
+    TODO: 实际测试两种排查方案
+
+    1. node-heapdump + Chrome Profiles
+
+    2. node-memwatch
+
+    [如何定位 Node.js 的内存泄漏（淘宝FED）](http://taobaofed.org/blog/2016/04/16/how-to-find-memory-leak/)
+
+4. 大内存应用
+
+    Node提供了stream模块，通过流的方式实现对大文件的操作。
+    ```js
+    var reader = fs.createReadStream('in.text');
+    var writer = fs.createReadStream('out.txt');
+
+    reader.on('data', function (chunk) {
+        writer.writer(chunk);
+    });
+    reader.on('end', function () {
+        writer.end();
+    })
+
+
+    // 简洁写法
+    var reader = fs.createReadStream('in.text');
+    var writer = fs.createReadStream('out.txt');
+    reader.pipe(writer);
+    ```
+    可读流提供了管道方法`pipe()`，通过流的方式，上述代码不会受到V8内存限制的影响，有效提高程序的健壮性。
+
+    如不需要进行字符串层面的操作，则不需要借助V8来处理，可以尝试进行纯粹的Buffer操作，这不会受到V8堆内存的限制。
