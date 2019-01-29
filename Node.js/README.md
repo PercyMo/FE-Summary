@@ -116,19 +116,6 @@ $ npm view socket.io
     ```
     除`fs.watchFile`之外，还可以使用`fs.watch`来监视整个目录。
 
-##### 6. TCP
-
-1. 特征
-    1. 面向连接的通信和保证传递的顺序
-
-        使用node来写一个TCP服务器，只要考虑连接和以及往套接字中写数据即可。接收方会按序接收到传输的信息，要是发生网络错误，连接会失效或者终止。
-    2. 面向字节
-
-        可以使用ASCII字符或者Unicode进行传输
-    3. 可靠性
-    4. 流控制
-    5. 拥堵控制
-
 ##### 7. HTTP
 HTTP属于TCP上层协议
 1. HTTP结构
@@ -405,6 +392,15 @@ Node具有与Nginx相同的特征，不同之处在于Nginx采用纯C写成，�
 ##### 1. 异步编程解决方案
 1. 事件发布/订阅模式
 Node自身提供events模块
+
+    ```js
+    // 订阅
+    emitter.on('event1', function (msg) {
+        console.log(msg);
+    });
+    // 发布
+    emitter.emit('event1', 'hello');
+    ```
     1. 如果对一个事件添加了超过10个侦听器，将会得到一条警告。这一设计与Node自身单线程运行有关，设计者认为侦听器太多可能会导致内存泄漏，所以存在这样一条警告。调用`emitter.setMaxListeners(0)`；可以将这个限制去掉。
 
     2. 为了处理异常，EventEmitter对象对error事件进行了特殊对待。如果外部没有捕获这个异常，将会引起线程退出。一个健壮的EventEmitter实例应该对error事件做处理。
@@ -471,6 +467,45 @@ Node自身提供events模块
         利用once()方法，将所有请求的回调都压入事件队列中，利用其执行一次就将监视器移除的特点，保证每一个回调只被执行一次。
 
         SQL在进行查询时，新到来的相同调用只需在队列中等待数据就绪即可，得到结果可以被这些调用共同使用。
+
+    5. 多异步之间的协作方案
+
+        利用偏函数处理哨兵变量和第三方函数的关系。
+
+        ```js
+        var after = function (times, callback) {
+            var count = 0, results = {};
+            return function (key, value) {
+                results[key] = value;
+                count++;
+                if (count === times) {
+                    callback(results);
+                }
+            };
+        };
+
+        var emitter = new EventSource.Emitter();
+        var done = after(times, render);
+
+        emitter.on('done', done);
+        emitter.on('done', others);
+
+        fs.readFile(remplate_path, 'utf-8', function (err, template) {
+            emitter.emit('done', 'template', template);
+        });
+
+        db.query(sql, function (err, data) {
+            emitter.emit('done', 'data', data);
+        });
+
+        l10n.get(function (err, resources) {
+            emitter.emit('done', 'resources', resources);
+        });
+        ```
+        问题：这种方式需要额外维护一个`done()`函数，以及在回调函数中需要从结果中把数据一个一个提取出来，再进行处理。  
+
+        优化一步解决方案：   
+        [田老师的EventProxy模块](http://taobaofed.org/blog/2016/04/16/how-to-find-memory-leak/)
 
 #### 第五章 内存控制
 
@@ -542,6 +577,8 @@ Node的内存构成主要由通过V8进行分配的部分和Node自行分配的�
 
     [如何定位 Node.js 的内存泄漏（淘宝FED）](http://taobaofed.org/blog/2016/04/16/how-to-find-memory-leak/)
 
+    [heapdump安装报错](https://blog.csdn.net/qq_28097847/article/details/78059762)
+
 4. 大内存应用
 
     Node提供了stream模块，通过流的方式实现对大文件的操作。
@@ -565,3 +602,39 @@ Node的内存构成主要由通过V8进行分配的部分和Node自行分配的�
     可读流提供了管道方法`pipe()`，通过流的方式，上述代码不会受到V8内存限制的影响，有效提高程序的健壮性。
 
     如不需要进行字符串层面的操作，则不需要借助V8来处理，可以尝试进行纯粹的Buffer操作，这不会受到V8堆内存的限制。
+
+#### 第六章 理解Buffer
+TODO: 待补充
+
+#### 第七章 网络编程
+
+1. 构建TCP服务
+    1. 特征
+        1. 面向连接的通信和保证传递的顺序
+
+            使用node来写一个TCP服务器，只要考虑连接和以及往套接字中写数据即可。接收方会按序接收到传输的信息，要是发生网络错误，连接会失效或者终止。
+        2. 面向字节
+
+            可以使用ASCII字符或者Unicode进行传输
+        3. 可靠性
+        4. 流控制
+        5. 拥堵控制
+
+    2. OSI七层协议
+
+        <img src="./images/05.png" width="450" />
+
+    3. TCP服务事件
+
+        TCP 针对网络中的小数据包有一定的优化策略：Nagle算法。   
+        如果每次只发送一个字节的内容而不优化，网络中将充满只有极少数有效数据的数据包，将十分浪费网络资源。Nagle算法针对这种情况，要求缓冲区的数据大到一定数量或者一定时间后才将其发出，所以小数据包将被Nagle算法合并。缺点是：数据有可能被延迟发送。
+
+        在Node中，由于TCP默认启用了Nagle算法，可以调用`socket.setNoDelay(true)`去掉Nagle算法，使得write()可以立即发送数据到网络中。
+
+2. 构建UDP服务
+
+    1. UDP与TCP最大的不同是，UDP不是面向连接的。在UDP中，一个套接字可以与第一个UDP服务通信。
+
+        问题：它提供面向事务的简单不可靠信息传输服务，在网络差的情况下存在丢包严重的问题。
+
+        常常应用在那种偶尔丢一两个数据包也不会产生重大影响的场景，比如音频，视频等。DNS服务即使基于它实现的。
