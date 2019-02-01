@@ -839,6 +839,7 @@ TODO: 待补充
 
         参考：   
         [* WebSocket详解系列（IM开发者社区）](http://www.52im.net/forum.php?mod=viewthread&tid=338)
+        
         [WebSocket协议：5分钟从入门到精通](https://www.cnblogs.com/chyingp/p/websocket-deep-in.html)
 
 2. 基于WebSocket的实现方案
