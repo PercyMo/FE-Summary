@@ -680,7 +680,6 @@ TODO: 待补充
 
             详解有点绕，反正记不住，用到再查！
 
-
             ```
             0                   1                   2                   3
             0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
@@ -842,142 +841,150 @@ TODO: 待补充
         
         [WebSocket协议：5分钟从入门到精通](https://www.cnblogs.com/chyingp/p/websocket-deep-in.html)
 
-2. 基于WebSocket的实现方案
+    2. 基于WebSocket的实现方案
 
-    1. 使用ws模块搭建的简单服务器
+        1. 使用ws模块搭建的简单服务器
 
-        ```html
-        // 客户端代码
-        <!DOCTYPE html>
-        <html lang="en">
-        
-        <head>
-            <meta charset="UTF-8">
-            <title>document</title>
-        </head>
-        
-        <body>
-        </body>
-        <script>
-            let ws = new WebSocket('ws://localhost:8080')
-            ws.onopen = function (e) {
-                ws.send('hello PosyMo!')
-            }
-            ws.onerror = function (e) {
-            }
-            ws.onmessage = function (e) {
-                console.log('onmessage', e);
-            }
-            ws.onclose = function (e) {
-            }
-        </script>
-        
-        </html>
-        ```
-        
-        ```js
-        // 服务端代码
-        var WebSocketServer = require('ws').Server;
-        var wss = new WebSocketServer({ port: 8080 });
-        
-        wss.on('connection', function connection(ws) {
-            ws.on('message', function incoming(message) {
-                console.log('received: %s', message);
-            });
-        
-            ws.send('something');
-        });
-        ```
-        
-    2. Socket.IO
-
-        Socket.IO 是一个封装了 Websocket、基于 Node 的 JavaScript 框架，包含 client 的 JavaScript 和 server 的 Node。其屏蔽了所有底层细节，让顶层调用非常简单。
-        
-        另外，Socket.IO 还有一个非常重要的好处。其不仅支持 WebSocket，还支持许多种轮询机制以及其他实时通信方式，并封装了通用的接口。这些方式包含 Adobe Flash Socket、Ajax 长轮询、Ajax multipart streaming 、持久 Iframe、JSONP 轮询等。换句话说，当 Socket.IO 检测到当前环境不支持 WebSocket 时，能够自动地选择最佳的方式来实现网络的实时通信。
-        
-        ```html
-        // 客户端实现 index.html
-        <!doctype html>
-        <html>
-        
-        <head>
-            <title>Socket.IO chat</title>
-            <style>
-                * { margin: 0; padding: 0; box-sizing: border-box;}
-                body { font: 13px Helvetica, Arial; }
-                form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-                form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-                form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-                #messages { list-style-type: none; margin: 0; padding: 0; }
-                #messages li { padding: 5px 10px; }
-                #messages li:nth-child(odd) { background: #eee; }
-            </style>
-        </head>
-        
-        <body>
-            <ul id="messages"></ul>
-            <form action="">
-                <input id="m" autocomplete="off" /><button>Send</button>
-            </form>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
-            <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+            ```html
+            // 客户端代码
+            <!DOCTYPE html>
+            <html lang="en">
+            
+            <head>
+                <meta charset="UTF-8">
+                <title>document</title>
+            </head>
+            
+            <body>
+            </body>
             <script>
-                var socket = io();
-                $('form').submit(function () {
-                    //io.emit提供给我们可以发送给所有人的事件io.emit('some event', { for: 'everyone' });
-                    socket.emit('chat message', $('#m').val());
-                    $('#m').val('');
-                    return false;
-                });
-                socket.on('chat message', function (msg) {
-                    $('#messages').append($('<li>').text(msg));
-                });
+                let ws = new WebSocket('ws://localhost:8080')
+                ws.onopen = function (e) {
+                    ws.send('hello PosyMo!')
+                }
+                ws.onerror = function (e) {
+                }
+                ws.onmessage = function (e) {
+                    console.log('onmessage', e);
+                }
+                ws.onclose = function (e) {
+                }
             </script>
-        </body>
-        
-        </html>
-        ```
-        
-        ```js
-        // 服务端实现 index.js
-        var app = require('express')();
-        var http = require('http').Server(app);
-        var io = require('socket.io')(http);
-        
-        app.get('/', function (req, res) {
-            res.sendfile(__dirname + '/index.html');
-        });
-        
-        io.on('connection', function (socket) {
-            console.log('a user connected', socket.id);
-            //监听客户端的消息
-            socket.on('chat message', function (msg) {
-                //用于将消息发送给每个人，包括发送者
-                io.emit('chat message', msg);
+            
+            </html>
+            ```
+            
+            ```js
+            // 服务端代码
+            var WebSocketServer = require('ws').Server;
+            var wss = new WebSocketServer({ port: 8080 });
+            
+            wss.on('connection', function connection(ws) {
+                ws.on('message', function incoming(message) {
+                    console.log('received: %s', message);
+                });
+            
+                ws.send('something');
             });
-            socket.on('disconnect', function () {
-                console.log('user disconnected');
+            ```
+            
+        2. Socket.IO
+
+            Socket.IO 是一个封装了 Websocket、基于 Node 的 JavaScript 框架，包含 client 的 JavaScript 和 server 的 Node。其屏蔽了所有底层细节，让顶层调用非常简单。
+            
+            另外，Socket.IO 还有一个非常重要的好处。其不仅支持 WebSocket，还支持许多种轮询机制以及其他实时通信方式，并封装了通用的接口。这些方式包含 Adobe Flash Socket、Ajax 长轮询、Ajax multipart streaming 、持久 Iframe、JSONP 轮询等。换句话说，当 Socket.IO 检测到当前环境不支持 WebSocket 时，能够自动地选择最佳的方式来实现网络的实时通信。
+            
+            ```html
+            // 客户端实现 index.html
+            <!doctype html>
+            <html>
+            
+            <head>
+                <title>Socket.IO chat</title>
+                <style>
+                    * { margin: 0; padding: 0; box-sizing: border-box;}
+                    body { font: 13px Helvetica, Arial; }
+                    form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+                    form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+                    form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+                    #messages { list-style-type: none; margin: 0; padding: 0; }
+                    #messages li { padding: 5px 10px; }
+                    #messages li:nth-child(odd) { background: #eee; }
+                </style>
+            </head>
+            
+            <body>
+                <ul id="messages"></ul>
+                <form action="">
+                    <input id="m" autocomplete="off" /><button>Send</button>
+                </form>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+                <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+                <script>
+                    var socket = io();
+                    $('form').submit(function () {
+                        //io.emit提供给我们可以发送给所有人的事件io.emit('some event', { for: 'everyone' });
+                        socket.emit('chat message', $('#m').val());
+                        $('#m').val('');
+                        return false;
+                    });
+                    socket.on('chat message', function (msg) {
+                        $('#messages').append($('<li>').text(msg));
+                    });
+                </script>
+            </body>
+            
+            </html>
+            ```
+            
+            ```js
+            // 服务端实现 index.js
+            var app = require('express')();
+            var http = require('http').Server(app);
+            var io = require('socket.io')(http);
+            
+            app.get('/', function (req, res) {
+                res.sendfile(__dirname + '/index.html');
             });
-        });
-        
-        http.listen(3000);
-        ```
-        
-3. 利用 socket 实现消息实时推送思路
-    1. 在 Node 服务器建立一个用户信息和 socket id 的映射表，因为同一用户可能打开了多个页面，所以他的 socket id 可能存在多个值。当用户建立连接时，往其中添加值；用户断开连接后，删除相应值。
+            
+            io.on('connection', function (socket) {
+                console.log('a user connected', socket.id);
+                //监听客户端的消息
+                socket.on('chat message', function (msg) {
+                    //用于将消息发送给每个人，包括发送者
+                    io.emit('chat message', msg);
+                });
+                socket.on('disconnect', function () {
+                    console.log('user disconnected');
+                });
+            });
+            
+            http.listen(3000);
+            ```
+            
+    3. 利用 socket 实现消息实时推送思路
+        1. 在 Node 服务器建立一个用户信息和 socket id 的映射表，因为同一用户可能打开了多个页面，所以他的 socket id 可能存在多个值。当用户建立连接时，往其中添加值；用户断开连接后，删除相应值。
 
-        ```js
-        socket.on('user_login', function(info) {
-            const { tokenId, userId, socketId } = info;
-            addSocketId(users, { tokenId, socketId, userId });
-        });
-        ```
-    2. 根据 tokenId 找出与该用户对应的 socket id。根据 id 来向特定用户推送消息。
+            ```js
+            socket.on('user_login', function(info) {
+                const { tokenId, userId, socketId } = info;
+                addSocketId(users, { tokenId, socketId, userId });
+            });
+            ```
+        2. 根据 tokenId 找出与该用户对应的 socket id。根据 id 来向特定用户推送消息。
 
-        ```js
-        // 只向 id = socketId 的这一连接发送消息 
-        io.sockets.to(socketId).emit('receive_message', {
-            entityType,
-            data
-        });
-        ```
+            ```js
+            // 只向 id = socketId 的这一连接发送消息 
+            io.sockets.to(socketId).emit('receive_message', {
+                entityType,
+                data
+            });
+            ```
+
+
+4. 网络服务安全
+TODO: 待补充
+
+#### 第八章 构建Web应用
+
+##### 1. 基础功能
