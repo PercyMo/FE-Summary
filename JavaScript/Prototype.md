@@ -1,7 +1,5 @@
 ### 原型对象与原型链、继承详解
 
-#### 1. 进程与线程
-
 #### 1. **原型对象与原型链、继承（_重点内容_）**
 1. prototype和__proto__的区别
 
@@ -81,3 +79,132 @@ SubType.prototype = {
     }
 }
 ```
+
+#### 4. 原型的实际应用
+    ```html
+    <!-- index.html -->
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Home</title>
+    </head>
+
+    <body>
+        <p>zepto test 1</p>
+        <p>zepto test 2</p>
+        <p>zepto test 3</p>
+        <div id="div1">
+            <p>zepto test in div</p>
+        </div>
+        <script src="js/my-zepto.js"></script>
+        <script type="text/javascript">
+            var $p = $('p')
+            $p.css('font-size', '40px')
+            alert($p.html())
+
+            var $div1 = $('#div1')
+            $div1.css('color', 'blue')
+            alert($div1.html())
+        </script>
+    </body>
+    </html>
+    ```
+
+1. 在jQuery中的使用
+    ```js
+    // my-jquery.js
+    (function (window) {
+
+        var jQuery = function (selector) {
+            return new jQuery.fn.init(selector)
+        }
+
+        // 为什么将方法集成到jQuery.fn上
+        // 1. 方便后期插件扩展，和使用
+        // 2. 最终只暴露出$，不污染全局变量
+        jQuery.fn = {
+            css: function (key, value) {
+                alert('css')
+            },
+            html: function (value) {
+                return 'html'
+            }
+        }
+
+        var init = jQuery.fn.init = function (selector) {
+            var slice = Array.prototype.slice
+            var dom = slice.call(document.querySelectorAll(selector))
+
+            var i, len = dom.length ? dom.length : 0
+            
+            // 将节点元素放到this下，方便访问
+            for (i = 0; i < len; i++) {
+                this[i] = dom[i]
+            }
+            this.length = len
+            this.selector = selector
+        }
+
+        init.prototype = jQuery.fn
+
+        window.$ = jQuery
+    })(window)
+    ```
+
+2. 在zepto中的使用
+    ```js
+    // my-zepto.js
+    (function (window) {
+        var zepto = {}
+
+        function Z(dom, selector) {
+            var i,
+                len = dom.length ? dom.length : 0
+            
+            for (i = 0; i < len; i++) {
+                this[i] = dom[i]
+            }
+            this.length = len
+            this.selector = selector || ''
+        }
+
+        zepto.Z = function (dom, selector) {
+            return new Z(dom, selector)
+        }
+
+        zepto.init = function (selector) {
+            var slice = Array.prototype.slice
+            var dom = slice.call(document.querySelectorAll(selector))
+            
+            return zepto.Z(dom, selector)
+        }
+
+        var $ = function (selector) {
+            return zepto.init(selector)
+        }
+
+        window.$ = $
+
+        $.fn = {
+            css: function (key, value) {
+                alert('css')
+            },
+            html: function (value) {
+                return '这是一个模拟的html'
+            }
+        }
+        Z.prototype = $.fn
+
+    })(window)
+    ```
+
+3. 插件机制和原型的可扩展性
+    在jQuery中可以通过
+    ```js
+    $.fn.xxx = function () {
+        // todo...
+    }
+    ```
+    扩展原型方法
+
+    jQ和zepto的插件机制，都体现出了原型的可扩展性
