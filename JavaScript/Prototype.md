@@ -81,34 +81,34 @@ SubType.prototype = {
 ```
 
 #### 4. 原型的实际应用
-    ```html
-    <!-- index.html -->
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>Home</title>
-    </head>
+```html
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
 
-    <body>
-        <p>zepto test 1</p>
-        <p>zepto test 2</p>
-        <p>zepto test 3</p>
-        <div id="div1">
-            <p>zepto test in div</p>
-        </div>
-        <script src="js/my-zepto.js"></script>
-        <script type="text/javascript">
-            var $p = $('p')
-            $p.css('font-size', '40px')
-            alert($p.html())
+<body>
+    <p>zepto test 1</p>
+    <p>zepto test 2</p>
+    <p>zepto test 3</p>
+    <div id="div1">
+        <p>zepto test in div</p>
+    </div>
+    <script src="js/my-zepto.js"></script>
+    <script type="text/javascript">
+        var $p = $('p')
+        $p.css('font-size', '40px')
+        alert($p.html())
 
-            var $div1 = $('#div1')
-            $div1.css('color', 'blue')
-            alert($div1.html())
-        </script>
-    </body>
-    </html>
-    ```
+        var $div1 = $('#div1')
+        $div1.css('color', 'blue')
+        alert($div1.html())
+    </script>
+</body>
+</html>
+```
 
 1. 在jQuery中的使用
     ```js
