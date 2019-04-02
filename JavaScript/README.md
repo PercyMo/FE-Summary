@@ -30,17 +30,11 @@
     }
     bar
     ```
-3. 变量对象
+3. [变量对象详解 =>>](./VO.md)
 
-    [变量对象详解 =>>](./VO.md)
+4. [变量提升和函数提升详解 =>>](./Hoisting.md)
 
-4. 变量提升和函数提升
-
-    [变量提升和函数提升详解 =>>](./Hoisting.md)
-
-5. 执行上下文和执行上下文栈
-
-    [执行上下文和执行上下文栈详解 =>>](./Context.md)
+5. [执行上下文和执行上下文栈详解 =>>](./Context.md)
 
 #### 第5章 引用类型
 2. Array类型
@@ -72,23 +66,15 @@
     ```
 
 #### 第6章 面向对象的程序设计
-3. 继承
+3. [原型对象与原型链、继承详解 =>>](./Prototype.md)
 
-    [原型对象与原型链、继承详解 =>>](./Prototype.md)
-
-4. 设计模式
-
-    [设计模式 =>>](./DesignPattern.md)
+4. [设计模式 =>>](./DesignPattern.md)
         
 #### 第7章 函数表达式
 2. 闭包
 
-    2. this
-
-    [关于this对象详解 =>>](./This.md)
-5. 立即执行函数表达式(IIFE)
-
-    [立即执行函数表达式(IIFE)详解 =>>](./IIFE.md)
+    2. [关于this对象详解 =>>](./This.md)
+5. [立即执行函数表达式(IIFE)详解 =>>](./IIFE.md)
 
 #### 第20章 JSON
 1. JSON可以表示三种类型的值：简单值，对象，数组
@@ -130,14 +116,12 @@
     * 值为`undefined`的任何属性都会被跳过
 
 #### 补充内容
-1. Event Loop事件循环
-
-    [Event Loop详细解析 =>>](./EventLoop.md)
+1. [Event Loop详细解析 =>>](./EventLoop.md)
 
 2. JS单线程与Web Worker
 
     Html5提出Web Worker标准，允许js创建多个线程，但子线程完全受主线程控制，且不得操作DOM，所以并没有改变js单线程的本质。
 
-3. 架构模式MVC和MVVM
+3. [架构模式MVC和MVVM =>>](./ArchitecturalPattern.md)
 
-    [架构模式MVC和MVVM =>>](./ArchitecturalPattern.md)
+4. [jQuery & zepto =>>](./jq&zepto.md)
