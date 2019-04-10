@@ -12,18 +12,20 @@
 
 2. 分析jq和zepto源码中对于append()的实现
 
-    1. zepto
+    1. zepto  
+
         zepto.js 里有一些关于DOM 节点插入操作的函数. 例如after, append, before, append 等, 它们都是由node.insertBefore来实现的
 
         在节点插入中还包含下面这段代码, 是用来处理插入script标签的情况
+
         ```js
         if (parentInDocument) traverseNode(node, function(el){ 
-        if (el.nodeName != null && el.nodeName.toUpperCase() === 'SCRIPT' && 
-        // type 为'' 或JavaScript , 不存在外部脚本 
-            (!el.type || el.type === 'text/javascript') && !el.src){ 
-            var target = el.ownerDocument ? el.ownerDocument.defaultView : window 
-            target['eval'].call(target, el.innerHTML) 
-        } 
+            if (el.nodeName != null && el.nodeName.toUpperCase() === 'SCRIPT' && 
+            // type 为'' 或JavaScript , 不存在外部脚本 
+                (!el.type || el.type === 'text/javascript') && !el.src){ 
+                var target = el.ownerDocument ? el.ownerDocument.defaultView : window 
+                target['eval'].call(target, el.innerHTML) 
+            } 
         }) 
         ```
         之所以需要使用eval()来运行script标签里面的代码是因为,zepto将html片段转换为node节点是通过Element.innerHTML来实现的, 而通过innerHTML插入的script标签是不会执行的.
@@ -34,15 +36,15 @@
         // dom 为$.each(elements, callback) return elements,  
         // 即slice.call(container.childNodes)将childNodes转化为Array,以便$(Array)转化为Zepto对象 
         dom = $.each(slice.call(container.childNodes), function(){ 
-        // 清空container 
-        container.removeChild(this) 
+            // 清空container 
+            container.removeChild(this) 
         }) 
         ```
 
         上面代码中特殊处理的script是这种形式`"<script>console.log('测试代码')<\/script>"`  
         而并没有对`<script src="js\/test.js"><\/script>`做特殊处理，因此并不识别。
 
-    2. jquery
+    2. jquery  
 
         在jq中的domManip函数中，首先会通过
         ```js
