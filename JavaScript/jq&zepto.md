@@ -1,8 +1,4 @@
-
-
-
-
-####1. 对比`append()`插入`<script>`标签情况
+#### 1. 对比`append()`插入`<script>`标签情况
 
 1. 问题场景：
 
@@ -70,7 +66,7 @@
 
         由此可见，在jq中是对这种情况做过处理的，所以可以正常使用。
 
-3. 引用
+3. 引用  
     [zepto.js使用$.fn.append等方法插入script标签的情况](https://github.com/fangbinwei/zepto_src_analysis/issues/1)   
     [
     用jQuery的append方法插入script节点](https://segmentfault.com/q/1010000003696587)
