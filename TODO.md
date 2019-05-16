@@ -27,6 +27,7 @@
   [链接](https://segmentfault.com/a/1190000016126079)
 8. 【TODO】git工作流，追踪master分支代码变动
   [**git-workflow-tutorial.md](https://github.com/xirong/my-git/blob/master/git-workflow-tutorial.md)
+  [开发与OP流程规范（git）](https://www.cnblogs.com/aylin/p/6042653.html)
   [阮一峰 Git 工作流程](http://www.ruanyifeng.com/blog/2015/12/git-workflow.html)
   [常用 Git 命令清单](http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html)
   [Git 工作流](https://juejin.im/post/5a014d5f518825295f5d56c7)
