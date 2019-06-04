@@ -5,7 +5,7 @@
 4. 【TODO】xtpl文档，模板引擎的工作原理，什么是模板引擎的runtime（顺便了解下jade）
 5. 【TODO】js代码的性能测试，Benchmark.js
 6. 【TODO】source_track，通过document.referrer 追踪用户注册来源，写入cookie，也算是一个业务实践
-7. 通过$.append()方法添加一个script标签和通过原生js手动构建并添加一个标签有什么区别。jquery中通过append()插入script标签，其中的js代码可以正常执行，在zepto中则不行
+7. ~~通过$.append()方法添加一个script标签和通过原生js手动构建并添加一个标签有什么区别。jquery中通过append()插入script标签，其中的js代码可以正常执行，在zepto中则不行~~
 
 ### 2019.04
 1. 【TODO】目前前端埋点相关的主流技术方案
@@ -41,3 +41,10 @@
 14. 【TODO】sentry和gitlab等项目，它们允许用户配置不同的域名，然后接入自己的项目，开源的原理是什么
 
 ### 2019.05
+1. 【TODO】在不刷新页面的情况下改变URL，模板详情弹窗的实现（html5新特性）
+[如何在不刷新页面的情况下改变URL](https://zhuanlan.zhihu.com/p/22412047)
+[在history中跳转](https://developer.mozilla.org/zh-CN/docs/Web/API/History_API)
+window.addEventListener('popstate', function() {})
+2. 【TODO】path-to-regexp 路由匹配组件
+3. ~~css文字渐变色~~
+4. httpOnly
