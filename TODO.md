@@ -50,3 +50,4 @@ window.addEventListener('popstate', function() {})
 
 ### 2019.06
 1. 【TODO】httpOnly
+2. 【TODO】host的配置原理
