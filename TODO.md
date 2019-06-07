@@ -50,4 +50,5 @@ window.addEventListener('popstate', function() {})
 
 ### 2019.06
 1. 【TODO】httpOnly
-2. 【TODO】host的配置原理
+2. ~~host的配置原理~~
+3. ~~Js操作cookie，及httpOnly限制~~
