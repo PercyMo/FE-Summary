@@ -49,6 +49,5 @@ window.addEventListener('popstate', function() {})
 3. ~~css文字渐变色~~
 
 ### 2019.06
-1. 【TODO】httpOnly
+1. ~~httpOnly~~
 2. ~~host的配置原理~~
-3. ~~Js操作cookie，及httpOnly限制~~
