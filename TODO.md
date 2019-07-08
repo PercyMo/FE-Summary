@@ -51,3 +51,22 @@ window.addEventListener('popstate', function() {})
 ### 2019.06
 1. ~~httpOnly~~
 2. ~~host的配置原理~~
+3. ~~css实现文字渐变色~~
+4. 浏览器兼容模式
+5. HappyPack（webpack打包速度太慢问题）
+6. ::v-deep
+7. 修改之后，执行 git add . && git commit --amend     然后 git push -f
+8. JSON.stringify(vipItem.package, null, 2)
+9. Vue 中 model: {
+    prop: 'visible',
+    event: 'visible-change'
+ }
+10. document.body.appendChild
+  当同一个节点呗多次添加时，会先删除之前的节点然后，再添加
+11. <!DOCTYPE html>和浏览器的混杂模式
+12. uuid，16进制转换10进制数字
+13. // 下面两行是为了解决滚动太快时模板列表会先出现空白问题
+  background-image: url(about:blank);
+  background-attachment: fixed;
+
+### 2019.07
