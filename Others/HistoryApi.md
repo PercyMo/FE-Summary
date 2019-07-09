@@ -1,6 +1,6 @@
-### HistoryApi及不刷新页面的情况下改变URL实践
+# HistoryApi及不刷新页面的情况下改变URL实践
 
-#### 1. window.history基础详解
+## 1. window.history基础详解
 1. history实例
 
 <img src="./images/02.png" width="600" />
@@ -73,10 +73,10 @@
         auto: 默认，保留上一次的滚动条位置。        
         manual： 滚动条位置为初始化位置（垂直方向置顶，水平方向最左边）
     
-#### 2. 不刷新页面的情况下改变URL实践
+## 2. 不刷新页面的情况下改变URL实践
 
 
-#### 3. 引用
+## 3. 引用
 [window.history详解](https://my.oschina.net/u/3303095/blog/1083136)
 
 [History 对象（阮一峰）](https://wangdoc.com/javascript/bom/history.html)
