@@ -41,10 +41,7 @@
 14. 【TODO】sentry和gitlab等项目，它们允许用户配置不同的域名，然后接入自己的项目，开源的原理是什么
 
 ## 2019.05
-1. 【TODO】在不刷新页面的情况下改变URL，模板详情弹窗的实现（html5新特性）
-[如何在不刷新页面的情况下改变URL](https://zhuanlan.zhihu.com/p/22412047)
-[在history中跳转](https://developer.mozilla.org/zh-CN/docs/Web/API/History_API)
-window.addEventListener('popstate', function() {})
+1. ~~在不刷新页面的情况下改变URL~~
 2. 【TODO】path-to-regexp 路由匹配组件
 3. ~~css文字渐变色~~
 
@@ -70,3 +67,4 @@ window.addEventListener('popstate', function() {})
   background-attachment: fixed;
 
 ## 2019.07
+1. 【TODO】从vue-router看前端路由的两种实现
