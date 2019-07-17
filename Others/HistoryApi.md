@@ -1,6 +1,6 @@
-# HistoryApi及不刷新页面的情况下改变URL实践
+## HistoryApi及history模式下的前端路由思路
 
-## 1. window.history基础详解
+### 1. window.history基础详解
 1. history实例
 
 <img src="./images/02.png" width="600" />
@@ -22,7 +22,7 @@
 
         <img src="./images/04.png" width="600" />
 
-    2. back，forward方法：调用次方法相当于点击浏览器的后退和前进按钮（此方法忽视一切参数）
+    2. back，forward方法：调用此方法相当于点击浏览器的后退和前进按钮（此方法忽视一切参数）
 
     3. go方法：可加载历史列表中的某个具体的页面
 
@@ -30,7 +30,7 @@
 
     5. **pushState 在history栈中添加一个新的记录。**
         ```js
-        window.history.pushstatus(state, title, url)
+        window.history.pushstatus(stateObject, title, URL)
         ```
         依次接受三个参数：
 
@@ -73,12 +73,88 @@
         auto: 默认，保留上一次的滚动条位置。        
         manual： 滚动条位置为初始化位置（垂直方向置顶，水平方向最左边）
     
-## 2. 不刷新页面的情况下改变URL实践
+### 2. 浏览器历史记录策略和History API的关系
 
+<img src="./images/05.png" width="600" />
 
-## 3. 引用
-[window.history详解](https://my.oschina.net/u/3303095/blog/1083136)
+结论：
+1. 浏览器针对每个页面维护一个History栈，执行pushStatus()可压入特定的url至栈顶，同时修改当前指针；
+2. 执行back()操作时，栈的大小（history.length）并不会改变，仅仅移动指针的位置。
+3. 若当前指针在栈的中间位置（非栈顶），执行pushStatus()会改变栈的大小；
+
+### 3. history模式下的前端路由实践
+```html
+<!-- index.html -->
+<div class="menu">
+    <a class="nav-item" href="/">home</a>
+    <a class="nav-item" href="/profile">profile</a>
+    <a class="nav-item" href="/articles">articles</a>
+</div>
+```
+```js
+// index.js
+const $ = (selector) => document.querySelector(selector)
+
+class Router {
+    constructor(routerMap) {
+        this.routerMap = routerMap
+        this._bindPopState()
+    }
+    init(path) {
+        path = Router.realPath(path)
+        history.replaceState({ path }, '', path)
+        this.routerMap[path] && this.routerMap[path]()
+    }
+    push(path) {
+        path = Router.realPath(path)
+        history.pushState({ path }, '', path)
+        this.routerMap[path] && this.routerMap[path]()
+    }
+    _bindPopState() {
+        window.addEventListener('popstate', (e) => {
+            const path = e.state && e.state.path
+            this.routerMap[path] && this.routerMap[path]()
+        })
+    }
+    static realPath(path) {
+        // 这里可以配合 path-to-regexp 做更完善的路由检测
+        if (path !== '/' && path.slice(-1) === '/') {
+            path = path.match(/(.+)\/$/)[1]
+        }
+        return path
+    }
+}
+const routerMap = {
+    '/': () => {
+        const $content = $('.content')
+        $content.innerHTML = '这里是首页'
+    },
+    '/profile': () => {
+        const $content = $('.content')
+        $content.innerHTML = '这里是用户信息'
+    },
+    '/articles': () => {
+        const $content = $('.content')
+        $content.innerHTML = '这里是文章列表'
+    }
+}
+
+// 页面使用方式
+let router = new Router(routerMap)
+router.init(location.pathname)
+
+$('.menu').addEventListener('click', (e) => {
+    e.preventDefault()
+    if (e.target.tagName === 'A') {
+        router.push(e.target.getAttribute('href'))
+    }
+})
+```
+
+### 4. 引用
 
 [History 对象（阮一峰）](https://wangdoc.com/javascript/bom/history.html)
 
-[History API与浏览器历史堆栈管理](https://www.cnblogs.com/accordion/p/5699372.html)
+[history实现一个前端路由](https://xwjgo.github.io/2017/08/29/history%E5%AE%9E%E7%8E%B0%E5%89%8D%E7%AB%AF%E8%B7%AF%E7%94%B1/)
+
+[【源码拾遗】从vue-router看前端路由的两种实现](https://zhuanlan.zhihu.com/p/27588422)
