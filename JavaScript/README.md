@@ -76,6 +76,9 @@
     2. [关于this对象详解 =>>](./This.md)
 5. [立即执行函数表达式(IIFE)详解 =>>](./IIFE.md)
 
+#### 第8章 BOM
+5. [HistoryApi及history模式下的前端路由思路 =>>](./HistoryApi.md)
+
 #### 第20章 JSON
 1. JSON可以表示三种类型的值：简单值，对象，数组
 

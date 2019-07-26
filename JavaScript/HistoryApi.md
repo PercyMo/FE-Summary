@@ -3,13 +3,13 @@
 ### 1. window.history基础详解
 1. history实例
 
-<img src="./images/02.png" width="600" />
+<img src="./images/HistoryApi/01.png" width="600" />
 
 2. 操作session级别的url
 
     history内部有一个栈，当然这个栈是不可见的（处于安全考虑）。这个栈用来存放当前浏览器session级别的（关闭前）同一个tab所有访问过的url
 
-    <img src="./images/03.png" width="600" />
+    <img src="./images/HistoryApi/02.png" width="600" />
 
     history对象并没有暴露存放历史url的属性。所以我们并不能通过类似如下方法操作会话历史：
     ```
@@ -20,7 +20,7 @@
 
     1. length属性：记录进入会话历史的url的数目，注意是readonly!
 
-        <img src="./images/04.png" width="600" />
+        <img src="./images/HistoryApi/03.png" width="600" />
 
     2. back，forward方法：调用此方法相当于点击浏览器的后退和前进按钮（此方法忽视一切参数）
 
@@ -75,7 +75,7 @@
     
 ### 2. 浏览器历史记录策略和History API的关系
 
-<img src="./images/05.png" width="600" />
+<img src="./images/HistoryApi/04.png" width="600" />
 
 结论：
 1. 浏览器针对每个页面维护一个History栈，执行pushStatus()可压入特定的url至栈顶，同时修改当前指针；
