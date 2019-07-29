@@ -80,7 +80,7 @@
 5. [HistoryApi及history模式下的前端路由思路 =>>](./HistoryApi.md)
 
 #### 第10章 DOM
-3. [NodeList 与 类数组对象 =>>](./NodeList.md)
+3. [NodeList =>>](./NodeList.md)
 
 #### 第20章 JSON
 1. JSON可以表示三种类型的值：简单值，对象，数组
