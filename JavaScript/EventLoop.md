@@ -25,8 +25,8 @@
         **特点：**
     * 微任务队列操作，总是会一次性清空队列
     * 宏任务队列每次只会取出一条任务到执行栈中执行
-    <img src="./images/02.png" width="500" />
-    <img src="./images/01.jpg" width="500" />
+    <img src="./images/EventLoop/02.png" width="500" />
+    <img src="./images/EventLoop/01.jpg" width="500" />
 
 #### 3. 宏任务和微任务
 

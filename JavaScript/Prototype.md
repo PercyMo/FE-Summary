@@ -3,7 +3,7 @@
 #### 1. **原型对象与原型链、继承（_重点内容_）**
 1. prototype和__proto__的区别
 
-    <img src="https://note.youdao.com/yws/public/resource/0c7e34c500438947463771cc1073655a/xmlnote/WEBRESOURCE247de9dd6ed3d119b222d9620aac2337/899" width="500" />
+    <img src="./images/Prototype/01.png" width="500" />
 
     ```js
     var a = {};
@@ -15,7 +15,7 @@
     ```
 2. __proto__属性指向谁
 
-    <img src="https://note.youdao.com/yws/public/resource/0c7e34c500438947463771cc1073655a/xmlnote/WEBRESOURCEf94f0664c6cc8dec86029683129a504c/901" width="500" />
+    <img src="./images/Prototype/02.png" width="500" />
 
     ```js
     // 1. 字面量方式
@@ -37,7 +37,7 @@
     ```
 3. 什么是原型链
 
-    <img src="https://note.youdao.com/yws/public/resource/0c7e34c500438947463771cc1073655a/xmlnote/WEBRESOURCEb5e2c35f3974cb59743a6b86f2e23410/897" width="500" />
+    <img src="./images/Prototype/03.png" width="500" />
 
     ```js
     var A = function() {};
@@ -47,7 +47,7 @@
     a.__proto__.__proto__.__proto__;            // null
     ```
     
-    <img src="./images/03.png" width="500" />
+    <img src="./images/Prototype/04.png" width="500" />
 
     图中由相互关联的原型组成的链状结构就是原型链，也就是蓝色的这条线。
 
