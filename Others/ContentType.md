@@ -91,3 +91,5 @@ Content-Type: text/xml
 ### 2. 引用
 
 [详解Content-Type](https://github.com/Mmzer/think/issues/22)
+
+[HttpRequest中常见的四种ContentType](https://www.cnblogs.com/xiaozong/p/5732332.html)
