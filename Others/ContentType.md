@@ -68,6 +68,7 @@ axios.interceptors.request.use(config => {
 
 #### application/xml
 TODO: 待验证
+
 以xml格式提交提交数据，微信的请求就使用的这种格式，请求头如下：
 ```xml
 POST http://www.example.com HTTP/1.1 
@@ -89,4 +90,4 @@ Content-Type: text/xml
 
 ### 2. 引用
 
-[NodeList（MDN）](https://developer.mozilla.org/zh-CN/docs/Web/API/NodeList)
+[详解Content-Type](https://github.com/Mmzer/think/issues/22)
