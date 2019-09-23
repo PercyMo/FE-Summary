@@ -77,7 +77,7 @@
 5. [立即执行函数表达式(IIFE)详解 =>>](./IIFE.md)
 
 #### 第8章 BOM
-5. [HistoryApi及history模式下的前端路由思路 =>>](./HistoryApi.md)
+5. [Hash、History & 前端路由模式 =>>](./Router.md)
 
 #### 第10章 DOM
 3. [NodeList =>>](./NodeList.md)

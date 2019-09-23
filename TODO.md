@@ -57,8 +57,7 @@
   background-attachment: fixed;
 
 ## 2019.07
-1. 【TODO】从vue-router看前端路由的两种实现
-2. 【TODO】基于IntersectionObserver的曝光统计
+1. 【TODO】基于IntersectionObserver的曝光统计
 
 ## 2019.08
 1. 【TODO】从零开始写一个NPM包
