@@ -49,7 +49,7 @@
 
 #### 2) 跨域资源共享(CORS)
 跨域资源共享标准新增了一组HTTP首部字段，允许服务器声明哪些源站通过通过浏览器有权访问哪些资源。
-1. 简单请求
+1. 简单请求  
     不会触发CORS预检的请求。
     1. 使用 `GET、POST、HEAD` 之一请求
     
@@ -72,16 +72,16 @@
     4. 请求中的任意`XMLHttpRequestUpload`对象均没有注册事件监听器。(TODO: 待验证)
     
     5. 请求中没有使用`ReadableStream`对象(TODO: 待验证)
-2. 预检请求
+2. 预检请求  
     即“非简单请求”的请求，要求必须首先使用`OPTIONS`方法发起一个预检请求到服务器，以获知服务器是否允许该实际请求。
     “预检请求”的使用，可以避免跨域请求对服务器的用户数据产生未预知的影响。
-3. 请求附带身份凭证 -> cookie
+3. 请求附带身份凭证 -> cookie  
     ```js
     // 前端设置是否带cookie
     xhr.withCredentials = true
     ```
     如果服务器端未设置`Control-Allow-Credentials: true`，则响应内容不会返回给请求的发起者
-4. 后端处理
+4. 后端处理  
     ```js
     // koa2
     app.use(async (ctx, next) => {
@@ -104,7 +104,7 @@
         }
     })
     ```
-5. 请求过程
+5. 请求过程  
     js进行一次跨域ajax请求，浏览器判断是否为“简单请求”，简单请求就直接发起正式请求，复杂请求就先发送一次预检请求，预检成功后再发送正式请求。
 
     <img src="./images/CrossOrigin/01.png" width="500" />
@@ -177,7 +177,7 @@ server {
 
     实现原理：两个页面都通过js强制设置`document.domain`为基础主域，就实现了同域。
 
-### 4. 引用
+### 3. 引用
 [前端跨域问题及其解决方案](https://yq.aliyun.com/articles/610080)
 
 [HTTP访问控制（CORS）](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)
