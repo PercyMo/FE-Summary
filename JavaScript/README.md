@@ -1,7 +1,4 @@
-### 《JavaScript》学习笔记
-> 基于《JavaScript高级程序设计》第三版目录结构
-
-#### 第4章 变量、作用域和内存问题
+### 四、变量、作用域和内存问题
 2. 执行环境及作用域
 
     JavaScript采用的是词法作用域，函数的作用域在函数定义的时候就决定了。   
@@ -36,7 +33,7 @@
 
 5. [执行上下文和执行上下文栈详解 =>>](./Context.md)
 
-#### 第5章 引用类型
+### 五、引用类型
 2. Array类型
     1. 模拟实现一个forEach
     ```js
@@ -65,24 +62,24 @@
     }
     ```
 
-#### 第6章 面向对象的程序设计
+### 六、面向对象的程序设计
 3. [原型对象与原型链、继承详解 =>>](./Prototype.md)
 
 4. [设计模式 =>>](./DesignPattern.md)
         
-#### 第7章 函数表达式
+### 七、函数表达式
 2. 闭包
 
     2. [关于this对象详解 =>>](./This.md)
 5. [立即执行函数表达式(IIFE)详解 =>>](./IIFE.md)
 
-#### 第8章 BOM
+### 八、BOM
 5. [Hash、History & 前端路由模式 =>>](./Router.md)
 
-#### 第10章 DOM
+### 九、DOM
 3. [NodeList =>>](./NodeList.md)
 
-#### 第20章 JSON
+### 二十、JSON
 1. JSON可以表示三种类型的值：简单值，对象，数组
 
 2. JavaScript字符串和JSON字符串最大的区别在于，JSON字符串必须使用双引号（单引号会导致语法错误）。
@@ -121,10 +118,10 @@
 5. JSON对象有两个方法：JSON.stringify()和JSON.parse()。分别用于将JSON对象序列化为JSON字符串，和把JSON字符串解析为原生JavaScript值。
     * 值为`undefined`的任何属性都会被跳过
 
-#### 第21章 Ajax与Comet
+### 二十一、Ajax与Comet
 1. [前端跨域问题详解 =>>](./CrossOrigin.md)
 
-#### 补充内容
+### 其他
 1. [Event Loop详细解析 =>>](./EventLoop.md)
 
 2. JS单线程与Web Worker
