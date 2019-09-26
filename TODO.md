@@ -17,23 +17,22 @@
     1. [链接1](http://www.chengweiyang.cn/gitbook/basic-usage/README.html)
     2. [链接2](https://blog.csdn.net/lu_embedded/article/details/81100704)
 3. 【TODO】使用charles做请求代理，手动修改数据响应类型，text/html  =>  image/gif
-4. 【TODO】通过图片image标签src实现跨域的方案。。。
-5. 【TODO】css变量 --bc-red: #f55555
+4. 【TODO】css变量 --bc-red: #f55555
   [链接](http://www.ruanyifeng.com/blog/2017/05/css-variables.html)
-6. 【TODO】传统网站换肤功能实现方案
-7. 【TODO】请求CORB警告 （跨域访问阻塞），情况：在三方类库中跨域访问.gif资源，服务器响应类型为text/html，造成CORB错误
+5. 【TODO】传统网站换肤功能实现方案
+6. 【TODO】请求CORB警告 （跨域访问阻塞），情况：在三方类库中跨域访问.gif资源，服务器响应类型为text/html，造成CORB错误
   [链接](https://segmentfault.com/a/1190000016126079)
-8. 【TODO】git工作流，追踪master分支代码变动
+7. 【TODO】git工作流，追踪master分支代码变动
     1. [**git-workflow-tutorial.md](https://github.com/xirong/my-git/blob/master/git-workflow-tutorial.md)
     2. [开发与OP流程规范（git）](https://www.cnblogs.com/aylin/p/6042653.html)
     3. [阮一峰 Git 工作流程](http://www.ruanyifeng.com/blog/2015/12/git-workflow.html)
     4. [常用 Git 命令清单](http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html)
     5. [Git 工作流](https://juejin.im/post/5a014d5f518825295f5d56c7)
-9. 【TODO】jq中ready的时机（DOMContentLoaded），原生实现
-10. 【TODO】webpack 在开发环境中，项目build文件默认在内存中，默认启用文件端口等等
-11. 【TODO】梳理整个项目启动的原理（有时间的时候，不急。2.0和3.0项目架构存在比较大差异，慢慢对比，如何支持多模板的编译，在开发环境当中，已经使用koa启动了项目，那么webpack在这一过程中如何发挥作用）
-12. 【TODO】gitlab具体是什么，它和github的区别，比git多做了什么
-13. 【TODO】sentry和gitlab等项目，它们允许用户配置不同的域名，然后接入自己的项目，开源的原理是什么
+8. 【TODO】jq中ready的时机（DOMContentLoaded），原生实现
+9. 【TODO】webpack 在开发环境中，项目build文件默认在内存中，默认启用文件端口等等
+10. 【TODO】梳理整个项目启动的原理（有时间的时候，不急。2.0和3.0项目架构存在比较大差异，慢慢对比，如何支持多模板的编译，在开发环境当中，已经使用koa启动了项目，那么webpack在这一过程中如何发挥作用）
+11. 【TODO】gitlab具体是什么，它和github的区别，比git多做了什么
+12. 【TODO】sentry和gitlab等项目，它们允许用户配置不同的域名，然后接入自己的项目，开源的原理是什么
 
 ## 2019.05
 1. 【TODO】path-to-regexp 路由匹配组件
