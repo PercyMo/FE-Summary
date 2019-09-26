@@ -4,7 +4,7 @@
 
 ### 二、HTTP
 1. [Content-Type详解 =>>](./ContentType.md)
-2. [HTTP缓存控制 ==>](./HttpCache.md)
+2. [HTTP缓存控制 =>>](./HttpCache.md)
 
 ### 其他
 1. [Hosts原理及作用 =>>](./Hosts.md)
