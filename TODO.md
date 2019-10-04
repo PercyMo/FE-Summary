@@ -4,6 +4,7 @@
 3. 【TODO】xtpl文档，模板引擎的工作原理，什么是模板引擎的runtime（顺便了解下jade）
 4. 【TODO】js代码的性能测试，Benchmark.js
 5. 【TODO】source_track，通过document.referrer 追踪用户注册来源，写入cookie，也算是一个业务实践
+  [张鑫旭 document.referrer实践](https://www.zhangxinxu.com/wordpress/2017/02/js-page-url-document-referrer/)
 
 ## 2019.04
 1. 【TODO】目前前端埋点相关的主流技术方案
@@ -29,29 +30,26 @@
     4. [常用 Git 命令清单](http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html)
     5. [Git 工作流](https://juejin.im/post/5a014d5f518825295f5d56c7)
 8. 【TODO】jq中ready的时机（DOMContentLoaded），原生实现
-9. 【TODO】webpack 在开发环境中，项目build文件默认在内存中，默认启用文件端口等等
-10. 【TODO】梳理整个项目启动的原理（有时间的时候，不急。2.0和3.0项目架构存在比较大差异，慢慢对比，如何支持多模板的编译，在开发环境当中，已经使用koa启动了项目，那么webpack在这一过程中如何发挥作用）
-11. 【TODO】gitlab具体是什么，它和github的区别，比git多做了什么
-12. 【TODO】sentry和gitlab等项目，它们允许用户配置不同的域名，然后接入自己的项目，开源的原理是什么
+9. 【TODO】gitlab具体是什么，它和github的区别，比git多做了什么
+10. 【TODO】sentry和gitlab等项目，它们允许用户配置不同的域名，然后接入自己的项目，开源的原理是什么
 
 ## 2019.05
 1. 【TODO】path-to-regexp 路由匹配组件
 
 ## 2019.06
 1. 【TODO】浏览器兼容模式
-2. 【TODO】HappyPack（webpack打包速度太慢问题）
-3. 【TODO】::v-deep
-4. 【TODO】修改之后，执行 git add . && git commit --amend     然后 git push -f
-5. 【TODO】JSON.stringify(vipItem.package, null, 2)
-6. 【TODO】Vue 中 model: {
+2. 【TODO】::v-deep
+3. 【TODO】修改之后，执行 git add . && git commit --amend     然后 git push -f
+4. 【TODO】JSON.stringify(vipItem.package, null, 2)
+5. 【TODO】Vue 中 model: {
     prop: 'visible',
     event: 'visible-change'
   }
-7. 【TODO】document.body.appendChild
+6. 【TODO】document.body.appendChild
   当同一个节点呗多次添加时，会先删除之前的节点然后，再添加
-8. 【TODO】<!DOCTYPE html>和浏览器的混杂模式
-9. 【TODO】uuid，16进制转换10进制数字
-10. 【TODO】// 下面两行是为了解决滚动太快时模板列表会先出现空白问题
+7. 【TODO】<!DOCTYPE html>和浏览器的混杂模式
+8. 【TODO】uuid，16进制转换10进制数字
+9. 【TODO】// 下面两行是为了解决滚动太快时模板列表会先出现空白问题
   background-image: url(about:blank);
   background-attachment: fixed;
 

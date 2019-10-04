@@ -43,9 +43,13 @@
         ctx.body = jsonpStr
     })
     ```
+
 3. 缺点
     * 只能实现GET请求
     * 不安全，可能会遭受XSS攻击
+
+4. 补充一点`form`表单跨域  
+    `form`表单跨域和`jsonp`跨域其实都是利用了浏览器的历史兼容性，`form`表单会刷新页面不会把结果返回给js，浏览器认为这是安全的，所以没做跨域限制。
 
 #### 2) 跨域资源共享(CORS)
 跨域资源共享标准新增了一组HTTP首部字段，允许服务器声明哪些源站通过通过浏览器有权访问哪些资源。
@@ -177,7 +181,10 @@ server {
 
     实现原理：两个页面都通过js强制设置`document.domain`为基础主域，就实现了同域。
 
-### 3. 引用
+### 3. CSRF 跨站请求伪造
+TODO: [CORS与CSRF](https://my.oschina.net/hosee/blog/903665)
+
+### 4. 引用
 [前端跨域问题及其解决方案](https://yq.aliyun.com/articles/610080)
 
 [HTTP访问控制（CORS）](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS)
