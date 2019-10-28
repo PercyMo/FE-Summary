@@ -61,6 +61,7 @@
         }
     }
     ```
+    3. [Array数组方法 =>>](./Array.md)
 
 ### 六、面向对象的程序设计
 3. [原型对象与原型链、继承详解 =>>](./Prototype.md)
@@ -126,6 +127,7 @@
     1. [webpack详解 =>>](./WebpackDetail.md)
     2. [webpack原理 =>>](./WebpackPrinciple.md)
     2. [webpack优化 =>>](./WebpackOptimization.md)
+    2. [Babel详解 =>>](./Babel.md)
 
 ### 其他
 1. [Event Loop详解 =>>](./EventLoop.md)
