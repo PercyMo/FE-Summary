@@ -1,12 +1,13 @@
-### Event Loop详细解析
+### 浏览器中Event Loop详细解析 & Node中的事件循环
 
-#### 1. 进程与线程
-
+### 一. 进程与线程
 进程是操作系统分配资源和调度任务的基本单位，线程是建立在进程上的一次程序运行单位，一个进程上可以有多个线程。
 
 单线程特点是节约了内存,并且不需要在切换执行上下文。
 
-#### 2. 执行栈与任务队列
+### 二. 浏览器中Event Loop
+
+#### 1. 执行栈与任务队列
 
 1. 执行栈
 
@@ -28,7 +29,7 @@
     <img src="./images/EventLoop/02.png" width="500" />
     <img src="./images/EventLoop/01.jpg" width="500" />
 
-#### 3. 宏任务和微任务
+#### 2. 宏任务和微任务
 
 * macro-task(宏任务):
     * script(整体代码)
@@ -55,7 +56,7 @@
 3. 若在执行微任务的过程中，加入了新的微任务，会把新的微任务添加在当前任务队列的队尾巴
 4. 微任务会在本轮EventLoop执行完后，马上把执行栈中的任务都执行完毕
 
-#### 4. Node.js的Event Loop
+#### 3. Node.js的Event Loop
 Node.js还提供了另外两个与“任务队列”相关的方法：`process.nextTick`和`setImmediate`
 
 `process.nextTick`方法可以在当前执行栈的尾部——下一次Event Loop之前，触发回调函数。也就是说，他指定的任务总是发生在所有异步任务之前。   
@@ -63,7 +64,7 @@ Node.js还提供了另外两个与“任务队列”相关的方法：`process.n
 
 `process.nextTick`和`setImmediate`的一个重要区别：多个`process.nextTick`语句（不管他们是否嵌套）总是在当前"执行栈"一次执行完，多个`setImmediate`可能则需要多次loop才能执行完
 
-#### 5. 辅助理解
+#### 4. 辅助理解
 
 运行下这段代码，Event Loop机制就非常清晰了
 ```js
@@ -142,9 +143,17 @@ setImmediate(function() {
 })
 ```
 
-#### 引用
+### 三. Node中的Event Loop
+
+TODO: 待补充：Node中的Event Loop...
+
+### 四. Node与浏览器的Event Loop差异
+
+### 五. 引用
 [JavaScript：彻底理解同步、异步和事件循环(Event Loop)](https://segmentfault.com/a/1190000004322358)
 
 [深入核心，详解事件循环机制](https://www.jianshu.com/p/12b9f73c5a4f)
 
 [微任务、宏任务与Event-Loop](https://juejin.im/post/5b73d7a6518825610072b42b)
+
+[浏览器与Node的事件循环(Event Loop)有何区别?](https://juejin.im/post/5c337ae06fb9a049bc4cd218)
