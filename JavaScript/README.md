@@ -129,8 +129,8 @@
     2. [webpack优化 =>>](./WebpackOptimization.md)
     2. [Babel详解 =>>](./Babel.md)
 
-### 其他
-1. [Event Loop详解 =>>](./EventLoop.md)
+### 二十四、其他
+1. [浏览器中Event Loop详细解析 & Node中的事件循环 =>>](./EventLoop.md)
 
 2. JS单线程与Web Worker
 
@@ -139,3 +139,9 @@
 3. [架构模式MVC和MVVM =>>](./ArchitecturalPattern.md)
 
 4. [jQuery & zepto =>>](./jq&zepto.md)
+
+5. 异步编程
+    1. [JS异步编程解决方案 & 发展历程 & 优缺点 =>>](./Asynchronous.md)
+    2. [Promise =>>](./Promise.md)
+    3. [Generator =>>](./Generator.md)
+    4. [异步终极解决方案Async/Await =>>](./Async&Await.md)
