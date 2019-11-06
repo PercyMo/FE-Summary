@@ -2,16 +2,16 @@
 
 ### 一. Promise标准
 TODO: 具体内容待填充...
-三种状态
-pending
-failfilled
-rejected
+三种状态  
+pending  
+fulfilled  
+rejected  
 
 一般来说，不要在then方法里面定义reject状态的回调函数（即then的第二个参数），总是使用catch方法
 
-Promise.prototype.then()
-Promise.prototype.catch()
-Promise.prototype.finally()
+Promise.prototype.then()  
+Promise.prototype.catch()  
+Promise.prototype.finally()  
 
 ### 二. 内部实现原理
 #### 1. 个人总结
@@ -229,3 +229,13 @@ Promise.prototype.finally()
 
 ### 四. 引用
 [Promise实现原理](https://juejin.im/post/5b83cb5ae51d4538cc3ec354)
+
+promise标准待整理，参考
+
+[ES6 系列之我们来聊聊 Promise](https://github.com/mqyqingfeng/Blog/issues/98)
+
+[剖析Promise内部结构](https://github.com/xieranmaya/blog/issues/3)
+
+[简单实现Promise](https://imweb.io/topic/5bbc264b6477d81e668cc930)
+
+[Promise原理讲解](https://juejin.im/post/5aa7868b6fb9a028dd4de672)
