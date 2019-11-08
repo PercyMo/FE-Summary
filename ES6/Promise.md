@@ -230,7 +230,7 @@ Promise.prototype.finally()
 ### 四. 引用
 [Promise实现原理](https://juejin.im/post/5b83cb5ae51d4538cc3ec354)
 
-promise标准待整理，参考
+TODO: promise标准待整理，参考
 
 [ES6 系列之我们来聊聊 Promise](https://github.com/mqyqingfeng/Blog/issues/98)
 
