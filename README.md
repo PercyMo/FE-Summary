@@ -16,7 +16,7 @@
 
 #### [- Vue =>>](./Vue/README.md)
 
-#### [- NodeJS =>>](./NodeJS/README.md)
+#### [- NodeJs =>>](./NodeJs/README.md)
 
 #### [- 前端设计模式 =>>](./设计模式/README.md)
 
