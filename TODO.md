@@ -77,4 +77,4 @@
     2. [Mac 下的 Top 和 Htop 指令](https://cnbin.github.io/blog/2015/06/19/mac-xia-de-top-he-htop-zhi-ling/)
 5. 【TODO】Fetch & Ajax
 6. 【TODO】babel-polyfill
-7. 【TODO】浏览器工作原理 & 一张网页的加载过程
+7. 【TODO】浏览器工作原理
