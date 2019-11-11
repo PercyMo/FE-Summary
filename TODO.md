@@ -37,7 +37,6 @@
 1. 【TODO】path-to-regexp 路由匹配组件
 
 ## 2019.06
-1. 【TODO】浏览器兼容模式
 2. 【TODO】::v-deep
 3. 【TODO】修改之后，执行 git add . && git commit --amend     然后 git push -f
 4. 【TODO】JSON.stringify(vipItem.package, null, 2)
@@ -47,7 +46,6 @@
   }
 6. 【TODO】document.body.appendChild
   当同一个节点呗多次添加时，会先删除之前的节点然后，再添加
-7. 【TODO】<!DOCTYPE html>和浏览器的混杂模式
 8. 【TODO】uuid，16进制转换10进制数字
 9. 【TODO】// 下面两行是为了解决滚动太快时模板列表会先出现空白问题
   background-image: url(about:blank);
