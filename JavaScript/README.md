@@ -35,33 +35,7 @@
 
 ### 五、引用类型
 2. Array类型
-    1. 模拟实现一个forEach
-    ```js
-    if (!Array.prototype.forEach) {
-        Array.prototype.forEach = function(fn, thisObj) {
-            var scope = thisObj || window;
-            for (var i = 0, len = this.length; i < len; i++) {
-                fn.call(scope, this[i], i, this);
-            }
-        }
-    }
-    ```
-    2. 模拟实现一个filter
-    ```js
-    if (!Array.prototype.filter) {
-        Array.prototype.filter = function(fn, thisObj) {
-            var scope = thisObj || window,
-                res = [];
-            for (var i = 0, len = this.length; i < len; i++) {
-                if (fn.call(scope, this[i], i, this)) {
-                    res.push(this[i]);
-                }
-            }
-            return res;
-        }
-    }
-    ```
-    3. [Array数组方法 =>>](./Array.md)
+    1. [Array数组方法 =>>](./Array.md)
 
 ### 六、面向对象的程序设计
 3. [原型对象与原型链、继承详解 =>>](./Prototype.md)
