@@ -22,6 +22,7 @@
   [链接](http://www.ruanyifeng.com/blog/2017/05/css-variables.html)
 5. 【TODO】传统网站换肤功能实现方案
 6. 【TODO】请求CORB警告 （跨域访问阻塞），情况：在三方类库中跨域访问.gif资源，服务器响应类型为text/html，造成CORB错误
+  [Cross-Origin Read Blocking (CORB)](https://juejin.im/post/5cc2e3ecf265da03904c1e06)
   [链接](https://segmentfault.com/a/1190000016126079)
 7. 【TODO】git工作流，追踪master分支代码变动
     1. [**git-workflow-tutorial.md](https://github.com/xirong/my-git/blob/master/git-workflow-tutorial.md)
