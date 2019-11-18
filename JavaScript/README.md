@@ -91,9 +91,6 @@
 5. JSON对象有两个方法：JSON.stringify()和JSON.parse()。分别用于将JSON对象序列化为JSON字符串，和把JSON字符串解析为原生JavaScript值。
     * 值为`undefined`的任何属性都会被跳过
 
-### 二十一、Ajax与Comet
-1. [前端跨域问题详解 =>>](./CrossOrigin.md)
-
 ### 二十三、最佳实践
 3. 构建 & 部署
     1. [webpack详解 =>>](./WebpackDetail.md)
