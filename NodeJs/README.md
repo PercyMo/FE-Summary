@@ -725,7 +725,7 @@ TODO: 待补充
             <script>
                 let ws = new WebSocket('ws://localhost:12010')
                 ws.onopen = function (e) {
-                    ws.send('你好 PosyMo！');
+                    ws.send('你好 PercyMo！');
                 }
                 ws.onerror = function (e) {
                 }
@@ -860,7 +860,7 @@ TODO: 待补充
             <script>
                 let ws = new WebSocket('ws://localhost:8080')
                 ws.onopen = function (e) {
-                    ws.send('hello PosyMo!')
+                    ws.send('hello PercyMo!')
                 }
                 ws.onerror = function (e) {
                 }
