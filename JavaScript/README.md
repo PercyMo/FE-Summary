@@ -41,10 +41,10 @@
 3. [原型对象与原型链、继承详解 =>>](./Prototype.md)
         
 ### 七、函数表达式
-2. 闭包
-
-    2. [关于this对象详解 =>>](./This.md)
-5. [立即执行函数表达式(IIFE)详解 =>>](./IIFE.md)
+1. 闭包
+2. [关于this对象详解 =>>](./This.md)
+3. [bind、call、apply详解 =>>](./Bind&Call&Apply.md)
+4. [立即执行函数表达式(IIFE)详解 =>>](./IIFE.md)
 
 ### 八、BOM
 5. [Hash、History & 前端路由模式 =>>](./Router.md)
