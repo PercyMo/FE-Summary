@@ -344,7 +344,31 @@ class MyPromise {
 }
 ```
 
-### 六. 引用
+### 六. 应用
+#### 1. race()
+使用`race()`特性做超时的操作
+```js
+// 请求某个图片资源
+var requestImg = new Promise(function(resolve, reject) {
+    var img = new Image();
+    img.onload = function() {
+        resolve(img);
+    };
+});
+// 延时函数，用于给请求计时
+var timeOut = new Promise(function(resolve, reject) {
+    setTimeout(function() {
+        reject('图片请求超时');
+    }, 5000);
+});
+Promise.race([requestImg, timeOut]).then(function(res) {
+    console.log(res);
+}, function(err) {
+    console.log(err);
+});
+```
+
+### 七. 引用
 [Promise实现原理](https://juejin.im/post/5b83cb5ae51d4538cc3ec354)
 
 [ES6 系列之我们来聊聊 Promise](https://github.com/mqyqingfeng/Blog/issues/98)
