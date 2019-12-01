@@ -100,7 +100,7 @@ Function.prototype.myCall = function(context) {
 ### 三. apply模拟实现
 ```js
 Function.prototype.myApply = function(context, arr) {
-    context = context || this;
+    context = context || window;
     context.fn = this;
 
     var result;
@@ -122,17 +122,64 @@ Function.prototype.myApply = function(context, arr) {
 
 ### 四. bind模拟实现
 ```js
-// TODO: 和MDN还有出入，待优化
+function.bind(thisArgs[, arg1[, arg2[, ...]]])
+```
+**特点：**
+1. 当使用`bind`在`setTimeout`中创建一个函数（作为回调提供）时，作为`thisArgs`传递的任何原始值都将转换为`object`
+2. 一个绑定函数也能使用`new`操作符创建对象：这种行为就像把原函数当做构造。提供的`this`值被忽略，同时调用时的参数被提供给模拟函数。
+    ```js
+    var value = 2;
+
+    var foo = {
+        value: 1
+    };
+
+    function bar(name, age) {
+        this.habit = 'shopping';
+        console.log(this.value);
+        console.log(name);
+        console.log(age);
+    }
+
+    bar.prototype.friend = 'kevin';
+
+    var bindFoo = bar.bind(foo, 'daisy');
+
+    var obj = new bindFoo('18');
+    // undefined    通过bind绑定的this指向foo已经失效
+    // daisy
+    // 18
+    console.log(obj.habit);
+    console.log(obj.friend);
+    // shopping     obj中的this此时已经指向了obj
+    // kevin
+    ```
+
+**bind函数模拟完整实现**
+```js
 Function.prototype.myBind = function(context) {
+    // 调用bind的不是函数，抛错
+    if (typeof this !== 'function') {
+        throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable');
+    }
+    
     var self = this;
     // 截取第 2 到最后一个参数
     var args = Array.prototype.slice.call(arguments, 1);
-    
-    return function() {
+
+    var fNOP = function() {};
+
+    var fBound = function() {
         // 使用全部参数
         var bindArgs = Array.prototype.slice.call(arguments);
-        return self.apply(context, args.concat(bindArgs));
+        // 通过 instanceof 判断是否通过 new 调用了函数
+        return self.apply(this instanceof fNOP ? this : context, args.concat(bindArgs));
     };
+
+    // 通过 FNOP 空函数中转，使 fBound 继承this原型上的属性
+    fNOP.prototype = this.prototype;
+    fBound.prototype = new fNOP();
+    return fBound;
 };
 ```
 
