@@ -41,6 +41,19 @@
     console.log(arr[2].userName)    // wade
     ```
 
+4. 展开语法`Spread`
+    ```js
+    var m = {
+        a: 1,
+        b: {
+            name: 'mao'
+        }
+    }
+    var n = {...m}
+    m.b.name = 'percy'
+    console.log(n.b.name)    // 'percy'
+    ```
+
 ### 三. 深拷贝的实现方式
 1. `JSON.parse(JSON.stringify())`
     ```js
@@ -251,6 +264,15 @@
     ```
 
 ### 四. lodash中deepclone源码分析
+// TODO: 有点费时间，后续再补全
+* 位掩码
+* 定制 clone 函数
+* 非对象
+* 数组 & 正则
+* 对象 & 函数
+* 循环引用
+* Map & Set
+* Symbol & 原型链
 
 
 ### 五. 总结
