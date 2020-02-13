@@ -56,14 +56,6 @@
 1. 【TODO】基于IntersectionObserver的曝光统计
 
 ## 2019.08
-1. 【TODO】从零开始写一个NPM包
-2. 【TODO】前端学习的nginx知识
-    1. [前端工程师学习Nginx入门篇](http://cnt1992.xyz/2016/03/18/simple-intro-to-nginx/)
-    2. [Nginx与前端开发](https://juejin.im/post/5bacbd395188255c8d0fd4b2)
-    3. [前端想要了解的Nginx](https://juejin.im/post/5cae9de95188251ae2324ec3)
-    4. [8分钟带你深入浅出搞懂Nginx](https://zhuanlan.zhihu.com/p/34943332)
-    5. [一个前端必会的 Nginx免费教程 (共11集）](http://jspang.com/posts/2018/10/05/nginx.html)
-    6. 百度云里有视频教程
 3. 【TODO】sentry & 前端错误监控
     1. [sentry使用实践](https://www.jianshu.com/p/66e00077fac3)
     2. [Sentry支持SourceMap指引](https://blog.fritx.me/?2017/07/sentry-sourcemap-guide)
