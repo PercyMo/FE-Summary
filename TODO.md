@@ -66,5 +66,4 @@
 4. 【TODO】几个最近发现的Linux命令行工具
     1. [每天学习一个命令：代码搜索工具](ack-grep http://einverne.github.io/post/2017/10/ack-grep.html)
     2. [Mac 下的 Top 和 Htop 指令](https://cnbin.github.io/blog/2015/06/19/mac-xia-de-top-he-htop-zhi-ling/)
-5. 【TODO】Fetch & Ajax
-6. 【TODO】babel-polyfill
+5. 【TODO】babel-polyfill
