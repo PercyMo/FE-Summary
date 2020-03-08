@@ -87,7 +87,7 @@
         缺点：
         * 如果资源更新的速度是秒以下单位，那么该缓存是不能被使用的，因为它的时间单位最低是秒。
         
-    2. `Last-Modifiled` & `If-Modifiled-Since`  
+    2. `Etag` & `If-None-Match`  
         `Etag` 存储的是文件的特殊标识(一般都是 hash 生成的)，服务器存储着文件的 `Etag` 字段，**只要资源有变化，Etag就会重新生成**。之后的流程和 `Last-Modified` 一致，只是 `Last-Modified` 字段和它所表示的更新时间改变成了 `Etag` 字段和它所表示的文件 hash，把 `If-Modified-Since` 变成了 `If-None-Match`。服务器同样进行比较，命中返回 304, 不命中返回新资源和 200。
         * 首先在精确度上，`Etag` 要优于 `Last-Modified`
         * `Etag` 的优先级高于 `Last-Modified`
