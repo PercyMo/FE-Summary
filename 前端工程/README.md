@@ -1,5 +1,6 @@
 ### 概述
-1. [前端工程化](./IntegratedSolution.md)
+1. [前端工程化概述](./IntegratedSolution.md)
+2. [《前端工程化-体系设计与实践》笔记](./StudyNotes.md)
 
 ### 一、模块化
 1. [JavaScript模块化详解 =>>](./JavaScriptModules.md)

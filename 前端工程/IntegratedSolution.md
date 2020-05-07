@@ -85,7 +85,7 @@
 1. 前端构建工具  
     gulp、grunt、webpack、Rollup、Parcel
 2. JS编译工具  
-    Babel、Browserify
+    Babel
 
 #### 3. 限定规范
 1. 统一编码规范
