@@ -1,7 +1,7 @@
 ## 《前端工程化-体系设计与实践》笔记
 ### 一. 前端工程简史
 #### 1. 目前的前后端协作流程及工程化程度
-![前后端协作流程](https://vani.oss-cn-beijing.aliyuncs.com/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/01_v1.png?x-oss-process=image/resize,w_500)
+![前后端协作流程](http://img.vanilla.ink/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/01_v1.png?x-oss-process=image/resize,w_500)
 
 1. 开发层面
     * ES规范与浏览器兼容性不一致
@@ -23,7 +23,7 @@
 TODO: 这里可以专门对比下这些工具的差异
 
 #### 3.工程化方案的整体架构
-![工程化方案的整体架构](https://vani.oss-cn-beijing.aliyuncs.com/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/02.png?x-oss-process=image/resize,w_400)
+![工程化方案的整体架构](http://img.vanilla.ink/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/02.png?x-oss-process=image/resize,w_400)
 
 * 暴露给用户层的有两种接口：命令行调用各功能模块的接口和配置接口
 * 平台层分为4个功能模块：脚手架、本地服务器、构建以及部署模块
@@ -46,7 +46,7 @@ TODO: 这里可以专门对比下这些工具的差异
     * 测试环境指的是集成测试阶段测试工程师对产品进行仿真模拟测试的特定沙箱环境
     * 生产环境指的是产品交付给用户的真实环境
 
-    ![工作流](https://vani.oss-cn-beijing.aliyuncs.com/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/03.png?x-oss-process=image/resize,w_500)
+    ![工作流](http://img.vanilla.ink/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/03.png?x-oss-process=image/resize,w_500)
 
     不论前端工程化是最简单的本地工具链，还是集大成者的持续集成阶段，脚手架的执行环境始终局限于本地。这给脚手架工具带来了一个必须解决的问题：操作系统兼容性。
 
@@ -55,7 +55,7 @@ TODO: 这里可以专门对比下这些工具的差异
 4. 多样性的实现模式
     * 脚手架与构建模块如何协作  
 
-    ![脚手架协作](https://vani.oss-cn-beijing.aliyuncs.com/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/04.png?x-oss-process=image/resize,w_500)
+    ![脚手架协作](http://img.vanilla.ink/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/04.png?x-oss-process=image/resize,w_500)
 #### 3. 脚手架功能规划
 1. 命令行工具  
     | 命令 | 功能 |
@@ -329,7 +329,7 @@ TODO: 这里可以专门对比下这些工具的差异
     1. babel-preset-env  
         Babel提供了丰富的preset插件供开发者根据项目具体需求进行自由搭配。例如babel-preset-es2015插件是一个集合，包含了将ES6转化为ES5对应语法的所有插件。  
 
-        ![Babel插件](https://vani.oss-cn-beijing.aliyuncs.com/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/05.jpg?x-oss-process=image/resize,w_500)
+        ![Babel插件](http://img.vanilla.ink/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/05.jpg?x-oss-process=image/resize,w_500)
 
         但在实际开发过程中，根据项目针对浏览器版本的不同，部分ES6语法并不需要转化为ES5。比如项目只需要兼容Chrome59以上的版本，浏览器自身已经实现了对箭头函数的支持，源码中的箭头函数就没必要转成ES5语法。但要想自己搭配各个独立的插件以便剔除babel-preset-es2015中的冗余部分，并不是件容易的事，babel-preset-env节省了你搭配插件的时间。  
         ```js
@@ -368,7 +368,7 @@ TODO: 这里可以专门对比下这些工具的差异
     CSS预编译器的语法是各成一派的，而PostCSS鼓励开发者使用规范的CSS原生语法编写源代码，然后配置编译器需要兼容的浏览器版本，最后经过编译将源码转化为目标浏览器可用的CSS代码。从理念上更加接近Babel。  
     但是，PostCSS并不能完全弥补CSS的缺陷，所以目前普遍的方案是将CSS预编译与PostCSS综合在一起。  
 
-    ![CSS预编译+PostCSS](https://vani.oss-cn-beijing.aliyuncs.com/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/06.png?x-oss-process=image/resize,w_400)
+    ![CSS预编译+PostCSS](http://img.vanilla.ink/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/06.png?x-oss-process=image/resize,w_400)
 
     * 使用CSS预编译弥补CSS源码的弱编程能力，比如变量、运算、继承、模块化等
     * 使用PostCSS处理针对浏览器的需求，比如autoprefix、自动CSS Sprites等
@@ -424,7 +424,7 @@ CommonJS/AMD/CMD/ES6 Module
     ```
     经webpack构建后产出以下文件：  
 
-    ![webpack构建AMD异步模块](https://vani.oss-cn-beijing.aliyuncs.com/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/07.png?x-oss-process=image/resize,w_500)
+    ![webpack构建AMD异步模块](http://img.vanilla.ink/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/07.png?x-oss-process=image/resize,w_500)
 
     构建输出的文件名为`1.087f61de.js`，而且其`Chunk Names`为空值。实际上，文件名中的1是模块的id。这种命名方式是没有语义的，对于线上错误跟踪也不方便。可见webpack对于AMD这种已经落后于时代的规范支持不佳。  
 
@@ -439,7 +439,7 @@ CommonJS/AMD/CMD/ES6 Module
     ```
     经webpack构建后产出如下文件：  
 
-    ![webpack构建ES6异步模块](https://vani.oss-cn-beijing.aliyuncs.com/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/08.png?x-oss-process=image/resize,w_500)
+    ![webpack构建ES6异步模块](http://img.vanilla.ink/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/08.png?x-oss-process=image/resize,w_500)
 
 #### 6. 针对浏览器缓存策略的构建功能的设计
 1. HTTP缓存策略  
@@ -462,7 +462,7 @@ CommonJS/AMD/CMD/ES6 Module
         Etag: FpCaYjU-Tbu-QqsYyqFRaibzH_RE
         ```
     
-    ![HTTP缓存策略](https://vani.oss-cn-beijing.aliyuncs.com/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/09.png?x-oss-process=image/resize,w_500)
+    ![HTTP缓存策略](http://img.vanilla.ink/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/09.png?x-oss-process=image/resize,w_500)
 
     设置`Cache-control: no-chche`，便可以强制浏览器使用协商缓存。
 
@@ -510,7 +510,7 @@ CommonJS/AMD/CMD/ES6 Module
     2. contenthash  
         在webpack中，css源文件必须在JS中引入。webpack默认将构建后的CSS代码合并到引用它的js文件中，此js文件运行时在HTML文档中动态添加`<style>`标签，所以js主文件与css文件的hash指纹（thunkhash）完全一致。  
 
-        ![webpack构建css](https://vani.oss-cn-beijing.aliyuncs.com/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/10.png?x-oss-process=image/resize,w_500)
+        ![webpack构建css](http://img.vanilla.ink/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/10.png?x-oss-process=image/resize,w_500)
 
         contenthash并不是webpack自身的另外一种hash值，而是由MiniCssExtractPlugin插件提供的。可以解耦js与css文件的hash指纹。
 
@@ -550,7 +550,7 @@ CommonJS/AMD/CMD/ES6 Module
     1. Livereload  
         Livereload的原理是在浏览器和服务器之间创建WebSocket连接，服务器端在执行完动态编译之后发送reload事件至浏览器，浏览器接收到事件时候刷新整个页面。  
 
-        ![Livereload模式](https://vani.oss-cn-beijing.aliyuncs.com/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/11.png?x-oss-process=image/resize,w_500)
+        ![Livereload模式](http://img.vanilla.ink/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/11.png?x-oss-process=image/resize,w_500)
 
     2. HMR  
         在开启webpack-dev-server模式下，webpack向构建输出的文件中注入了一项额外的功能模块——HMR Runtime。同时在服务器端也注入了对应的服务模块——HMR Server。与Livereload的实现方式类似的是，客户端与服务器之间也是通过WebSocket进行通信的。
@@ -585,7 +585,7 @@ CommonJS/AMD/CMD/ES6 Module
             app.use(require('webpack-hot-middleware')(compiler))
             ```
         
-        ![HMR新生成的文件](https://vani.oss-cn-beijing.aliyuncs.com/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/12.png?x-oss-process=image/resize,w_500)
+        ![HMR新生成的文件](http://img.vanilla.ink/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/StudyNotes/12.png?x-oss-process=image/resize,w_500)
 
 #### 2. Mock服务
 1. Mock的必要前提和发展进程  

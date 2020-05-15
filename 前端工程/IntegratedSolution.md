@@ -16,7 +16,7 @@
 2. **后端为主的MVC时代**  
     为了降低复杂度，以后端为出发点，有了Web Server层的架构升级，比如Structs、Spring MVC等。  
 
-    ![MVC](https://vani.oss-cn-beijing.aliyuncs.com/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/IntegratedSolution/01.png?x-oss-process=image/resize,w_500)
+    ![MVC](http://img.vanilla.ink/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/IntegratedSolution/01.png?x-oss-process=image/resize,w_500)
 
 > **前两个阶段存在的问题**
 > 1. 前端开发重度依赖开发环境
@@ -25,7 +25,7 @@
 3. **Ajax带来的SPA时代**  
     2005年，ajax正式提出，前端进入SPA（Single Page Application 单页面应用）时代。  
 
-    ![web2.0](https://vani.oss-cn-beijing.aliyuncs.com/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/IntegratedSolution/02.png?x-oss-process=image/resize,w_500)
+    ![web2.0](http://img.vanilla.ink/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/IntegratedSolution/02.png?x-oss-process=image/resize,w_500)
 
     Ajax时代面临的挑战：
         1. 前后端接口的约定
@@ -34,12 +34,12 @@
 4. **前端为主的MVC、MV\*时代**  
     为了降低前端开发复杂度，Backbone、EmberJS、KnockoutJS、AngularJS、React、Vue等大量前端框架涌现。（组件化开发以及合理分层）
 
-    ![SPA](https://vani.oss-cn-beijing.aliyuncs.com/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/IntegratedSolution/03.png?x-oss-process=image/resize,w_500)
+    ![SPA](http://img.vanilla.ink/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/IntegratedSolution/03.png?x-oss-process=image/resize,w_500)
 
 5. **Node带来的全栈时代**  
     随着NodeJS的兴起，为前端带来了一种新的开发模式。业界比较出名的实践是，阿里巴巴的中途岛计划（Midway，基于eggJS的二开）。  
 
-    ![全栈时代](https://vani.oss-cn-beijing.aliyuncs.com/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/IntegratedSolution/04.png?x-oss-process=image/resize,w_400)
+    ![全栈时代](http://img.vanilla.ink/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/IntegratedSolution/04.png?x-oss-process=image/resize,w_400)
 
 > **后两个阶段的优势**
 > 1. 前后端职责很清晰
@@ -57,7 +57,7 @@
 2. 采用组件化的编程思想，处理UI层
     React、Vue、Angular  
 
-    ![组件化](https://vani.oss-cn-beijing.aliyuncs.com/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/IntegratedSolution/05.png?x-oss-process=image/resize,w_500)
+    ![组件化](http://img.vanilla.ink/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/IntegratedSolution/05.png?x-oss-process=image/resize,w_500)
 
     前端组件化开发理念：  
 
