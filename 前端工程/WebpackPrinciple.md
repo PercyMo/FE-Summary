@@ -172,6 +172,166 @@ module.exports = show;
 webpack在`__webpack_reqire__`函数的实现中还做了缓存优化：执行加载过的模块会缓存在内存中，当该模块被第二次访问时会直接去内存中读取被缓存的返回值。
 
 #### 2. 分割代码时的输出
+使用异步模块，输出内容将发生变化。
+```js
+// 异步加载 show.js
+import('./show').then((show) => {
+  show('Webpack');
+})
+```
+重新构建后，除了入口文件 `bundle.js`，还会多构建输出一个异步加载的文件 `0.bundle.js`，内容如下：
+```js
+// 0.bundle.js
+webpackJsonp(
+    // 在其它文件中存放着的模块的 ID （没太理解，个人觉得叫文件id更合适些）
+    [0],
+    // 本文件所包含的模块
+    [
+        /* 0 */,
+        /* 1 */
+        // show.js 所对应的模块
+        (function (module, exports) {
+            function show(content) {
+                window.document.getElementById('app').innerText = 'Hello,' + content;
+            }
+
+            module.exports = show;
+        })
+    ]
+);
+```
+```js
+// bundle.js
+(function(modules) {
+    /**
+     * webpackJsonp 用于从异步加载的文件中安装模块
+     * 把 webpackJsonp 挂载到全局是为了方便在其他文件中调用。
+     *
+     * @param chunkIds 异步加载的文件中存放的需要安装的模块对应的 chunkId
+     * @param moreModules 异步加载文件中存放的需要安装的模块列表
+     * @param excuteModules 在异步加载的文件中存放的需要安装的模块都安装成功后，需要执行的模块对应的 index
+     */
+    window["webpackJsonp"] = function webpackJsonpCallback(chunkIds, moreModules, excuteModules) {
+        // 把 moreModules 添加到 modules 对象中
+        // 把所有 chunkIds 对应的模块都标记成已经加载成功
+        var moduleId, chunkId, i = 0, resolves = [], result;
+        for (;i < chunkIds.length; i++) {
+            chunkId = chunkIds[i];
+            if (installedChunks[chunkId]) {
+                // installedChunks 每一项在 loading 时的结构为 [resolve, reject, promise]
+                resolves.push(installedChunks[chunkId][0]); // [0] 指的就是 resolve
+            }
+            installedChunks[chunkId] = 0;
+        }
+        for (moduleId in moreModules) {
+            if (Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+                modules[moduleId] = moreModules[moduleId];
+            }
+        }
+        while (resolves.length) {
+            resolves.shift()();
+        }
+    }
+
+    // 缓存已经安装的模块
+    var installedModules = {};
+
+    // 存储每个 chunk 的加载状态
+    // 键 为 chunk 的 id，值为0表示已经加载成功
+    var installedChunks = {
+        1: 0 // 这里的1猜测为chunk的上限，如果有3个chunk，这里就变成 3:0 了
+    };
+
+    function __webpack_require__(moduleId) {
+        // ... 省略和上面一样的内容
+    }
+
+    /**
+     * 用于加载被分割出去的，需要异步加载的 Chunk 对应的文件
+     * @param chunkId 需要异步加载的 Chunk 对应的 ID
+     * @returns {Promise}
+     */
+    __webpack_require__.e = function requireEnsure(chunkId) {
+        // 从上面定义的 installedChunks 中获取 chunkId 对应的 Chunk 的加载状态
+        var installedChunkData = installedChunks[chunkId];
+        // 如果加载状态为0表示 Chunk已经加载成功了，直接返回 resolve Promise
+        if (installedChunkData === 0) {
+            return new Promise(function(resolve) {
+                resolve();
+            });
+        }
+        // installedChunkData 不为空且不为0表示该 Chunk 正在网络加载中
+        if (installedChunkData) {
+            // 返回存放在 installedChunkData 数组中的 Promise 对象
+            return installedChunkData[2];
+        }
+
+        // installedChunkData 为空，表示该 Chunk 还没有加载过，去加载该 Chunk 对应的文件
+        var promise = new Promise(function(resolve, reject) {
+            installedChunkData = installedChunks[chunkId] = [resolve, reject];
+        })
+        installedChunkData[2] = promise;
+
+        // 通过 DOM 操作，往 HTML head 中插入一个 script 标签去异步加载 Chunk 对应的JS文件
+        var head = document.getElementsByTagName('head')[0];
+        var script = document.createElement('script');
+        script.type = 'script/javascript';
+        script.charset = 'utf-8';
+        script.async = true;
+        script.timeout = 120000;
+
+        // 文件的路径为配置的 publicPath、chunkId 拼接而成
+        script.src = __webpack_require__.p + '' + chunkId + '.bundle.js';
+
+        // 设置异步加载的最长超时时间
+        var timeout = setTimeout(onScriptComplete, 120000);
+        script.onerror = script.onload = onScriptComplete;
+
+        // 在 script 加载和执行完成时回调
+        function onScriptComplete() {
+            // 防止内存泄漏
+            script.onerror = script.onload = null;
+            clearTimeout(timeout);
+
+            // 去检查 chunkId 对应的 chunk 是否安装成功，安装成功时才会存在于 installedChunks 中
+            var chunk = installedChunks[chunkId];
+            if (chunk !== 0) {
+                if (chunk) {
+                    chunk[1](new Error('Loading chunk' + chunkId + 'failed.'));
+                }
+                installedChunks[chunkId] = undefined;
+            }
+        }
+
+        head.appendChild(script);
+
+        return promise;
+    }
+
+    // 加载并执行入口模块
+    return __webpack_require__(__webpack_require__.s = 0);
+})(
+    // 存放所有没有经过异步加载的，随着执行入口文件加载的模块
+    [
+        // main.js 对应的模块
+        (function(module, exports, __webpack_require__) {
+            // 通过 __webpack_require__.e 去异步加载 show.js 对应的 chunk
+            __webpack_require__.e(0).then(__webpack_require__.bind(null, 1)).then((show) => {
+                show('Webpack');
+            })
+        })
+    ]
+);
+```
+> 待证实，暂称之“小毛猜想”
+> 1. 关于moduleId，webpack会将所有的同步和异步模块一起计数，如果同步模块已经有了2个坑位，那异步模块的id就是从2开始了
+> 2. 分割代码的写法略有不同（可能是出于优化考虑），id小于3时，`webpackJsonp([moduleId],[(function() {})])`，反之：`webpackJsonp([moduleId],{3: (function() {})})`
+
+这里的`bundle.js`和上面所讲的`bundle.js`非常相似，区别在于：
+* 多了一个`__webpack_require__.e`用于加载被分割出去的，需要异步加载的chunk对应的文件；
+* 多了一个`webpackJsonp`函数用于从异步加载的文件中安装模块。
+
+在使用了`CommonsChunkPlugin`去提取公共代码时输出的文件和使用了异步加载输出的文件是一样的，都会有`__webpack_require__.e`和`webpackJsonp`。原因在于提取公共代码和异步加载本质上都是代码分割。
 
 ### 三. 编写 Loader
 
