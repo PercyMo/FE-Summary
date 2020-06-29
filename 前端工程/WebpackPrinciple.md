@@ -87,7 +87,6 @@ function show(content) {
   window.document.getElementById('app').innerText = 'Hello,' + content;
 }
 
-// 通过 CommonJS 规范导出 show 函数
 module.exports = show;
 ```
 
@@ -334,6 +333,150 @@ webpackJsonp(
 在使用了`CommonsChunkPlugin`去提取公共代码时输出的文件和使用了异步加载输出的文件是一样的，都会有`__webpack_require__.e`和`webpackJsonp`。原因在于提取公共代码和异步加载本质上都是代码分割。
 
 ### 三. 编写 Loader
+#### 1. loader执行顺序
+以处理scss为例，
+1. `sass-loader` 把 `scss` 转成 `css`
+2. `sass-loader` 输出的 `css` 交给 `css-loader` 处理，找出`css`中依赖的资源、压缩`css`等
+3. `css-loader` 输出的 `css` 交给 `style-loader` 处理，转换成通过脚本加载的JS代码
+
+loader的处理过程是有顺序的链式执行，先`sass-loader`，再`css-loader`，最后`style-loader`。`use`数组中，从右至左执行。
+```js
+module.exports = {
+    module: {
+        rules: [
+            {
+                test: /\.scss$/,
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        // css-loader 配置
+                        options: {
+                            minimize: true
+                        }
+                    },
+                    'sass-loader'
+                ]
+            }
+        ]
+    }
+}
+```
+
+#### 2. loader的职责
+一个loader的职责是单一的，只需要完成一种转换。如果一个源文件需要经历多步转换才能正常使用，就通过多个loader去转换。在调用多个loader去转换一个文件时，每个loader会链式地顺序执行，第一个loader将会拿到需处理的原内容，上一个loader处理后的结果会传给下一个接着处理，最后的loader将处理后的结果返回给webpack。
+
+#### 3. loader编写规则
+1. 一个最简单的loader
+    ```js
+    module.exports = function (source) {
+        // source 为 compiler 传递给 loader 的一个文件的原内容
+        // 该函数直接把原内容返回，相当于loader没有做任何转换
+        return source;
+    };
+    ```
+
+2. loader运行在Node.js中，你可以调用任何Node.js自带的API，或者安装第三方模块进行调用。
+    ```js
+    const sass = require('node-sass');
+    module.exports = function (source) {
+        return sass(source);
+    };
+    ```
+
+3. 获得loader的options
+    ```js
+    const loaderUtils = require('loader-utils');
+    module.exports = function (source) {
+        // 获取到用户给 sass-lader 传递的 options 参数
+        const options = loaderUtils.getOptions(this);
+        return source;
+    };
+    ```
+
+4. 返回其它结果  
+    以用`babel-loader`转换ES6代码为例，它还需要输出转换后的ES5代码对应的`Source Map`，以方便调试源码。为了把`Source Map`也一起随着ES5代码返回给webpack，可以这样写：
+    ```js
+    module.exports = function (source) {
+        // 通过 this.callback 告诉 webpack 返回结果
+        this.callback(null, source, sourceMaps);
+        // 当使用 this.callback 返回内容时，该 loader 必须返回 undefined，
+        // 以让 webpack 知道该 loader 返回的结果在 this.callback 中，而不是 return 中
+        return;
+    };
+    ```
+    `this.callback`是webpack给loader注入的API，以方便webpack和loader之间通讯。`this.callback`的详细使用方法如下：
+    ```js
+    this.callback({
+        // 当无法转换原内容时，给 webpack 返回一个 Error
+        err: Error | null,
+        // 原内容转换后的内容
+        content: String | Buffer,
+        // 用于把转换后的内容得出原内容的 Source Map，方便调试
+        sourceMap?: SourceMap,
+        // 如果本次转换的原生内容生成了 AST 语法树，可以把这个 AST 返回，
+        // 以方便之后需要 AST 的 loader 复用该 AST，避免重复生成 AST，提升性能
+        abstractSyntaxTree?: AST
+    });
+    ```
+    > Source Map的生成很耗时，通常在开发环境下才生成Source Map，其他环境下不用生成，以加速构建。为此webpack 为 laoder 提供了 `this.sourceMap` API 告诉 loader 当前构建环境下用户是否需要 Source Map。
+
+5. 同步和异步  
+    当转换步骤存在异步时：
+    ```js
+    module.exports = function(source) {
+        // 告诉 webpack 本次转换是异步的，loader 会在 callback 中回调结果
+        var callback = this.async();
+        someAsyncOperation(source, function(err, result, sourceMaps, ast) {
+            // 通过 callback 返回异步执行的结果
+            callback(err, result, sourceMaps, ast);
+        });
+    };
+    ```
+
+6. 处理二进制数据  
+    webpack默认传给 loader 的原内容都是 UTF-8 格式编码的字符串。但某些场景下，如：file-loader，需要 webpack 给loader传入二进制格式数据。
+    ```js
+    module.exports = function(source) {
+        // 在 exports.row === true时，webpack 传给 loader 的 source 是 Buffer 类型的
+        source instanceof Buffer === true;
+        // loader 返回值也可以是 Buffer
+        // exports.row !== true，loader 也可以返回 Buffer 类型
+        return source;
+    };
+    // 通过 exports.row 属性告诉 webpack 该 loader 是否需要二进制数据，没有该行声明，loader只能拿到字符串
+    module.exports.row = true;
+    ```
+
+7. 缓存加速  
+    有些转换操作需要大量计算非常耗时，如果每次构建都重新执行重复的转换操作，构建将会变得非常缓慢。webpack会默认缓存所有 loader 的处理结果，在需要被处理的文件或者其依赖的文件没有发生变化时，是不会重新调用对应的loader去执行转换操作的。  
+    如果想让 webpack 不缓存该 loader 的处理结果：
+    ```js
+    module.exports = function(source) {
+        // 关闭该 loader 的缓存功能
+        this.cacheable(false);
+        return source;
+    };
+    ```
+
+#### 4. 其它loader API
+[webpack官网 其他loader的API](https://webpack.js.org/api/loaders/)
+
+#### 5. 加载本地 loader
+1. **npm link**  
+    通过软链将 loader 模块链接到项目的 node_modules 目录下
+
+2. **ResolveLoader**  
+    ```js
+    // webpack.config.js
+    module.exports = {
+        resolveLoader: {
+            // 去哪些目录下寻找 loader，有先后顺序之分
+            modules: ['node_modules', './loaders/']
+        }
+    };
+    ```
+    加上配置后，webpack会先去node_modules项目下寻找loader，如果找不到，会再去`./loader/`目录下寻找。
 
 ### 四. 编写 Plugin
 
