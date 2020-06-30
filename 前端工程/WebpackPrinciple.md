@@ -479,6 +479,62 @@ module.exports = {
     加上配置后，webpack会先去node_modules项目下寻找loader，如果找不到，会再去`./loader/`目录下寻找。
 
 ### 四. 编写 Plugin
+#### 1. 最简单的插件编写
+```js
+// BasicPlugin.js
+class BasicPlugin {
+    // 在构造函数中获取用户给该插件传入的配置
+    constructor(options) {
+    }
+
+    // webpack 会调用 BasicPlugin 实例的 apply 方法给插件实例传入 Compiler 对象
+    apply(compiler) {
+        compiler.plugin('emit', function (compilation, callback) {
+            // console.log('test', compilation)
+        })
+    }
+}
+
+// 导出 plugin
+module.exports = BasicPlugin;
+```
+使用该plugin，`webpack.config.js`中的配置
+```js
+const BasicPlugin = require('./BasicPlugin.js');
+module.exports = {
+    plugins: [
+        new BasicPlugin(options)
+    ]
+};
+```
+webpack启动后，在读取配置的过程中会先执行`new BasicPlugin(options)`初始化`BasicPlugin`获得其实例。在初始化compiler对象后，再调用`BasicPlugin.apply(compiler)`给插件实例传入`compiler`对象。插件实例在获取到`compiler`对象后，就可以通过`compiler.plugin(事件名称, 回调函数)`监听到webpack广播出来的事件，并且可以通过compiler对象去操作webpack。
+
+#### 2. Compiler和Compilation
+* compiler对象包含了webpack环境所有的配置信息，包含options、loaders、plugins，这个对象在webpack启动时被实例化，它是全局唯一的，可以简单理解为webpack实例。
+* compilation对象包含了当前的模块资源、编译生成资源、变化的文件等。当webpack以开发模式运行时，每当检测到一个文件变化，一次新的compilation将被创建。
+
+compiler和compilation区别在于：compiler代表了整个webpack从启动到关闭的声明周期，而compilation只是代表了一次新的编译。
+
+#### 3. 事件流
+webpack通过[Tapable](https://github.com/webpack/tapable)来组织事件流。webpack会在运行过程中广播事件，插件只需要监听它所关心的事件，就能加入到这条生产线，改变生产线的运作。webpack的事件流机制保证了插件的有序性。  
+webpack的事件流机制应用了观察者模式，和Node.js中的EventEmmit非常相似。Compiler和Compilation都继承自Tapable，可以直接在Compiler和Compilation对象上广播和监听事件。
+```js
+/**
+* 广播出事件
+* event-name 为事件名称，注意不要和现有的事件重名
+* params 为附带的参数
+*/
+compiler.apply('event-name', params);
+
+compiler.plugin('event-name', function(params) {
+
+});
+```
+> TODO: 对于同一个事件，例如'emit'，如果在多个插件上监听，只有第一个实例化的插件会被执行。待证实
+
+#### 4. 常用API
+
+#### 5. 实战
 
 ### 五. Webpack 调试
 
