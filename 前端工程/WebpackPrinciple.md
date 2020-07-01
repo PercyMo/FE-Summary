@@ -517,7 +517,7 @@ compiler和compilation区别在于：compiler代表了整个webpack从启动到�
 
 #### 3. 事件流
 webpack通过[Tapable](https://github.com/webpack/tapable)来组织事件流。webpack会在运行过程中广播事件，插件只需要监听它所关心的事件，就能加入到这条生产线，改变生产线的运作。webpack的事件流机制保证了插件的有序性。  
-webpack的事件流机制应用了观察者模式，和Node.js中的EventEmmit非常相似。Compiler和Compilation都继承自Tapable，可以直接在Compiler和Compilation对象上广播和监听事件。
+webpack的事件流机制应用了观察者模式，和Node.js中的EventEmitter非常相似。Compiler和Compilation都继承自Tapable，可以直接在Compiler和Compilation对象上广播和监听事件。
 ```js
 /**
 * 广播出事件
@@ -527,12 +527,66 @@ webpack的事件流机制应用了观察者模式，和Node.js中的EventEmmit�
 compiler.apply('event-name', params);
 
 compiler.plugin('event-name', function(params) {
-
 });
 ```
 > TODO: 对于同一个事件，例如'emit'，如果在多个插件上监听，只有第一个实例化的插件会被执行。待证实
 
+开发插件注意点：
+* 只要能拿到Compiler或Compilation对象，就能广播出新的事件，所以在新开发的插件中也能广播出事件，给其他插件监听使用。
+    > TODO: 这里的坑感觉有点深了，关于Tapable，和Hooks单独写一篇
+    > [编写自定义webpack插件从理解Tapable开始](https://juejin.im/post/5dcba29f6fb9a04abb01fd77)
+    > [Webpack揭秘——走向高阶前端的必经之路](https://juejin.im/post/5badd0c5e51d450e4437f07a#heading-18)
+    > [揭秘webpack插件工作流程和原理](https://mp.weixin.qq.com/s/svhh8BJdxXGJuCuumJiBgA)
+* 传给每个插件的Compiler或Compilation对象都是同一个引用。也就是说在一个插件中修改了Compiler或Compilation对象上的属性，会影响到后面的插件。
+* 有些事件是异步的，这些异步的事件会附带两个参数，第二个参数为回调函数，在插件处理完任务时需要调用回调函数通知webpack，才会进入下一处理流程：
+    ```js
+    compiler.plugin('emit', function(compilation, callback) {
+        // 处理完成后执行callback通知webpack
+        // 如果不执行callback，运行流程将会一直卡在这里不往下执行
+        callback();
+    });
+    ```
+
 #### 4. 常用API
+1. **读取输出资源、代码块、模块及其依赖**  
+    在`emit`事件发生时，代表源文件的转换和组装已经完成，在这里可以读取到最终将输出的资源、代码块、模块及依赖，并可以修改输出自愿的内容。
+    ```js
+    class Plugin {
+        apply(compiler) {
+            compiler.plugin('emit', function (compilation, callback) {
+                // compilation.chunks 存放所有代码块，是一个数组
+                compilation.chunks.forEach(function (chunk) {
+                    // chunk 代表一个代码块
+                    // 代码块由多个模块组成，通过 chunk.forEachModule 能读取组成代码块的每个模块
+                    chunk.forEachModule(function (module) {
+                        // module 代表一个模块
+                        // module.fileDependencies 存放当前模块的所有依赖的文件路径，是一个数组
+                        module.fileDependencies.forEach(function (filePath) {
+                        });
+                    });
+
+                    // webpack 会根据 chunk 去生成输出的文件资源，每个 chunk 都对应一个及以上的输出文件
+                    // 例如在 chunk 中包含了 css 模块，并且使用了 ExtractTextPlugin 时，
+                    // 该 chunk 就会生成 .js 和 .css 两个文件
+                    chunk.files.forEach(function (filename) {
+                        // compilation.assets 存放当前所有即将输出的资源
+                        // 调用一个输出资源的 source() 能获取到输出资源的内容
+                        const source = compilation.assets[filename].source();
+                    });
+                });
+
+                // 这是一个异步事件，需要调用 callback 通知 webpack 本次事件监听处理结束
+                callback();
+            })
+        }
+    }
+    ```    
+
+2. **监听文件变化**  
+
+3. **修改输出资源**  
+
+4. **判断webpack使用了哪些插件**  
 
 #### 5. 实战
 
