@@ -1,13 +1,14 @@
 ## 二叉树的基本操作
 
-### 一. 二叉树的一些公式
+### 一. 完全二叉树的一些公式
 1. 第n层的节点数最多为2<sup>n</sup>个节点
 2. n层二叉树最多有2<sup>0</sup>+...2<sup>n</sup>=2<sup>n+1</sup>-1个节点
 3. 第一个非子叶节点：length/2 // TODO: 没懂什么意思
 4. 一个节点的孩子节点：2n、2n+1 // TODO: 没懂什么意思
+// TODO: 完全二叉树和普通的二叉树
 
 ### 二. 基本结构
-插入、遍历、深度 // TODO: 缺少了preOrder、middleOrder、laterOrder方法
+插入、遍历、深度
 ```js
 function Node(data, left, right) {
     this.data = data
@@ -49,6 +50,27 @@ Tree.prototype = {
                     return
                 }
             }
+        }
+    },
+    preOrder: function (node) {
+        if (node) {
+            node.show()
+            this.preOrder(node.left)
+            this.preOrder(node.right)
+        }
+    },
+    middleOrder: function (node) {
+        if (node) {
+            this.middleOrder(node.left)
+            node.show()
+            this.middleOrder(node.right)
+        }
+    },
+    laterOrder: function (node) {
+        if (node) {
+            this.laterOrder(node.left)
+            this.laterOrder(node.right)
+            node.show()
         }
     },
     getMin: function () {
@@ -117,8 +139,8 @@ getNode: function(data, node) {
 ```
 
 ### 四. 二分查找
-二分查找的条件是必须是有序的线性表。
-和线性表的中点值进行比较，如果小就继续在小的序列中查找，如此递归直到找到相同的值。
+二分查找的条件是必须是有序的线性表。  
+和线性表的中点值进行比较，如果小就继续在小的序列中查找，如此递归直到找到相同的值。  
 ```js
 const arr = [0, 1, 1, 1, 1, 1, 4, 6, 7, 8]
 function binarySearch(data, arr, start, end) {
