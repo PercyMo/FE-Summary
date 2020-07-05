@@ -583,16 +583,77 @@ compiler.plugin('event-name', function(params) {
     ```    
 
 2. **监听文件变化**  
+    当入口模块或其依赖的模块发生变化时，webpack就会触发一次新的compilation。
+    ```js
+    // 当依赖的文件发生变化时会触发 watch-run 事件
+    compiler.plugin('wtach-run', (watching, callback) => {
+        // 获取发生变化的文件列表
+        const changeFiles = watching.compiler.watchFileSystem.watcher.mtimes;
+        // changeFiles 格式为键值对，键为发生变化的文件路径
+        if (changeFiles[filePath] !== undefined) {
+            // filePath 对饮的文件发生了变化
+        }
+        callback();
+    });
+    ```
+    默认情况下，webpack只会监听入口和其依赖的模块是否发生变化，在有些情况下项目可能需要引入新文件，例如引入一个html。由于js不会去导入html文件，因此编辑html时不会触发新的compilation。为了监听html的变化，需要把html加入到依赖列表中：
+    ```js
+    compiler.plugin('after-compile', (compilation, callback) => {
+        compilation.fileDependencies.push(path.resolve(__dirname, '../index.html'));
+        callback();
+    });
+    ```
 
 3. **修改输出资源**  
+    `emit`事件时所有模块的转换和代码对应的文件已经生成好了，需要输出的资源即将输出，因此`emit`事件是修改、增加、删除webpack输出资源的最后时机。  
+    所有需要输出的资源会存放在`compilation.assets`中，`compilation.assets`是一个键值对，键为需要输出的文件名称，值为文件对应的内容。  
+    设置`compilation.assets`的代码如下：
+    ```js
+    compiler.plugin('emit', (compilation, callback) => {
+        // 设置名为 fileName 的输出资源
+        compilation.assets[filename] = {
+            // 返回的文件内容
+            source: () => {
+                // fileContent 既可以是代表文本文件的字符串，也可以是二进制Buffer
+                return fileContent;
+            },
+            // 返回文件大小
+            size: () => {
+                return Buffer.byteLength(fileContent, 'utf8');
+            }
+        };
+        callback();
+    });
+    ```
+    读取`compilation.assets`代码如下：
+    ```js
+    compiler.plugin('emit', (compilation, callback) => {
+        const asset = compilation.assets[fileName];
+        asset.source();
+        asset.size();
+        callback();
+    });
+    ```
 
 4. **判断webpack使用了哪些插件**  
-
-#### 5. 实战
+    开发一个插件时可能需要根据当前配置是否使用了其他某个插件而做下一步决定，因此需要读取webpack当前的插件配置情况。
+    ```js
+    function hasExtractTextPlugin(compiler) {
+        const plugins = compiler.options.plugins;
+        return plugins.find(plugin => plugin.__proto__.constructor === ExtractTextPlugin) !== null;
+    }
+    // 没懂constructor === ExtractTextPlugin 是怎么判断的，是否是伪代码
+    // constructor.name === 'ExtractTextPlugin'可行
+    ```
 
 ### 五. Webpack 调试
+由于webpack运行在Node.js之上，调试webpack就相当于调试Node.js程序。  
+VS Code断点调试，`--inspect`，单独解释下。  
 
-### 六. 实现一个乞丐版 Webpack
+### 六. 其他
+> 一点小小提醒的给自己，配置webpack时，一定注意webpack自身版本和所用的插件、loader版本是否匹配，遇到过不止一次这样的问题，webpack给出的提示莫名其妙，花费了许多时间都解决不了的报错，也许只是版本问题，换个版本就好了。
+> 遇到疑难杂症的时候，一定想一下是否可能是版本的问题导致。
+> ***千万谨记！千万谨记！千万谨记！***
 
 ### 七. 引用
 [webpack原理（《深入浅出 webpack》）](https://webpack.wuhaolin.cn/5%E5%8E%9F%E7%90%86/5-1%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E6%A6%82%E6%8B%AC.html)
