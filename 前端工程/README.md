@@ -29,6 +29,8 @@
 1. [git基本操作 =>>](./GitCheatSheet.md)
 2. [基于git的工作流程规范 =>>](./GitWorkflow.md)
 3. git hooks
+4. [git忽略规则提交 =>>](./Gitignore.md)
+5. [本地项目上传git](./GitLocalProject.md)
 
 ### 六、nginx
 1. 正反向代理
