@@ -310,8 +310,8 @@ Node模块分为两类：一类是Node提供的模块，核心模块；另一类
 
 4. 模块调用栈
     C/C++内建模块属于最底层的模块，它属于核心模块，主要提供API给JavaScript核心模块和第三方JS文件模块调用。如果你不是非常了解要调用的C/C++内建模块，请尽量避免通过process.binding()方法直接调用，这是不推荐的。
-
-    <img src="./images/01.png" width="400" />
+    
+    ![模块调用栈](http://img.vanilla.ink/me/webproject/FE-Summary/Node/01.png?x-oss-process=image/resize,w_400)
 
 5. 兼容多种模块规范
     ```js
@@ -344,11 +344,11 @@ Node模块分为两类：一类是Node提供的模块，核心模块；另一类
 ##### 1. 现实的异步I/O
 我们时常提到Node是单线程的，这里的单线程仅仅是JS执行在单线程中罢了。在Node中，无论是*nix还是Windows平台，内部完成I/O任务的另有线程池。
 
-<img src="./images/03.png" width="450" />
+![现实的异步I/O](http://img.vanilla.ink/me/webproject/FE-Summary/Node/03.png?x-oss-process=image/resize,w_450)
 
 由于Windows平台和*nix平台的差异，Node提供了libuv作为抽象封装层，使得所有平台兼容性的判断都由这一层来完成，并保证上层的Node与下层的自定义线程池及IOCP之间各自独立。
 
-<img src="./images/02.png" width="300" />
+![平台差异](http://img.vanilla.ink/me/webproject/FE-Summary/Node/02.png?x-oss-process=image/resize,w_300)
 
 ##### 2. Node的异步I/O
 
@@ -368,7 +368,7 @@ Node模块分为两类：一类是Node提供的模块，核心模块；另一类
 
     整个异步I/O的流程
 
-    <img src="./images/04.png" width="500" />
+    ![整个异步I/O的流程](http://img.vanilla.ink/me/webproject/FE-Summary/Node/04.png?x-oss-process=image/resize,w_500)
 
 ##### 3. 非 I/O 的异步API
 1. 定时器
@@ -622,7 +622,7 @@ TODO: 待补充
 
     2. OSI七层协议
 
-        <img src="./images/05.png" width="450" />
+        ![OSI七层协议](http://img.vanilla.ink/me/webproject/FE-Summary/Node/05.png?x-oss-process=image/resize,w_450)
 
     3. TCP服务事件
 
