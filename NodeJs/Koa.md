@@ -102,7 +102,7 @@ createContext(req, res) {
 }
 ```
 
-> **ctx的扩展**
+> **ctx的扩展**  
 > 我们知道`this.context`是中间件中上下文对象ctx的原型。因此在实际开发中，可以将一些常用的方法挂载到`this.context`上面，这样，在中间件ctx中，可以方便使用这些方法，这个概念叫做ctx的扩展。
 > 一个例子是阿里的egg.js，已经把这个扩展机制作为一部分，融入到了框架开发中。
 ```js
@@ -230,18 +230,72 @@ next()
 ```
 
 #### 4. 错误捕获和错误处理
-每一个中间件代码都是由async包裹着的，而且中间件的执行函数compose返回的也是一个async函数。因此只需使用promise的catch方法，就可以把所有中间件的异常全部捕获到。
-```js
-return fn(ctx).then(respond).catch(onerror)
-```
+1. 每一个中间件代码都是由async包裹着的，而且中间件的执行函数compose返回的也是一个async函数。因此只需使用promise的catch方法，就可以把所有中间件的异常全部捕获到。  
 
-koa构造函数继承events模块，通过emit函数触发，通过on监听函数就能订阅和监听框架层面上的错误。
+2. koa构造函数继承events模块，通过emit函数触发，通过on监听函数就能订阅和监听框架层面上的错误。  
+
 ```js
 const EventEmitter = require('event')
-class Application extends EventEmitter {}
+
+class Application extends EventEmitter {
+    // ...
+
+    callback() {
+        const ctx = this.createContext(req, res)
+        const respond = () => this.responseBody(ctx)
+        const onerror = err => this.onerror(err, ctx)
+        const fn = this.compose()
+        // 在这里catch异常，调用onerror方法处理异常
+        return fn(ctx).then(respond).catch(onerror)
+    }
+
+    onerror(err, ctx) {
+        if (err.code === 'ENOENT') {
+            ctx.status = 404
+        } else {
+            ctx.status = 500
+        }
+        const msg = err.message || 'Internal error'
+        ctx.res.end(msg)
+        // 触发error事件
+        this.emit('error', err)
+    }
+}
 ```
 
 ### 三. 效果
+```js
+const koa = require('./koa/application.js')
+const app = new koa()
+
+app.on('error', err => {
+    console.log('error happends: ', err.stack)
+})
+
+app.use(async (ctx, next) => {
+    console.log('1')
+    await next()
+    console.log('5')
+})
+
+app.use(async (ctx, next) => {
+    console.log('2')
+    await next()
+    console.log('4')
+})
+
+app.use(async (ctx, next) => {
+    console.log('3')
+    ctx.body = 'hello world!'
+})
+
+app.listen(8081, () => {
+    console.log('监听：', 8081)
+})
+```
+
+启动服务后，成功监听8081端口，访问页面后，页面输出`hello world`，终端顺序打印`1 2 3 4 5`。  
+中间件抛错时，可以成功监听，做相应处理，返回500状态码。  
 
 ### 四. 完整代码实现
 
