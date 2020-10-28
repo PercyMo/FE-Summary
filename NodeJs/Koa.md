@@ -103,7 +103,7 @@ createContext(req, res) {
 ```
 
 > **ctx的扩展**  
-> 我们知道`this.context`是中间件中上下文对象ctx的原型。因此在实际开发中，可以将一些常用的方法挂载到`this.context`上面，这样，在中间件ctx中，可以方便使用这些方法，这个概念叫做ctx的扩展。
+> 我们知道`this.context`是中间件中上下文对象ctx的原型。因此在实际开发中，可以将一些常用的方法挂载到`this.context`上面，这样，在中间件ctx中，可以方便使用这些方法，这个概念叫做ctx的扩展。  
 > 一个例子是阿里的egg.js，已经把这个扩展机制作为一部分，融入到了框架开发中。
 ```js
 const simpleKoa = require('./application)
@@ -298,6 +298,8 @@ app.listen(8081, () => {
 中间件抛错时，可以成功监听，做相应处理，返回500状态码。  
 
 ### 四. 完整代码实现
+
+[一个简单的koa代码实现](https://github.com/PercyMo/simple-koa)
 
 ### 五. 引用
 
