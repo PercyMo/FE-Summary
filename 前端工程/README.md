@@ -37,7 +37,7 @@
 2. nginx实现请求过滤、配置 gzip、负载均衡
 
 ### 七、持续集成交付
-1. [Jenkins自动化部署Vue项目 =>>](./Jenkins.md)
+1. [Jenkins自动化部署前端项目 =>>](./Jenkins.md)
 2. CI/CD （Jenkins）
 
 ### 八、前端监控
