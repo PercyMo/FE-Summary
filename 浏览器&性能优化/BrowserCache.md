@@ -1,7 +1,8 @@
 ## 浏览器缓存控制
 
-浏览器缓存过程  
-<img src="./images/BrowserCache/01.png" width="500" />  
+浏览器缓存过程   
+![浏览器缓存过程](http://img.vanilla.ink/me/webproject/FE-Summary/%E6%B5%8F%E8%A7%88%E5%99%A8%26%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/01.png?x-oss-process=image/resize,w_500)  
+
 * 浏览器每次发起请求，都会在浏览器缓存中查找该请求的结果和缓存标识
 * 浏览器每次拿到返回的请求结果都会将该结果和缓存标识存入浏览器缓存中
 

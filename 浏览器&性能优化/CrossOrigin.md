@@ -111,7 +111,7 @@
 5. 请求过程  
     js进行一次跨域ajax请求，浏览器判断是否为“简单请求”，简单请求就直接发起正式请求，复杂请求就先发送一次预检请求，预检成功后再发送正式请求。
 
-    <img src="./images/CrossOrigin/01.png" width="500" />
+    ![ajax请求过程](http://img.vanilla.ink/me/webproject/FE-Summary/%E6%B5%8F%E8%A7%88%E5%99%A8%26%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/02.png?x-oss-process=image/resize,w_500)  
 
 #### 3) WebSocket
 `WebSocket`是HTML5一种新的协议，支持浏览器与服务器全双工通讯，同时允许跨域通讯。
@@ -124,7 +124,7 @@
 * 拿到服务器响应数据
 * 将响应转发给客户端
 
-    <img src="./images/CrossOrigin/02.jpg" width="500" />
+    ![Node中间件代理（两次跨域）](http://img.vanilla.ink/me/webproject/FE-Summary/%E6%B5%8F%E8%A7%88%E5%99%A8%26%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/03.jpg?x-oss-process=image/resize,w_500)  
 
 ```js
 // node代码
