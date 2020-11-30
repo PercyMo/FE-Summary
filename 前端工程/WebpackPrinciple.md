@@ -2,7 +2,7 @@
 
 ### 一. 构建流程详解
 
-![webpack构建流程详解](http://img.vanilla.ink/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/Webpack/02.jpg)
+![webpack构建流程详解](http://img.vanilla.ink/me/webproject/FE-Summary/Engineering/Webpack/02.jpg)
 
 #### 1. 基本概念
 * **Entry**：入口，webpack执行构建的第一步将从Entry开始，可抽象成输入。
@@ -29,7 +29,7 @@
 2. **编译**：从`Entry`出发，针对每个`Module`串行调用对应的Loader去翻译文件内容，再找到该`Module`依赖的`Module`，递归地进行编译处理。
 3. **输出**：对编译后的`Module`组合成`Chunk`，把`Chunk`转换成文件，输出到文件系统。
 
-![webpack编译流程](http://img.vanilla.ink/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/Webpack/01.png?x-oss-process=image/resize,w_250)
+![webpack编译流程](http://img.vanilla.ink/me/webproject/FE-Summary/Engineering/Webpack/01.png?x-oss-process=image/resize,w_250)
 
 1. **初始化阶段**  
 

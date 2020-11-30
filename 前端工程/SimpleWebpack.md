@@ -138,7 +138,7 @@ module.exports = Webpack;
 ```js
 new Webpack(options).run();
 ```
-![打包结果](http://img.vanilla.ink/me/webproject/FE-Summary/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/Webpack/03.png)
+![打包结果](http://img.vanilla.ink/me/webproject/FE-Summary/Engineering/Webpack/03.png)
 
 #### 4. 浏览器运行
 代码正常执行，并正确输出计算结果：`hello: 3`。
