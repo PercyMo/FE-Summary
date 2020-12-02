@@ -227,47 +227,124 @@ mac：`Command + Option + C`
 
 Network面板从上到下，分为上面几个区域：
 
-1. **(Controls,Filters)区域**  
-    ![(Controls,Filters)区域](18)  
+#### 1. **(Controls,Filters)区域**  
+![(Controls,Filters)区域](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/18.png?x-oss-process=image/resize,w_500)  
 
-    * **使用大请求行** - Requests Table的每一个条目显示两行文本字段：主要字段和次要字段
-    * **捕获屏幕截图** - 将鼠标悬停在某个截图上时，Timeline/Waterfall(时间轴)会显示一条垂直的黄线，指示该帧是合适被捕获的
-    * **显示概述** - 展示整个生命周期的各个阶段的耗时
+* **使用大请求行** - Requests Table的每一个条目显示两行文本字段：主要字段和次要字段
+* **捕获屏幕截图** - 将鼠标悬停在某个截图上时，Timeline/Waterfall(时间轴)会显示一条垂直的黄线，指示该帧是合适被捕获的
+* **显示概述** - 展示整个生命周期的各个阶段的耗时
 
-2. **Overview区域**  
-    页面整个生命周期的各个阶段网络资源加载耗时信息的汇总，可以选择区域来筛选`Requests Table` 的详情资源信息。
+#### 2. **Overview区域**  
+页面整个生命周期的各个阶段网络资源加载耗时信息的汇总，可以选择区域来筛选`Requests Table` 的详情资源信息。
 
-3. **Requests Table区域**  
-    * `Name`(名称)：资源的名称
-    * `Status`(状态)：HTTP状态码
-    * `Type`(类型)：请求资源的MIME类型
-    * `Initiator`(发起)：发起请求的对象或类型。有以下几种值：
-        * `Parser`(解析器)：Chrome的HTML解析器发起了请求
-        * `Redirect`(重定向)：HTTP重定向启动了请求
-        * `Script`(脚本)：脚本启动了请求
-        * `Other`(其他)：一些其他进程或动作发起了请求，例如用户点击链接跳转页面，或在地址栏中输入网址
-    * `Size`(大小)：响应头了大小（通常是几百字节）加上响应数据，由服务器提供
-    * `Time`(时间)：总持续时间，从请求开始到接受响应中的最后一个字节
-    * `Timeline/Waterfall`(时间轴)：显示所有网络请求的可视化统计信息
+#### 3. **Requests Table区域**  
+* `Name`(名称)：资源的名称
+* `Status`(状态)：HTTP状态码
+* `Type`(类型)：请求资源的MIME类型
+* `Initiator`(发起)：发起请求的对象或类型。有以下几种值：
+    * `Parser`(解析器)：Chrome的HTML解析器发起了请求
+    * `Redirect`(重定向)：HTTP重定向启动了请求
+    * `Script`(脚本)：脚本启动了请求
+    * `Other`(其他)：一些其他进程或动作发起了请求，例如用户点击链接跳转页面，或在地址栏中输入网址
+* `Size`(大小)：响应头了大小（通常是几百字节）加上响应数据，由服务器提供
+* `Time`(时间)：总持续时间，从请求开始到接受响应中的最后一个字节
+* `Timeline/Waterfall`(时间轴)：显示所有网络请求的可视化统计信息
 
-    > Content-Encoding选项可以用来查看资源的gzip压缩情况
+> Content-Encoding选项可以用来查看资源的gzip压缩情况
 
-    ![(Requests Table区域](19)  
+![(Requests Table区域](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/19.png?x-oss-process=image/resize,w_500)  
 
-    **重新发起XHR请求**  
+1. **重新发起XHR请求**  
     除了刷新页面重新请求之外，还可以右键http请求条目，选择`Replay XHR`发起一条新的请求
 
-    **查看HTTP相关信息**  
+2. **查看HTTP相关信息**  
     *查看网络请求的参数：* 可以通过点击 `query string parameters` (查询字符串参数)旁边的 `view URL encoded` (查看 URL 编码)或 `view decoded` (查看解码)链接，查看 URL 编码或解码格式的 `query string parameters` (查询字符串参数)。在使用 postman 复制相关入参时尤其实用。
     *查看HTTP响应内容：* 接口的返回值(在 preview 中）同样也可以 `Save global variable` 存储一个全局变量
 
-    **Size和Time为什么有两行参数**  
+3. **Size和Time为什么有两行参数**  
+    ![Size和Time两行参数](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/20.png?x-oss-process=image/resize,w_500)  
+    1. 关于Size列  
+        * 第一行表示数据**传输时**的大小，例如上图中的`108KB`
+        * 第二行表示的是数据实际的大小`326KB`
 
-    **Waterfall**  
+        > 在服务端使用`gzip`压缩算法，可以大大提高资源传输效率  
+        > **需要注意的点：**  
+        > `gzip`压缩只会压缩`响应体`内容，所以适用于返回数据量大的时候，如果数据量太小，有可能会导致数据**传输时**的大小比**实际**大小要大（加入了一些额外的响应头）
 
-4. **Summary区域**  
+    2. 关于Time列  
+        * 第一行表示从客户端发送请求到服务器端返回所有数据所花费的总时间，对于上图来说就是`230ms`
+        * 第二行表示的是从客户端发送请求到服务器端返回第一个字节所花费的时间，对于上图来说就是`32ms`
 
-5. **使用Network面板进行网络优化**  
+        > 第一行的时间代表了所有项目：例如`解析DNS`，`建立连接`，`等待服务器返回数据`，`传输数据`等  
+        > 第二行的时间是`总时间 - 数据传输`是时间  
+
+        从上面的分析中我们看到 **从客户端请求到服务器处理结束准备返回数据** 花了`32ms`，但是在进行 **传输数据** 的时候花费了`197ms`  
+        对于网慢的用户来说，可能会耗费更长的时间，所以在写代码（接口）的时候，返回的数据量要尽量精简
+
+4. **Waterfall**  
+    一条HTTP请求的详细信息：  
+    ![Waterfall](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/21.png?x-oss-process=image/resize,w_350)  
+    * `Queuing`(排队)：浏览器在以下情况下对请求排队
+        1. 存在更高优先级的请求，请求被渲染引擎推迟，这经常发生在images（图像）上，因为它被认为比关键资源（如脚本/样式）的优先级低。
+        2. 此源已打开6个TCP连接，达到限值，仅适用于 HTTP/1.0 和 HTTP/1.1。在等待一个即将被释放的不可用的 TCP socket
+        3. 浏览器正在短暂分配磁盘缓存中空间，生成磁盘缓存条目（通常非常快）TODO: 这里不很明白，看完浏览器原理再回来看
+    * `Stalled`(停滞) - 发送请求之前等待的时间。它可能因为进入队列的任意原因而被阻塞，这个时间包括代理协商的时间。请求可能会因为Queuing中描述的任何原因而停滞。
+    * `DNS lookup`(DNS查找) - 浏览器正在解析请求ip地址，页面上每个新域都需要完整地往返（roundtrip）才能进行DNS查找（TODO: 最后一句没懂，或与RTT相关）
+    * `Proxy Negotiation` - 浏览器正在与代理服务器协商请求
+    * `initial connection`(初始连接) - 建立连接所需要的时间，包括TCP握手/重试和协商SSL
+    * `SSL handshake`(SSL握手) - 完成SSL握手所用的时间
+    * `Request send`(请求发送) - 发出网络请求所花费是时间，通常是几分之一毫秒
+    * `Waiting`(等待 TTFB) - 等待初始响应所花费的时间，也成为`Time To First Byte`(接收到第一个字节所花费的时间)。这个时间除了等待服务器传递响应所花费的时间外，还包括1次往返延迟时间及服务器准备响应所用的时间（服务器发送数据的延迟时间）
+    * `Content Download`(内容下载) - 接受响应数据所花费的时间（从接收到第一个字节开始，到下载完最后一个字节结束）
+    * `ServiceWorker Preparation` - 浏览器正在启动Service Worker
+    * `Request to ServiceWorker` - 正在将请求发送到Service Worker
+    * `Receiving Push` - 浏览器正在通过 HTTP/2 服务器推送接收此响应的数据
+    * `Reading Push` - 浏览器正在读取之前收到的本地数据
+
+#### 4. **Summary区域**  
+![Summary区域](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/22.png?x-oss-process=image/resize,w_500)  
+
+`requests` 查看请求的数量 | `transferred` 请求的总大小 | `resources` 资源 | `Finish` 所有http请求响应完成的时间 | DOMContentLoaded 时间 | load时间  
+
+当页面的初始标记被解析完时，会触发`DOMContentLoaded`，它在Network面板上的显示（页面完全加载的`load`事件，用红线标识）：
+* 在 Overview 窗格中的蓝色垂直线表示这个事件
+* 在Requests Table 中的蓝色垂直线也表示这个事件
+* 在 Summary 窗格中，可以查看事件的确切时间
+
+![DOMContentLoaded 和 load 事件](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/23.png?x-oss-process=image/resize,w_500)  
+
+> DOMContentLoaded 会比 load 时间小，两者时间差大致等于外部资源加载（一般是图片/字体）的时间  
+> Finish 时间是页面上所有http请求（不只是XHR请求，还包括DOC，img，js，css等资源是请求）发送到响应完成的时间（如果页面存在一个轮询的接口，这个值也会累加的）  
+> 所以 Finish 时间与 DOMContentLoaded 和 load 并无直接关系
+
+#### 5. **使用Network面板进行网络优化**  
+1. **排队或停止阻塞**  
+    最常见的问题是很多个请求排队或被阻塞。HTTP/1.x 中，chrome限制每个域名下最多同时创建6个TCP长连接，因此资源过多时，就出现了排队现象。解决方案就是：域名分片。  
+
+    ![请求排队或停止阻塞](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/24.png?x-oss-process=image/resize,w_500)  
+
+    > 域名分片不适用于HTTP2，它会影响HTTP2中TCP多路复用的效率。
+
+2. **接收到第一个字节的时间很慢**  
+
+    绿色的块占据比例很高：  
+
+    ![接收到第一个字节的时间很慢](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/25.png?x-oss-process=image/resize,w_250)  
+
+    TTFB建议在200ms以下，以下情况可能导致高TTFB：  
+    1. 客户端和服务器间网络条件差
+    2. 服务器程序响应很慢
+
+    > 为解决高TTFB，首先排除网络问题。理想情况下（例如接口是node写的），将程序部署在本地，查看TTFB是否依然较高。如果有，那么需要优化应用程序的响应速度。比如优化数据库查询，部分内容实现高速缓存，修改web服务器配置...（让后端改）  
+    > 如果本地TTFB低，那可能是客户端和服务器之间的网络问题。
+
+3. **加载缓慢**  
+
+    蓝色的块占据比例很高：  
+
+    ![加载缓慢](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/26.png?x-oss-process=image/resize,w_350)  
+
+    如果 `Content Download` 阶段花费了很多时间，提高服务响应速度、并行下载等优化措施效果并不明显。主要的解决方案是发送更少的字节（比如一张高质量的大图可能几M大小，可以酌情优化下图片的宽高/清晰度）
 
 ### 四. Sources面板
 
