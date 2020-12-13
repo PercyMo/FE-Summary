@@ -347,14 +347,166 @@ Network面板从上到下，分为上面几个区域：
     如果 `Content Download` 阶段花费了很多时间，提高服务响应速度、并行下载等优化措施效果并不明显。主要的解决方案是发送更少的字节（比如一张高质量的大图可能几M大小，可以酌情优化下图片的宽高/清晰度）
 
 ### 四. Sources面板
+#### 1. 自定义代码片段 Snippets  
+感觉不太实用
+
+#### 2. 设置断点
+1. **断点的面板**  
+    ![断点的面板](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/27.png?x-oss-process=image/resize,w_500)  
+
+    ![断点调试按钮](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/28.png?x-oss-process=image/resize,w_500)  
+
+2. **指定位置的中断**(断点调试基本流程)  
+    ![断点调试基本流程](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/29.gif?x-oss-process=image/resize,w_500)  
+
+3. **全局事件中断**  
+    [sources面板demo](http://me.vanilla.ink:3002/devtools/sources.html)
+
+4. **黑盒模式**  
+    把脚本文件放入Blackbox(黑盒)，可以忽略来自第三方库的调用堆栈  
+    默认（不开启黑盒）：  
+    ![不开启黑盒](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/30.png?x-oss-process=image/resize,w_500)  
+
+    开启黑盒：  
+    ![开启黑盒](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/31.png?x-oss-process=image/resize,w_500)  
+
+    1. 打开方式①  
+        1. 打开 DevTools Settings (设置)
+        2. 在左侧的导航菜单中，单击 Blackboxing (黑箱)
+        3. 点击 Add pattern... (添加模式)按钮。
+        4. 在 Pattern(模式)文本框输入您希望从调用堆栈中排除的文件名模式。DevTools 会排除该模式匹配的任何脚本。
+        5. 在文本字段右侧的下拉菜单中，选择 Blackbox (黑箱)以执行脚本文件但是排除来自调用堆栈的调用，或选择 Disabled (禁用)来阻止文件执行。
+        6. 点击Add(添加) 保存
+
+    2. 打开方式②  
+        直接在想要忽略的堆栈信息上 blackbox script
+
+5. **DOM断点**  
+    查看element面板DOM断点
 
 ### 五. Performance面板
+> 使用隐身模式打开[demo](http://me.vanilla.ink:3002/devtools/performance.html)  
+> 隐身模式可以保证 Chrome 在一个相对干净的环境下运行，假如安装了许多插件，这些插件可能会影响性能分析表现  
+> 在 Performance 面板可以查看页面加载过程的详细信息，比如在什么时间开始做什么事情，耗时多久等等。相较于 Network 面板，不仅可以看到通过网络加载资源的信息，还能看到解析 Js、计算样式、重绘等页面加载的方方面面的信息
+
+#### 1. 面板主要区域的划分
+1. `Controls` - 开始记录，停止记录和配置记录期间捕获的信息
+2. `Overview` - 页面性能的汇总
+3. `Flame Chart` - [火焰图（线程面板）]。在火焰图上看到三条（绿色的有好几条）垂直的虚线：
+    * 蓝线代表 `DomContentLoaded` 事件
+    * 绿线代表首次绘制的时间
+    * 红线代表 `load` 事件
+4. `Details` - 在 Flame Chart 中，选择了某一事件后，这部分会展示与这个事件相关的更多信息；
+    > 如果选择了某一帧，这部分会展示与选中帧相关的信息。如果既没有选中事件也没有选中帧，则这部分会展示当前记录时间段内的相关信息。
+
+![面板主要区域的划分](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/32.png?x-oss-process=image/resize,w_500)
+
+#### 2. 开始记录
+> 与台式机和笔记本相比移动设备的CPU功率要小得多。无论何时分析页面，都使用 CPU 限制来模拟页面在移动设备上的表现。确保启用了屏幕截图和内存选项。对于 CPU，选择2倍减速，DevTools 会限制 CPU 使其速度比平时慢 2 倍  
+> *注意：如果想要确保在低端设备上运行良好，请将 CPU 设置限制为 20 倍减速。（请告诉我20倍操作按钮在哪里？）*
+
+1. **controls 控制条区域**  
+    * 上半区域
+        * `Screenshots` 截图：默认勾选，每一帧都会截图
+        * `Memory` 内存消耗记录：勾选后可以看到各种内存消耗曲线
+    * 下面的 checkbox 区域
+        * `Disable javascript samples` [禁用 js 示例]：减少在手机运行时系统的开销，模拟手机运行时开启
+        * `Network` [网络模拟 ]：可以模拟在 3G,4G 等网络条件下运行页面
+        * `enable anvanced paint instrumentation(slow)` [启用高级画图检测工具（慢速） ]：捕获高级画图检测工具，带来显著的性能开销
+        * `CPU` [CPU 限制性能]：主要为了模拟低 CPU 下运行性能
+
+2. **overview 总览区域**  
+    ![overview 总览区域](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/33.png?x-oss-process=image/resize,w_500)  
+
+    1. **FPS**  
+        绿色竖线越高，FPS越高。FPS图表上的红色块表示长时间帧，该时间段内很可能出现了卡顿。  
+
+        > FPS (frames per second) 是用来分析动画的一个主要性能指标。  
+        > Q: 为什么是 60fps？  
+        > A: 这和目前大多数显示器的刷新帧率相吻合（60HZ）。这意味着，一秒之内进行60次重新渲染，每次重新渲染的时间不能超过 16.66 毫秒
+
+    2. **CPU**  
+        **此面积图指示消耗 CPU 资源的事件类型**。在 CPU 图表中的各种颜色与 `Summary` 面板里的颜色是相互对应的，表示 CPU 在各种事件处理上所花费的时间。如果发现某个处理占用大量时间，那这可能就是找到性能瓶颈的线索。
+
+        | 颜色 | 执行内容 |
+        |:- |:- |
+        | 蓝色（Loading） | 网络通信和 HTML 解析 |
+        | 黄色（Scripting） | Javascript 执行 |
+        | 紫色（Rendering） | 样式计算和布局，即重排 |
+        | 绿色（Painting） | 更改外观而不会影响布局，重绘 |
+        | 灰色（Other） | 其它事件花费的时间 |
+        | 白色（Idle） | 空闲时间 |
+
+        > 重排所需的成本比重绘高的多，改变深层次的节点很可能导致父节点的一系列重排
+
+        **单个帧的渲染流程 —— 像素管道**  
+        js修改DOM结构或样式 -> 计算style -> layout(重排) -> paint(重绘) -> composite(合成)
+
+    3. **NET**  
+        优化网络性能直接使用 network 面板
+
+3. **Flame Chart 火焰图（线程面板）**  
+    详细分析某些任务的耗时，从而定位问题。  
+    ![Flame Chart 火焰图](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/34.png?x-oss-process=image/resize,w_500)  
+
+    1. **看到几条虚线：**  
+        ![线程面板](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/35.gif)  
+        * 蓝线代表 `DOMContentLoaded` 事件
+        * 绿线代表首次绘制的时间
+            * FP(First Paint): 首次绘制
+            * FCP(First Contentful Paint): 第一次丰富内容的绘图
+            * FMP(First Meaningful Paint): 第一次有意义的 绘图
+            * LCP(Largest Contentful Paint): 最大区域内容绘制
+        * 红线代表 `load` 时间
+
+        > * `DOMContentLoaded`: 就是DOM内容加载完毕。打开一个网页当输入一个URL，页面的展示首先是空白的，然后过一会，页面会展示出内容，但是页面的有些资源比如图片资源还无法看到，此时页面是可以正常交互的，过一段时间后，图片才完全显示在页面上。从页面空白到展示出页面内容，会触发`DOMContentLoaded`事件。而这段时间就是 HTML 文档被加载和解析完成。
+        > * `load` 页面上所有的资源（图片、音频、视频等）被加载以后才会触发 load 事件，简单来说，页面的 load 事件会在`DOMContentLoaded`被触发之后才触发。
+    
+    2. **Main**展示了主线程运行状况
+        * X 轴代表时间，每个长条代表一个 event。长条越长就代表这个 event 花费的时间越长。
+        * Y 轴代表调用栈（call stack）。在栈里，上面的 event 调用了下面的 event。
+
+        ![主线程运行状况](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/36.png?x-oss-process=image/resize,w_500)  
+
+        如上图：click 事件触发了 `script_footer_closure.js` 第53行的函数调用。再看下面，Function Call 可以看到一个匿名函数被调用，然后调用 `Me()` 函数，然后调用 `Se()`，以此类推。  
+
+        > DevTools 为脚本分配随机颜色。在上图中，来自一个脚本的函数调用显示为浅绿色。来自另一个脚本的调用被渲染成米色。比较深的黄色表示脚本活动，而紫色的事件表示渲染活动。这些较暗的黄色和紫色事件在所有记录中都是一致的。
+
+        ![主线程事件详情](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/37.gif)  
+
+        1. 在性能报告中有很多数据。可以通过双击，拖动等动作来放大缩小报告范围，从各种时间段来观察分析报告
+        2. 在事件长条的右上角，如果出现了红色小三角，说明这个事件是存在问题的，需要特别注意
+        3. 双击这个带有红色小三角的事件。在 Summary 会看到详细信息。如果点击了 app.js:94 这个链接，就会跳转到对应的代码处
+
+4. **Details 区域**  
+    配合 `Flame Chart` 一起使用
+    * `Summary` 区域是一个饼状图总览，汇总了各个事件类型所耗费的总时长，另外还有三个查看选项
+    * `Bottom-Up`: 要查看直接花费最多时间的活动时使用
+    * `Call Tree`: 想查看导致最多工作的根活动时使用
+    * `Event Log`: 想按照记录期间的活动顺序查看活动时使用
 
 ### 六. Lighthouse(Audits)面板
+懒人专用！（TODO: 但我感觉不是，它的功能好像很强大，后面有时间再探究下！）
 
+![Lighthouse面板](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/38.png?x-oss-process=image/resize,w_500)
+
+* `Performance` 性能
+* `Accessibility` 无障碍使用
+* `Best Practice` 用户体验
+* `SEO` SEO优化
+* `Progressive Web App` 页面对于 PWA 的兼容性
 ### 七. Security面板
+用于检测当前页面的安全性
+
+* 如果被请求的页面通过 HTTP 提供服务，那么这个主源就会被标记为不安全
+* 如果被请求的页面是通过 HTTPS 获取的，但这个页面接着通过 HTTP 继续从其他来源检索内容，那么这个页面仍然被标记为不安全。
+
+![Lighthouse面板](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/39.png?x-oss-process=image/resize,w_500)  
 
 ### 八. Command
+快捷键：`Command + Shift + P`  
+
+截图、CSS/js 覆盖率
 
 ### 九. 引用
 [Chrome DevTools 全攻略！助力高效开发](https://mp.weixin.qq.com/s/-l5IrY-0CQO_bJe0TWDgDw)
