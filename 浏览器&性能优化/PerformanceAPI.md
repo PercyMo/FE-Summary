@@ -46,6 +46,8 @@
 5. **`performance.getEntiresByType()`**  
 
 ### 二. performance.timing
+![timing](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/performanceAPI/01.jpeg)   
+
 TODO: 有个值的注意的地方，在查看微信公众号和jd首页的时候，发现 `domLoading` 时间竟然提前到了 `responseEnd` 之前。不知道什么原因。他们做了什么神奇的优化。
 ```js
 var timing = {
