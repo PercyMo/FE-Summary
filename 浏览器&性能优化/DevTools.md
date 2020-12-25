@@ -485,7 +485,10 @@ Network面板从上到下，分为上面几个区域：
     * `Call Tree`: 想查看导致最多工作的根活动时使用
     * `Event Log`: 想按照记录期间的活动顺序查看活动时使用
 
-### 六. Lighthouse(Audits)面板
+### 六. Rendering面板
+1. `Paint flashing`：每次发生绘制时，发生绘制的区域可以看到有绿色闪烁。可以用于分析绘制问题。（请务必仅在尝试分析绘制问题时才打开此选项，因为它会产生开销，并且会歪曲性能分析结果）
+
+### 七. Lighthouse(Audits)面板
 懒人专用！（TODO: 但我感觉不是，它的功能好像很强大，后面有时间再探究下！）
 
 ![Lighthouse面板](http://img.vanilla.ink/me/webproject/FE-Summary/Browser/devTools/38.png?x-oss-process=image/resize,w_500)
