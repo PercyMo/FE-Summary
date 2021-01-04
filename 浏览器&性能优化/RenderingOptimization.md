@@ -165,7 +165,7 @@
 
     实际上，FLIP 是将复杂的计算放在了一开始（包括一次强制同步），根据 RAIL 规则，触发后 100ms 的反应时间是可以接受的，所以在 100ms 内完成为止的计算，之后的动画用 `transform` 来达到 60FPS。
 
-    [Demo演示]() TODO: 这里补充下Demo地址
+    [Demo演示](http://me.vanilla.ink:3002/devtools/optimization.html)
 
 ### 四. 高性能的 JavaScript
 1. **昂贵的 DOM 操作**  
