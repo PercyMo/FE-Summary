@@ -1,11 +1,50 @@
-## 代码简洁之道
+## 代码整洁之道
 
 ### 一. 数组操作
-1. **_**
+**熟练掌握 [数组的常用方法 =>>](../JavaScript/Array.md)，有助于写出简洁高效的代码！这极其重要！**
+
+1. **使用 forEach 方法遍历数组，不形成新数组**
     ```js
     // bad
+    for (let i = 0; i < arr.length; i++) {
+        // todo
+        arr[i].key = xx
+    }
 
     // good
+    arr.forEach(item => {
+        // todo
+        item.key = xx
+    })
+    ```
+
+2. **使用 filter 方法过滤原数组，形成新数组**
+    ```js
+    let arr = [1, 3, 5, 7]
+
+    // bad
+    let newArr = []
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] > 4) {
+            newArr.push(arr[i])
+        }
+    }
+
+    // good
+    let newArr = arr.filter(n => n > 4) // [5, 7]
+    ```
+
+3. **使用 map 对数组中的所有元素批量处理，形成新数组**
+    ```js
+    // bad
+    let arr = [1, 3, 5, 7],
+        newArr = []
+    for (let i = 0; i < arr.length; i++) {
+        newArr.push(arr[i] + 1)
+    }
+
+    // good
+    arr.map(n => n + 1) // [2, 4, 6, 8]
     ```
 
 ### 二. 其它
@@ -60,86 +99,7 @@
     b = a === 'a' ? a : c
     ```
 
-4. **使用 includes 简化 if 判断**
-    ```js
-    // bad
-    if (a === 1 || a === 2 || a === 3 || a === 4) {
-        // todo
-    }
-
-    // good
-    let arr = [1, 2, 3, 4]
-    if (arr.includes(a)) {
-        // todo
-    }
-    ```
-
-5. **使用 some 方法判断是否有满足条件的元素**
-    ```js
-    let arr = [1, 3, 5, 7]
-
-    // bad
-    function isHasNum (n) {
-        for (let i = 0; i < arr.length; i++) {
-            if (arr[i] === n) {
-                return true
-            }
-        }
-        return false
-    }
-
-    // good
-    let isHasNum = n => arr.some(num => num === n)
-
-    // best
-    let isHasNum = (n arr) => arr.some(num => num === n)
-    ```
-
-6. **使用 forEach 方法遍历数组，不形成新数组**
-    ```js
-    // bad
-    for (let i = 0; i < arr.length; i++) {
-        // todo
-        arr[i].key = xx
-    }
-
-    // good
-    arr.forEach(item => {
-        // todo
-        item.key = xx
-    })
-    ```
-
-7. **使用 filter 方法过滤原数组，形成新数组**
-    ```js
-    let arr = [1, 3, 5, 7]
-
-    // bad
-    let newArr = []
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i] > 4) {
-            newArr.push(arr[i])
-        }
-    }
-
-    // good
-    let newArr = arr.filter(n => n > 4) // [5, 7]
-    ```
-
-8. **使用 map 对数组中的所有元素批量处理，形成新数组**
-    ```js
-    // bad
-    let arr = [1, 3, 5, 7],
-        newArr = []
-    for (let i = 0; i < arr.length; i++) {
-        newArr.push(arr[i] + 1)
-    }
-
-    // good
-    arr.map(n => n + 1) // [2, 4, 6, 8]
-    ```
-
-9. **使用 Object.keys/Object.values 快速获取对象 键名/键值**
+4. **使用 Object.keys/Object.values 快速获取对象 键名/键值**
     ```js
     let obj = {
         a: 1,
@@ -172,21 +132,7 @@
     let values = Object.values(obj) // [1, 2]
     ```
 
-10. **结构数组进行变量值的替换**
-    ```js
-    let a = 1,
-        b = 2
-
-    // bad
-    let temp = a
-    a = b
-    b = temp
-
-    // good
-    [b, a] = [a, b]
-    ```
-
-11. **对象解构赋值/重命名/默认值**
+5. **对象解构赋值/重命名/默认值**
     ```js
     // bad
     setForm (person) {
@@ -215,7 +161,7 @@
     }
     ```
 
-12. **|| 短路符设置默认值**
+6. **|| 短路符设置默认值**
     ```js
     let person = {
         name: '张三',
@@ -224,7 +170,7 @@
     let name = person.name || '佚名'
     ```
 
-13. **&& 短路符判断依赖的键是否存在防止报错'xx of undefined'**
+7. **&& 短路符判断依赖的键是否存在防止报错'xx of undefined'**
     ```js
     let person = {
         name: '张三',
@@ -235,7 +181,7 @@
     let childrenName = person.children && person.children.name
     ```
 
-14. **字符串拼接使用 \`${}\` 字符串模板**
+8. **字符串拼接使用 \`${}\` 字符串模板**
     ```js
     let person = {
         name: '张三',
@@ -258,7 +204,7 @@
     }
     ```
 
-15. **使用箭头函数**
+9. **使用箭头函数**
     ```js
     let arr = [18, 19, 20, 21, 22]
     // bad
@@ -272,7 +218,7 @@
     let findStudentByAge = (arr, age) => arr.filter(num => num === age)
     ```
 
-16. **函数参数校验**
+10. **函数参数校验**
     ```js
     // bad
     let findStudentByAge = (arr, age) => {

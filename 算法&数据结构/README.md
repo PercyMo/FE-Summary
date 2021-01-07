@@ -1,5 +1,5 @@
 ### 一、JS编码能力
-1. [代码简洁之道 =>>](./CleanCode.md)
+1. [代码整洁之道 =>>](./CleanCode.md)
 2. [浅拷贝 & 深拷贝 =>>](./DeepClone.md)
 
 ### 二、数据结构
@@ -22,6 +22,6 @@
 #### 7. 字符串
 
 #### 8. 引用
-[awesome-coding-js](http://www.conardli.top/docs/dataStructure/)
+1. [awesome-coding-js](http://www.conardli.top/docs/dataStructure/)
 
 ### 三、算法
