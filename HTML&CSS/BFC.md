@@ -85,11 +85,11 @@ BFC，"块级格式化上下文"。是页面盒模型布局中的一种 CSS 渲�
         砸到花花草草也是不对的。</div>
     </body>
     ```
-    <img src="./images/BFC/01.png" width="300" />  
+    ![自适应两栏布局1](http://img.vanilla.ink/me/webproject/FE-Summary/HTML%26CSS/BFC/01.png?x-oss-process=image/resize,w_300)
 
     上图中，文字围绕着浮动元素排列，不过在这里，这显然不是我们想要的。此时我们可以为 `.box2` 元素的样式加上 `overflow:hidden;` 使其建立一个BFC，让其内容消除对外界浮动元素的影响  
 
-    <img src="./images/BFC/02.png" width="300" />
+    ![自适应两栏布局2](http://img.vanilla.ink/me/webproject/FE-Summary/HTML%26CSS/BFC/02.png?x-oss-process=image/resize,w_300)
 
 ### 5. 引用
 [块状格式化上下文BFC](https://github.com/alianggu/blog/issues/6)
