@@ -18,8 +18,9 @@
 8. 前端代码兼容方案，Polyfill
 
 ### 三、限定规范
-1. ESLint规则检测原理
-2. mock（yapi）
+1. [ESLint详解 =>>](./ESLint.md)
+2. [StyleLint配置 =>>](./StyleLint.md)
+3. mock（yapi）
 
 ### 四、可测试性
 1. TDD与 BDD模式
