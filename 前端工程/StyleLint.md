@@ -14,8 +14,8 @@ npm install stylelint stylelint-config-recess-order stylelint-order stylelint-co
 ```js
 // .stylelintrc.js
 module.exports = {
-    'extends': ['stylelint-config-standard', 'stylelint-config-recess-order'],
-    'plugins': ['stylelint-scss'],
+  'extends': ['stylelint-config-standard', 'stylelint-config-recess-order'],
+  'plugins': ['stylelint-scss'],
 }
 ```
 
@@ -23,20 +23,19 @@ module.exports = {
 ```json
 // package.json
 {
-    // ...
-    "husky": {
-        "hooks": {
-          "pre-commit": "lint-staged"
-        }
-      },
-      "lint-staged": {
-        "*.{js,vue}": [
-          "eslint --fix"
-        ],
-        "*.{html,vue,css,sass,scss}": [
-          "stylelint --fix"
-        ]
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.{js,vue}": [
+      "eslint --fix"
+    ],
+    "*.{html,vue,css,sass,scss}": [
+      "stylelint --fix"
+    ]
+  }
 }
 ```
 
