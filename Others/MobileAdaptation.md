@@ -252,7 +252,25 @@ setRemUnit();
 
 以`iPhone6`为例：布局视口为`375px`，则`1rem = 37.5px`，这时UI给定一个元素的宽为`75px`（设备独立像素），我们只需要将它设置为`75 / 37.5 = 2rem`。  
 
-每个布局都要计算非常繁琐，我们可以借助`PostCSS`的`px2rem`插件来帮助我们完成这个过程。
+每个布局都要计算非常繁琐，我们可以借助`PostCSS`的`px2rem`插件来帮助我们完成这个过程。  
+安装以下两个包：
+* [postcss-pxtorem](https://github.com/cuth/postcss-pxtorem) 是一款 `postcss` 插件，用于将单位转化为 `rem`
+* [lib-flexible](https://github.com/amfe/lib-flexible) 用于设置 `rem` 基准值  
+
+```js
+// PostCSS 配置 .postcssrc.js
+module.exports = {
+  plugins: {
+    autoprefixer: {
+      browsers: ['Android >= 4.0', 'iOS >= 8'],
+    },
+    'postcss-pxtorem': {
+      rootValue: 37.5,
+      propList: ['*'],
+    },
+  }
+}
+```
 
 #### 2. vw、vh方案
 `vh`、`vw`方案即将视觉视口宽度 `window.innerWidth`和视觉视口高度 `window.innerHeight` 等分为 `100` 份。
