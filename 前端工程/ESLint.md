@@ -74,4 +74,16 @@ module.exports = {
 }
 ```
 
+#### 4. lint 时会漏掉部分特殊文件夹
+项目中发现 `.xx` 这种文件，在lint校验时会默认被忽略掉。
+```
+# .eslintignore 
+
+!docs/.vuepress/**
+```
+执行lint脚本时，加上 `--no-ignore` 参数
+```sh
+eslint --fix --no-ignore
+```
+
 ### 四. 引用
