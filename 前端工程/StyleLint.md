@@ -14,8 +14,14 @@ npm install stylelint stylelint-config-recess-order stylelint-order stylelint-co
 ```js
 // .stylelintrc.js
 module.exports = {
-  'extends': ['stylelint-config-standard', 'stylelint-config-recess-order'],
-  'plugins': ['stylelint-scss'],
+  extends: ['stylelint-config-standard', 'stylelint-config-recess-order'],
+  plugins: ['stylelint-scss'],
+  rules: {
+    // scss 在校验时对部分关键字不识别会报错，没看到有好的解决方案，暂时屏蔽掉该条规则
+    'at-rule-no-unknown': [true, {
+      ignoreAtRules: ['function', 'if', 'each', 'include', 'mixin']
+    }]
+  }
 }
 ```
 
