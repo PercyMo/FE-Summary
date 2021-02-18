@@ -4,7 +4,7 @@
 #### 1. 像素
 像素即一个小方块，具有特定的位置和颜色。可以作为图片或者电子屏幕的最小组成单位。  
 
-<img src="./images/MobileAdaptation/01.png" width="400" />  
+![像素](http://img.vanilla.ink/me/webproject/FE-Summary/MultiEnd/MobileAdaptation/01.png?x-oss-process=image/resize,w_400)  
 
 通常所说的两种分辨率：图片分辨率和屏幕分辨率
 
@@ -17,7 +17,7 @@
 比如一张图片的分辨率为`800 x 400`。这表示图片分别在垂直和水平上所具有的像素点数为`800`和`400`。
 同一尺寸的图片，分辨率越高，图片越清晰。  
 
-<img src="./images/MobileAdaptation/02.png" width="500" />  
+![图像分辨率](http://img.vanilla.ink/me/webproject/FE-Summary/MultiEnd/MobileAdaptation/02.png?x-oss-process=image/resize,w_500)  
 
 #### 4. PPI
 `PPI(Pixel Per Inch)`：每英寸包括的像素数  
@@ -32,12 +32,12 @@
 ### 二. 设备独立像素
 `设备独立像素`是相对`物理像素`的一个概念。  
 
-<img src="./images/MobileAdaptation/03.png" width="500" />  
+![设备独立像素](http://img.vanilla.ink/me/webproject/FE-Summary/MultiEnd/MobileAdaptation/03.png?x-oss-process=image/resize,w_500)  
 
 右侧屏幕使用了视网膜屏幕的技术，它的显示结果应该是下面的情况，比如列表的宽度为`300`个像素，那么在一条水平线上，左侧屏幕会用`300`个物理像素去渲染它，而右侧屏幕实际上会用`600`个物理像素去渲染它。  
 我们必须用一种单位来同时告诉不同分辨率的手机，它们在界面上显示元素的大小是多少，这个单位就是设备独立像素(`Device Independent Pixels`)简称`DIP`或`DP`。上面我们说，列表的宽度为`300`个像素，实际上我们可以说：**列表的宽度为`300`个设备独立像素**。 
 
-<img src="./images/MobileAdaptation/04.png" width="500" />  
+![chrome模拟器](http://img.vanilla.ink/me/webproject/FE-Summary/MultiEnd/MobileAdaptation/04.png?x-oss-process=image/resize,w_500)  
 
 打开`chrome`的开发者工具，我们可以模拟各个手机型号的显示情况，每种型号上面会显示一个尺寸，比如`iPhone X`显示的尺寸是`375x812`，实际`iPhone X`的分辨率会比这高很多，这里显示的就是设备独立像素。
 
@@ -70,7 +70,7 @@
 
 比如：给你一块超大尺寸的屏幕，即使它的`PPI`很高，`DPR`也很高，在近距离你能看清它的像素点，这就不算`Retina`屏幕。
 
-<img src="./images/MobileAdaptation/05.png" width="500" />  
+![关于屏幕](http://img.vanilla.ink/me/webproject/FE-Summary/MultiEnd/MobileAdaptation/05.png?x-oss-process=image/resize,w_500)  
 
 我们经常见到用`K`和`P`这个单位来形容屏幕：
 
@@ -80,7 +80,7 @@
 
 ### 三. 视口
 #### 1. 布局视口
-<img src="./images/MobileAdaptation/06.png" width="400" />  
+![布局视口](http://img.vanilla.ink/me/webproject/FE-Summary/MultiEnd/MobileAdaptation/06.png?x-oss-process=image/resize,w_400)  
 
 布局视口是网页布局的基准窗口，在`PC`浏览器上，布局视口就等于当前浏览器的窗口大小（不包括`borders` 、`margins`、滚动条）。  
 
@@ -89,7 +89,7 @@
 我们可以通过调用`document.documentElement.clientWidth / clientHeight`来获取布局视口大小。
 
 #### 2. 视觉视口
-<img src="./images/MobileAdaptation/07.png" width="400" />  
+![视觉视口](http://img.vanilla.ink/me/webproject/FE-Summary/MultiEnd/MobileAdaptation/07.png?x-oss-process=image/resize,w_400)  
 
 视觉视口(`visual viewport`)：用户通过屏幕真实看到的区域。
 
@@ -98,7 +98,7 @@
 我们可以通过调用`window.innerWidth / innerHeight`来获取视觉视口大小。
 
 #### 3. 理想视口
-<img src="./images/MobileAdaptation/04.png" width="400" />  
+![理想视口](http://img.vanilla.ink/me/webproject/FE-Summary/MultiEnd/MobileAdaptation/04.png?x-oss-process=image/resize,w_400)  
 
 在浏览器调试移动端时页面上给定的像素大小就是理想视口大小，它的单位正是设备独立像素。  
 
@@ -280,7 +280,7 @@ module.exports = {
 `vmin` : `vw` 和 `vh` 中的较小值
 `vmax` : 选取 `vw` 和 `vh` 中的较大值
 
-<img src="./images/MobileAdaptation/08.png" width="400" />  
+![vw、vh方案](http://img.vanilla.ink/me/webproject/FE-Summary/MultiEnd/MobileAdaptation/08.png?x-oss-process=image/resize,w_400)  
 
 ### 六. 适配iphoneX
 #### 1. 安全区域
@@ -291,7 +291,7 @@ module.exports = {
 #### 2. viewport-fit
 `viewport-fit`是专门为了适配`iPhoneX`而诞生的一个属性，它用于限制网页如何在安全区域内进行展示。
 
-<img src="./images/MobileAdaptation/09.png" width="400" />  
+![viewport-fit](http://img.vanilla.ink/me/webproject/FE-Summary/MultiEnd/MobileAdaptation/09.png?x-oss-process=image/resize,w_400)  
 
 `contain`: 可视窗口完全包含网页内容  
 
@@ -300,7 +300,7 @@ module.exports = {
 默认情况下或者设置为`auto`和`contain`效果相同。
 
 #### 3. env、constant
-<img src="./images/MobileAdaptation/10.png" width="400" />  
+![env、constant](http://img.vanilla.ink/me/webproject/FE-Summary/MultiEnd/MobileAdaptation/10.png?x-oss-process=image/resize,w_400)  
 
 我们需要将顶部和底部合理的摆放在安全区域内，`iOS11`新增了两个`CSS`函数`env`、`constant`，用于设定安全区域与边界的距离。
 函数内部可以是四个常量：
@@ -359,7 +359,7 @@ window.addEventListener("resize", () => {
 #### 1. 产生原因
 在`dpr > 1`的屏幕上，位图的一个像素可能由多个物理像素来渲染，然而这些物理像素点并不能被准确的分配上对应位图像素的颜色，只能取近似值，所以相同的图片在`dpr > 1`的屏幕上就会模糊:  
 
-<img src="./images/MobileAdaptation/11.png" width="400" />  
+![图片模糊](http://img.vanilla.ink/me/webproject/FE-Summary/MultiEnd/MobileAdaptation/11.png?x-oss-process=image/resize,w_400)  
 
 #### 2. 解决方案
 应该尽可能让一个屏幕像素来渲染一个图片像素，所以，针对不同`DPR`的屏幕，我们需要展示不同分辨率的图片。
@@ -409,7 +409,7 @@ images.forEach((img)=>{
 ```
 
 #### 7. 使用svg
-`SVG`的全称是可缩放矢量图，不管放大多少倍都不会失真。
+`SVG`的全称是可缩放矢量图，不管放大多少倍都不会失真。 
 
 ### 八. 引用
 [关于移动端适配，你必须要知道的](https://juejin.im/post/5cddf289f265da038f77696c)
