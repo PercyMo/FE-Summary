@@ -102,3 +102,4 @@
 3. [架构模式MVC和MVVM =>>](./ArchitecturalPattern.md)
 
 4. [jQuery & zepto =>>](./jq&zepto.md)
+5. [JS 常用代码片段 =>>](./JSSnippet.md)
