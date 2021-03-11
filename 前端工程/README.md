@@ -9,13 +9,14 @@
 
 ### 二、项目构建
 1. [npm详解 =>>](./NpmDetail.md)
-2. [前端构建工具的发展和比较 =>>](./BuildTools.md)
-3. [webpack详解 =>>](./WebpackDetail.md)
-4. [webpack原理 =>>](./WebpackPrinciple.md)
-5. [webpack优化 =>>](./WebpackOptimization.md)
-6. [实现一个简单的webpack =>>](./SimpleWebpack.md)
-7. [Babel详解 =>>](./Babel.md)
-8. 前端代码兼容方案，Polyfill
+2. [yarn详解 =>>](./Yarn.md)
+3. [前端构建工具的发展和比较 =>>](./BuildTools.md)
+4. [webpack详解 =>>](./WebpackDetail.md)
+5. [webpack原理 =>>](./WebpackPrinciple.md)
+6. [webpack优化 =>>](./WebpackOptimization.md)
+7. [实现一个简单的webpack =>>](./SimpleWebpack.md)
+8. [Babel详解 =>>](./Babel.md)
+9. 前端代码兼容方案，Polyfill
 
 ### 三、限定规范
 1. [ESLint详解 =>>](./ESLint.md)
