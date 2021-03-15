@@ -1,19 +1,26 @@
 ## git基本操作
 
 ### 一. Git 基础
-1. branch分支
+#### 1. branch分支
 ```sh
 git fetch -p  # 删除那些远程已经不存在的分支的本地缓存
-
-git reset --soft HEAD~1 # 撤销上次commit，但保留工作区的代码
-
-git checkout . # 本地所有修改的。没有的提交的，都返回到原来的状态
 
 git log --follow ./test.js # 可以追溯文件重命名或者移动前的历史记录
 
 git show <commitId> # 查看某一次历史提交的改动记录
 
 git tag -a v0.1.0 -m "my version 0.1.0" # 打tag标签
+```
+#### 2. 撤销操作
+```sh
+# 本地所有修改的。没有的提交的，都返回到原来的状态
+git checkout .
+
+# 撤销上次commit，但保留工作区的代码
+git reset --soft HEAD~1
+
+# 撤销中间某次已提交的 commit
+git revert <commitHash>
 ```
 
 ### 二. Git 分支
