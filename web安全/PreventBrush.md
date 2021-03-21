@@ -1,0 +1,14 @@
+## 接口防刷
+
+### 一. 应对策略
+1. 网关控制流量洪峰，对在一个时间段内出现流量异常，可以拒绝请求
+2. 源`ip`请求个数限制。对请求来源的`ip`请求个数做限制
+3. `http`请求头信息校验；（例如`host`,`User-Agent`,`Referer`）  
+    这些信息，爬虫都可以伪造。
+4. 对用户唯一身份uid进行限制和校验。例如基本的长度，组合方式，甚至有效性进行判断。或者uid具有一定的实效性
+5. 前后端协议采用二进制方式进行交互或者协议采用签名机制。  
+    在本司，前后端尝试使用一种具有实效性的动态口令进行访问有效性的校验。在保证时间同步的前提下，在客户端基于时间戳算法生成的一次性密码则可以在服务端通过校验。  
+    1. 动态口令（OTP，One-Time Password）原理与实践（TOTP）（[https://www.cnblogs.com/shilxfly/p/9438235.html](https://www.cnblogs.com/shilxfly/p/9438235.html)）
+    2. 动态令牌-(OTP,HOTP,TOTP)-基本原理（[https://www.cnblogs.com/voipman/p/6216328.html](https://www.cnblogs.com/voipman/p/6216328.html)）
+6. 人机验证，验证码，短信验证码，滑动图片形式，12306形式  
+
