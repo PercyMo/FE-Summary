@@ -27,6 +27,34 @@
     -webkit-line-clamp: 2;
 }
 ```
+**元素**较宽不能被完全展示时将其隐藏（常见于标签并排展示，超出时，整个标签隐藏）
+```html
+<div class="labels">
+      <i class="placeholder"></i>
+      <span class="label">A really really really really really really really long label</span>
+      <span class="label">Cooking</span>
+      <span class="label">Coding</span>
+      <span class="label">Travel</span>
+      <span class="label">Photography</span>
+      <span class="label">Reading</span>
+</div>
+```
+```css
+.labels {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    height: 24px; /* 需要有一个高度 */
+    overflow: hidden;
+}
+.placeholder {
+    width: 1px;
+    height: 100%;
+}
+.label {
+    flex-shrink: 0;
+}
+```
 
 #### - CSS 图形
 ```css
