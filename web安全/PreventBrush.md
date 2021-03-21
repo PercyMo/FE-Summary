@@ -8,7 +8,7 @@
 4. 对用户唯一身份uid进行限制和校验。例如基本的长度，组合方式，甚至有效性进行判断。或者uid具有一定的实效性
 5. 前后端协议采用二进制方式进行交互或者协议采用签名机制。  
     在本司，前后端尝试使用一种具有实效性的动态口令进行访问有效性的校验。在保证时间同步的前提下，在客户端基于时间戳算法生成的一次性密码则可以在服务端通过校验。  
-    1. 动态口令（OTP，One-Time Password）原理与实践（TOTP）（[https://www.cnblogs.com/shilxfly/p/9438235.html](https://www.cnblogs.com/shilxfly/p/9438235.html)）
-    2. 动态令牌-(OTP,HOTP,TOTP)-基本原理（[https://www.cnblogs.com/voipman/p/6216328.html](https://www.cnblogs.com/voipman/p/6216328.html)）
+    1. [动态口令（OTP，One-Time Password）原理与实践（TOTP）](https://www.cnblogs.com/shilxfly/p/9438235.html)
+    2. [动态令牌-(OTP,HOTP,TOTP)-基本原理](https://www.cnblogs.com/voipman/p/6216328.html)
 6. 人机验证，验证码，短信验证码，滑动图片形式，12306形式  
 
