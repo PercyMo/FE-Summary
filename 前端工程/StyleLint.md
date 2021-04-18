@@ -3,7 +3,7 @@
 ### 一. 实践
 #### 1. 安装
 ```sh
-npm install stylelint stylelint-config-recess-order stylelint-order stylelint-config-standard --save-dev
+npm install stylelint stylelint-scss stylelint-config-recess-order stylelint-order stylelint-config-standard --save-dev
 ```
 * [stylelint](https://stylelint.io/)：规则检查工具
 * [stylelint-config-standard](https://github.com/stylelint/stylelint-config-standard#readme)：关于规范、风格约束的规则集，其中已经做了许多规则的配置
