@@ -20,9 +20,9 @@
 4. 将依赖项分别添加到不同的依赖类别中  
     分别添加到 `devDependencies`，`peerDependencies`，`optionalDependencies`
     ```sh
-    yarn add [package] -dev
-    yarn add [package] -peer
-    yarn add [package] -optional
+    yarn add [package] --dev
+    yarn add [package] --peer
+    yarn add [package] --optional
     ```
 5. 升级依赖包
     ```sh
