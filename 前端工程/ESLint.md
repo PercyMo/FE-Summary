@@ -52,7 +52,11 @@ module.exports = {
     }],
     // vue 模板使用2空格缩进
     'vue/html-indent': ['error', 2],
-    indent: ['error', 2]
+    indent: ['error', 2],
+    // 文件最大行数
+    'max-lines': ['error', { max: 800 }],
+    // 函数最大行数
+    'max-lines-per-function': ['error', { max: 80 }],
   }
 }
 ```
