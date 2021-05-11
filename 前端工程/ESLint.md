@@ -73,6 +73,12 @@ module.exports = {
   }
 }
 ```
+项目中发现，mac 使用 sourceTree 提交代码会自动跳过hook，可以做如下处理：
+```sh
+vim .git/hooks/pre-commit
+PATH=$PATH:/usr/local/bin:/usr/local/sbin
+```
+
 
 #### 4. lint 时会漏掉部分特殊文件夹
 项目中发现 `.xx` 这种文件，在lint校验时会默认被忽略掉。
