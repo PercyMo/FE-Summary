@@ -1,6 +1,14 @@
 ### 一、JS编码能力
 1. [代码整洁之道 =>>](./CleanCode.md)
-2. [浅拷贝 & 深拷贝 =>>](./DeepClone.md)
+#### 1. 数组/对象操作
+1. [浅拷贝 & 深拷贝 =>>](./DeepClone.md)
+
+#### 2. 功能函数实现
+1. [函数节流和防抖 =>>](./Throttle&Debounce.md)
+
+#### 3. JS原生API实现
+1. [bind、call、apply详解 =>>](./Bind&Call&Apply.md)
+2. [new 运算符详解 =>>](./New.md)
 
 ### 二、数据结构
 #### 1. 二叉树

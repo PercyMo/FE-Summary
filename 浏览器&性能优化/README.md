@@ -8,4 +8,3 @@
 7. [Performance API =>>](./PerformanceAPI.md)
 
 ### 二、性能优化
-1. [函数节流和防抖 =>>](./Throttle&Debounce.md)

@@ -43,9 +43,7 @@
 ### 七、函数表达式
 1. 闭包
 2. [关于this对象详解 =>>](./This.md)
-3. [bind、call、apply详解 =>>](./Bind&Call&Apply.md)
-4. [new 运算符详解 =>>](./New.md)
-5. [立即执行函数表达式(IIFE)详解 =>>](./IIFE.md)
+3. [立即执行函数表达式(IIFE)详解 =>>](./IIFE.md)
 
 ### 八、BOM
 5. [Hash、History & 前端路由模式 =>>](./Router.md)
