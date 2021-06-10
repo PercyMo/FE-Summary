@@ -53,4 +53,9 @@ yarn add -W -D package
 # 重装所有 node_moudles
 yarn install --force
 ```
-### 三. 引用
+### 三. 其他
+1. yarn 安装太慢
+    ```
+    yarn config set registry https://registry.npm.taobao.org
+    yarn config set sass_binary_site https://npm.taobao.org/mirrors/node-sass/
+    ```
