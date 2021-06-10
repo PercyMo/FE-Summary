@@ -35,8 +35,8 @@
 5. [本地项目上传git =>>](./GitLocalProject.md)
 
 ### 六、nginx
-1. 正反向代理
-2. nginx实现请求过滤、配置 gzip、负载均衡
+1. [Nginx =>>](./Nginx.md)
+2. nginx实现请求过滤、配置 gzip
 
 ### 七、持续集成交付
 1. [Jenkins自动化部署前端项目 =>>](./Jenkins.md)
