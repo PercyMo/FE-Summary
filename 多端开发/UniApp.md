@@ -16,49 +16,62 @@
     2. onReady替代mounted
 2. 在组件中，页面级生命周期，onLoad，onShow，onReady全部失效。和vue生命周期相同，created/mounted。
 
-### 四. 页面样式与布局
+### 四. 路由
+#### 1. H5 路由错误
+uni-app 并没有像 `vue-router` 一样提供一个兜底的错误页跳转，因此当路径错误时，就是始终处在空白页状态，体验不太友好。目前的解决方案是在 `app.vue` 中将异常路由重定向至一个错误页或者首页。
+```js
+onLaunch: function(options) {
+  // #ifdef H5
+  if (!options.path) {
+    uni.redirectTo({ url: '/'})
+  }
+  // #endif
+}
+```
+
+### 五. 页面样式与布局
 1. 尺寸单位继续使用rpx，响应式单位
 2. 布局尽量使用flex（快应用只支持flex布局）
 3. 条件渲染推荐使用 `<template/>` 而不是 `<block/>`，后者存在平台兼容问题
 4. `:style="styleObj"` 绑定一个内联的样式对象不生效，不知道原因
 
-### 五. ES6 和 npm、ts
+### 六. ES6 和 npm、ts
 1. 支持 `async/await`  
     异步可以使用 `async/await + promise`，使用 try/catch 来捕获错误
 2. 支持npm安装三方包  
     为多端兼容考虑，建议优先从uni-app插件市场获取插件。直接从npm下载库很容易只兼容h5端
 3. 支持ts
 
-### 六. 关于组件
+### 七. 关于组件
 1. 不建议继续使用小程序原生自定义组件，使用vue的组件写法，保证更好的兼容和性能
 
-### 七. 条件编译
+### 八. 条件编译
 1. 使用条件编译处理跨端兼容问题  
 2. 写法：以 #ifdef 或 #ifndef 加 %PLATFORM% 开头，以 #endif 结尾。
 3. 注意不同文件中的注释写法不太一样
 4. static 静态文件也支持通过专有目录名称实现条件编译
 
-### 八. 跨端开发注意
+### 九. 跨端开发注意
 1. v-html 在小程序端不支持
 2. 在某些特殊情况下，比如`uni.`实现有问题，你依然可以使用`wx.`，但建议只在微信的条件编译区使用`wx.`
 3. uni-app 全支持vue语法，所以在vue编译区，你可以随便写
 4. 编译为H5版后生成的是单页应用
 5. 为避免和内置组件冲突，自定义组件不可以`u-,uni-,wx-...`开头
 
-### 九. 全局页面通讯
+### 十. 全局页面通讯
 1. 页面通讯方面，原生提供了`uni.$emit()`、`uni.$on()`，类似vue的eventBus
 2. 使用vuex
 
-### 十. 数据缓存
+### 十一. 数据缓存
 1. uni.setStorage，及其他相关api。
     1. h5中使用localStorage
     2. 各小程序为原生的storage api
 
-### 十一. 网络请求
+### 十二. 网络请求
 1. uni.request()
 2. uni.uploadFile()
 
-### 十二. 踩坑
+### 十三. 踩坑
 #### 1. 慎重做一些DOM操作。  
 ref和$refs是可用的，但要做一些骚操作，小程序会不兼容
 #### 2. 路由的条件编译问题
@@ -67,5 +80,5 @@ ref和$refs是可用的，但要做一些骚操作，小程序会不兼容
 #### 3. 莫名其妙的问题
 1. TODO: 动态class style在小程序端失效
 
-### 十三. 引用
+### 十四. 引用
 [微信小程序转换uni-app详细指南](https://ask.dcloud.net.cn/article/35786)
