@@ -21,7 +21,8 @@
 ### 三、限定规范
 1. [ESLint详解 =>>](./ESLint.md)
 2. [StyleLint配置 =>>](./StyleLint.md)
-3. mock（yapi）
+3. [git commit =>>](./GitCommit.md)
+4. mock（yapi）
 
 ### 四、可测试性
 1. TDD与 BDD模式
