@@ -1072,25 +1072,363 @@ export default {
 #### 8. 命令式弹窗组件
 
 ### 三. 中间层技术点
+代理、缓存、日志、监控、数据处理。中间层的存在让前后端职责分离更加彻底。
 #### 1. 请求转发
+1. **相关中间件**  
+    ```sh
+    yarn add koa-router koa-bodyparser
+    ```
+    * `koa-router`: 路由中间件，快速定义路由及管理路由
+    * `koa-bodyparser`: 参数解析中间件，支持解析json、表单类型
+
+2. **路由设计**  
+    [RESTful API 设计指南](http://www.ruanyifeng.com/blog/2014/05/restful_api.html)
+    * 路由目录：`/server/routers/v1`
+    * 路由路径：标签相关接口文件 `tags`；用户相关接口文件 `users`
+        > 在RESAful 架构中，每个网址代表一种资源（resource），所以网址中不能有动词，只能有名词，而且所用的名词往往与数据库的表名对应。一般来说，数据库表都是同种记录的“集合”，所以 API 中的名词也应该使用复数。
+    * 路由类型：由 `HTTP` 动词表示
+        * GET(SELECT)：从服务器取出资源（一项或多项）
+        * POST(CREATE)：在服务器新建一个资源
+        * PUT(UPDATE)：在服务器更新资源（客户端提供改变后的完整资源）
+        * DELETE(DELETE)：从服务器删除资源
+
+3. **路由逻辑**  
+    ```js
+    // server/routers/users.js
+    const Router = require('koa-router')
+    const router = new Router()
+
+    /**
+    * @param {String} userId - 用户id
+    */
+    router.get('/userInfo', (ctx) => {
+      ctx.body = {
+        data: {
+          name: 'mao',
+          age: 18,
+        },
+      }
+    })
+
+    module.exports = router
+    ```
+    
+4. **注册路由**  
+    ```js
+    // /server/index.js
+    function useRouter(){
+      let module = require('./routes/users')
+      router.use('/v1/users', module.routes())
+      app.use(router.routes()).use(router.allowedMethods())
+    }
+    ```
 
 #### 2. 路由自动化注册
+以 `routers` 作为路由主目录，向下寻找 `js` 文件注册路由，最终以 `js` 文件路径作为路由名。  
+例如：`/server/routers/v1/users.js` 中有用户信息接口 `/userInfo`，最终接口调用地址为 `localhost:3000/v1/users/userInfo`  
+```js
+const fs = require('fs')
+const path = require('path')
+
+function useRouter(realPath) {
+  realPath = realPath || path.join(__dirname, '/routers')
+
+  const urls = fs.readdirSync(realPath)
+  urls.forEach((element) => {
+    const elementPath = path.join(realPath, element)
+    const stat = fs.lstatSync(elementPath)
+    const isDir = stat.isDirectory()
+    if (isDir) {
+      useRouter(elementPath)
+    } else {
+      const module = require(elementPath)
+      const routerPrefix = realPath.split('/routers')[1] || ''
+      // routers 里的文件路径作为 路由名
+      router.use(
+        path.join(routerPrefix, element.replace('.js', '')),
+        module.routes()
+      )
+    }
+  })
+}
+
+// 使用路由
+useRouter()
+app.use(router.routes()).use(router.allowedMethods())
+```
 
 #### 3. 统一返回格式 & 错误处理
+所有的返回值在 `server/middlewares/error.js` 里拦截一下，如果状态码是 200，用成功的工具函数包装返回，否则两种情况：一是自己业务抛错，使用失败工具函数包装返回；另一种是程序运行时报错，触发koa错误处理事件去处理
+```js
+// server/middlewares/response.js
+const response = () => {
+  return async function (ctx, next) {
+    ctx.res.fail = ({ code, data, message }) => {
+      ctx.body = {
+        code,
+        data,
+        message,
+      }
+    }
+
+    ctx.res.success = (message) => {
+      ctx.body = {
+        code: 0,
+        data: ctx.body,
+        message: message || 'success',
+      }
+    }
+
+    await next()
+  }
+}
+
+module.exports = response
+```
+```js
+// server/middlewares/error.js
+const error = () => {
+  return async function (ctx, next) {
+    try {
+      await next()
+      if (ctx.status === 200) {
+        ctx.res.success()
+      }
+    } catch (err) {
+      if (err.code) {
+        ctx.res.fail({ code: err.code, message: err.message })
+      } else {
+        ctx.app.emit('error', err, ctx)
+      }
+    }
+  }
+}
+
+module.exports = error
+```
+在`server/middlewares/index.js` 文件中引入上面两个中间件：
+```js
+const bodyParser = require('koa-bodyparser')
+const response = require('./response')
+const error = require('./error')
+
+/**
+ * 参数解析
+ */
+const mdBodyParser = bodyParser({
+  enableTypes: ['json', 'form', 'text', 'xml'],
+})
+
+/**
+ * 统一返回格式
+ */
+const mdResHandler = response()
+
+/**
+ * 错误处理
+ */
+const mdErrorHandler = error()
+
+module.exports = [mdResHandler, mdErrorHandler, mdBodyParser]
+```
+启动文件`server/index.js`中，添加全局错误捕获
+```js
+app.on('error', (err, ctx) => {
+  if (ctx) {
+    ctx.body = {
+      code: 9999,
+      message: `程序运行时报错：${err.message}`,
+    }
+  }
+})
+```
+添加完处理程序后，验证下返回结果：
+```js
+router.get('/userInfo', (ctx) => {
+  ctx.body = {
+    text: '返回结果',
+  }
+})
+
+// {
+//   "code": 0,
+//   "data": {
+//     "text": "返回结果"
+//   },
+//   "message": "success"
+// }
+```
+```js
+router.get('/userInfo', (ctx) => {
+  ctx.utils.assert('', ctx.utils.throwError(1001, '验证码失败'))
+})
+
+// {
+//   "code": 1001,
+//   "message": "验证码失败"
+// }
+```
+```js
+router.get('/userInfo', (ctx) => {
+  const b = a
+  ctx.body = {
+    text: '返回结果',
+  }
+})
+
+// {
+//   "code": 9999,
+//   "message": "程序运行时报错：a is not defined"
+// }
+```
 
 #### 4. 路由参数验证
+基于 `async-validator` 封装一个路由中间件，提前对参数验证，终止错误查询并告知使用者。
+```js
+const { default: Schema } = require('async-validator')
+
+module.exports = (descriptor) => {
+  return async function (ctx, next) {
+    const validator = new Schema(descriptor)
+    const params = {}
+    // 获取参数
+    Object.keys(descriptor).forEach((key) => {
+      if (ctx.method === 'GET') {
+        params[key] = ctx.query[key]
+      } else if (
+        ctx.method === 'POST' ||
+        ctx.method === 'PUT' ||
+        ctx.method === 'DELETE'
+      ) {
+        params[key] = ctx.request.body[key]
+      }
+    })
+
+    // 验证参数
+    const errors = await validator
+      .validate(params)
+      .then(() => null)
+      .catch((err) => err.errors)
+    if (errors) {
+      // 验证不通过
+      const error = new Error(JSON.stringify(errors))
+      error.code = 9998
+      throw error
+    } else {
+      await next()
+    }
+  }
+}
+```
+使用：
+```js
+const validator = require('../../middlewares/validator')
+
+router.get(
+  '/userList',
+  validator({
+    udid: { type: 'string', required: true },
+    pageSize: {
+      type: 'string',
+      required: true,
+      validator: (rule, value) => Number(value) > 0,
+      message: 'limit 需传入正整数',
+    },
+    order: { type: 'enum', enum: ['rankIndex', 'createdAt'] },
+  }),
+  (ctx) => {
+    ctx.body = {
+      list: [],
+    }
+  }
+)
+```
+`type` 代表参数类型，`require` 代表是否必填。当 `type` 为 `enum` （枚举）类型时，参数值只能为 `enum` 数组中的某一项。  
+```js
+{
+  "code": 9998,
+  "message": "[{\"message\":\"udid is required\",\"field\":\"udid\"},{\"message\":\"pageSize 需传入正整数\",\"field\":\"pageSize\"}]"
+}
+```
 
 #### 5. 跨域设置
+```sh
+yarn add koa2-cors
+```
+如果不符合请求的方式，或带有未允许的标头。发送请求时会直接失败，浏览器抛出 `cors` 策略限制的错误。
+```js
+const cors = require('koa2-cors')
+
+const mdCors = cors({
+  origin(ctx) {
+    return ctx.request.header.origin
+  },
+  credentials: true,
+  allowMethods: ['OPTIONS', 'GET', 'PUT', 'POST', 'DELETE'],
+  allowHeaders: ['Content-Type', 'X-Requested-With', 'token'],
+  maxAge: 86400,
+})
+module.exports = [mdCors, mdResHandler, mdErrorHandler, mdBodyParser]
+```
 
 #### 6. 网站安全性
+`koa-helmet` 提供重要的安全标头，使你的应用 程序在默认情况下更加安全。
+```sh
+yarn add koa-helmet
+```
+```js
+const helmet = require('koa-helmet')
+const mdHelmet = helmet()
+
+module.exports = [mdCors, mdHelmet, mdResHandler, mdErrorHandler, mdBodyParser]
+```
+默认为我们做了以下安全设置：
+* `Content-Security-Policy`: 内容安全策略（CSP），用于检测并削弱某些特定类型的攻击。
+* `X-DNS-Prefetch-Control`: 禁用浏览器的 DNS 预取
+* `X-Frame-Options`: 确保自己的网站 没有被嵌到别人的网站中去，避免点击劫持攻击
+* `X-Powered-By`: 表用用于支持当前网页应用程序的技术
+* `Strict-Transport-Security`:  它告诉浏览器只能使用 `HTTPS` 访问当前资源
+* `X-DownLoad-Options`: 防止 IE 在在站点上下文中执行下载
+* `X-Content-Type-Options`: 设置为 `nosniff`，有助于防止浏览器试图猜测 MINE 类型，这可能会带来安全隐患。
+* `X-XSS-Protection`: 防止反射的 XSS 攻击
+* ... 
 
 #### 7. 缓存
+基于 LRU-Cache
+1. **页面缓存**  
+
+2. **组件缓存**  
+
+3. **API缓存**  
 
 #### 8. 限流
+1. **单 IP 限流**  
+
+2. **IP 黑名单**  
 
 #### 9. 灾备
+高并发或异常情况下，SSR降级为CSR
+1. **监控系统降级**  
+    监测 Node 进程的CPU和内存使用率，设定阈值
+
+2. **全平台降级**  
+    大促期间，提前降级
+
+3. **单次访问降级**  
+    偶发性异常，自动切换CSR
+
+4. **指定渲染方式**  
+    url中增加参数isCsr=true，Nginx 层对参数isCsr进行拦截分流
 
 #### 10. 日志
+log4js
+1. **页面渲染日志**  
+
+2. **接口日志**  
+
+3. **中间层接口日志**  
+
+4. **日志采集**  
 
 #### 11. 流量监控
 
