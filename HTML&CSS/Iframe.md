@@ -144,14 +144,14 @@ Content-Security-Policy: child-src 'self' http://example.com; sandbox allow-form
 
 ### 六. iframe 跨域
 #### 1. 传统方案
-1. 以及域名相同，二级域名不同，通过设置 `document.domain` 共享 Cookie
+1. 一级域名相同，二级域名不同，通过设置 `document.domain` 共享 Cookie
 2. 片段识别符  
     父窗口把信息写入子窗口的片段识别符
     ```js
     const src = originURL + '#' + data
     document.getElementById('myIframe').src = src
     ```
-    子窗口通过监听 `hashChange` 时间得到通知
+    子窗口通过监听 `hashChange` 事件得到通知
 3. window.name  
 
 #### 2. postMessage
