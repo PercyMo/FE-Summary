@@ -18,11 +18,9 @@
 
 /* 多行文本溢出 */
 .text-overflow {
-    position: relative;
     display: -webkit-box;
     overflow: hidden;
     text-overflow: ellipsis;
-    word-break: break-all;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
 }
