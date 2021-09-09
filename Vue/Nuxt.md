@@ -1502,3 +1502,7 @@ export default {
 
 ### 五. 引用
 [🚀点亮你的Vue技术栈，万字Nuxt.js实践笔记来了](https://juejin.cn/post/6844904160324747278#heading-50)
+
+[抄得走, 用得到的 Koa 实践总结](https://mp.weixin.qq.com/s/sjtwDEOwU8uLtxiAqwi7ug)
+
+[开发效率提升50%以上，爱奇艺官网主站的Nuxt实践](https://mp.weixin.qq.com/s/H-2Dfw_UCQBIKnRbdPLNlQ)
