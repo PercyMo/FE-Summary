@@ -7,6 +7,7 @@
 2. [微信小程序（mpvue） =>>](./Mpvue.md)
 3. [微信小程序（wepy） =>>](./Wepy.md)
 4. [微信小程序体积优化 =>>](./SizeOptimization.md)
+5. [微信小程序性能优化 =>>](./PerformanceOptimization.md)
 
 ### 三、跨端
 1. [uni-app跨端实践 =>>](./UniApp.md)
