@@ -9,8 +9,5 @@
 4. Flex 布局
 5. Grid 布局
 
-### 三、业务实践
-1. [暗夜模式&网站换肤 =>>](./DarkLightMode.md)
-
-### 四、其他
+### 三、其他
 1. [格式化上下文 =>>](./FormattingContext.md)
