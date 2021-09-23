@@ -4,6 +4,8 @@
 
 #### [- JavaScript =>>](./JavaScript/README.md)
 
+#### [- TypeScript =>>](./TypeScript/README.md)
+
 #### [- ES6 =>>](./ES6/README.md)
 
 #### [- 浏览器&性能优化 =>>](./浏览器&性能优化/README.md)
@@ -13,6 +15,8 @@
 #### [- HTTP协议与数据请求 =>>](./HTTP/README.md)
 
 #### [- Vue =>>](./Vue/README.md)
+
+#### [- React =>>](./React/README.md)
 
 #### [- 多端开发 =>>](./多端开发/README.md)
 
