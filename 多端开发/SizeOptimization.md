@@ -15,6 +15,10 @@
     ![样式命名优化](http://img.vanilla.ink/me/webproject/FE-Summary/MultiEnd/SizeOptimization/01.png?x-oss-process=image/resize,w_450)
 
 ### 二. 实践
+#### 1. 共用代码提取
+1. 1px 边框、文本超出隐藏、垂直水平居中
+
+#### 2. 去除不必要的 `scoped`
 
 ### 三. 引用
 [京喜小程序首页瘦身实践——给小程序再减重30%的秘密](https://jelly.jd.com/article/5fbfa6e9cff6b301458392c3)
