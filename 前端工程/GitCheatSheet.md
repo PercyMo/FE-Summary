@@ -21,6 +21,9 @@ git reset --soft HEAD~1
 
 # 撤销中间某次已提交的 commit
 git revert <commitHash>
+
+# 回滚某次已提交的 merge
+git revert -m 1 <commitHash>
 ```
 #### 3. 标签
 ```sh

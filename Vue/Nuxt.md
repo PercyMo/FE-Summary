@@ -1506,3 +1506,10 @@ export default {
 [抄得走, 用得到的 Koa 实践总结](https://mp.weixin.qq.com/s/sjtwDEOwU8uLtxiAqwi7ug)
 
 [开发效率提升50%以上，爱奇艺官网主站的Nuxt实践](https://mp.weixin.qq.com/s/H-2Dfw_UCQBIKnRbdPLNlQ)
+
+TODO: 待整理
+[Nuxt.js 利用 Nginx 实现同构降级策略](https://linhong.me/2021/03/04/nuxt-ssr-to-csr/)
+
+[SSR同构降级策略](https://juejin.cn/post/6884107649843986440#heading-5)
+
+[vivo 商城架构升级-SSR 实战篇](https://segmentfault.com/a/1190000038575056)

@@ -25,7 +25,7 @@
 ```
 
 ### 二. clone项目 SRA 报错
-到[这里](https://www.ipaddress.com/)查下 `github.com` 和 `github.global-ssl.fastly.net`  
+到[这里](https://www.ipaddress.com/)查下 `github.com` 和 `github.global.ssl.fastly.net`  
 host 中修改下对应 ip
 ```sh
 # github SRA报错
