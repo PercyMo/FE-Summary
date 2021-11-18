@@ -29,7 +29,7 @@ cz-conventional-changelog：一个符合Angular团队规范的 preset
     ```
     package.json中配置：
     ```json
-    "script": {
+    "scripts": {
         ...,
         "commit": "git-cz"
     },
