@@ -8,6 +8,7 @@
 3. [CSS文字渐变色 =>>](./TextGradient.md)
 4. Flex 布局
 5. Grid 布局
+6. [穿透的div（pointer-events） =>>](./PointerEvents.md)
 
 ### 三、其他
 1. [格式化上下文 =>>](./FormattingContext.md)
