@@ -2,39 +2,9 @@
 1. [变量和类型 =>>](./Variable&Types.md)
 
 ### 四、变量、作用域和内存问题
-2. 执行环境及作用域
-
-    JavaScript采用的是词法作用域，函数的作用域在函数定义的时候就决定了。   
-    而与词法作用域相对的是动态作用域，函数的作用域是在函数调用的时候才决定的。  
-    例子：
-    ```js
-    // 在node下运行这段js代码
-    var value = 1;
-    function foo() {
-        console.log(value);
-    }
-    function bar() {
-        var value = 2;
-        foo();
-    }
-    bar();
-
-    // 在bash下运行这段bash代码 （bash语言是动态作用域）
-    value=1
-    function foo () {
-        echo $value;
-    }
-    function bar () {
-        local value=2;
-        foo;
-    }
-    bar
-    ```
-3. [变量对象详解 =>>](./VO.md)
-
-4. [变量提升和函数提升详解 =>>](./Hoisting.md)
-
-5. [执行上下文和执行上下文栈详解 =>>](./Context.md)
+1. [VO/AO/作用域 =>>](./VO&AO&Scope.md)
+2. [变量提升和函数提升详解 =>>](./Hoisting.md)
+3. [执行上下文和执行上下文栈详解 =>>](./Context.md)
 
 ### 五、引用类型
 2. Array类型

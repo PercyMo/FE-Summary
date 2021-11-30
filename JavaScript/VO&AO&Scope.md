@@ -1,6 +1,6 @@
-### 变量对象详解
+## VO/AO/作用域
 
-#### 1. 变量对象
+### 一. 变量对象
 如果变量与执行上下文相关，那变量自己应该知道它的数据存储在哪里，并且知道如何访问。这种机制称为变量对象(variable object)。
 
 变量对象(缩写为VO)是一个与执行上下文相关的特殊对象，它存储着在上下文中声明的以下内容：
@@ -105,3 +105,37 @@ VO = {
 
 #### 5. 引用
 [变量对象（Variable Object）](http://www.cnblogs.com/TomXu/archive/2012/01/16/2309728.html)
+
+TODO: 待整理
+
+JavaScript采用的是词法作用域，函数的作用域在函数定义的时候就决定了。   
+而与词法作用域相对的是动态作用域，函数的作用域是在函数调用的时候才决定的。  
+例子：
+```js
+// 在node下运行这段js代码
+var value = 1;
+function foo() {
+    console.log(value);
+}
+function bar() {
+    var value = 2;
+    foo();
+}
+bar();
+
+// 在bash下运行这段bash代码 （bash语言是动态作用域）
+value=1
+function foo () {
+    echo $value;
+}
+function bar () {
+    local value=2;
+    foo;
+}
+bar
+```
+[一道js面试题引发的思考](https://github.com/kuitos/kuitos.github.io/issues/18)  
+
+[JavaScript深入之词法作用域和动态作用域](https://github.com/mqyqingfeng/Blog/issues/3)  
+
+[JavaScript深入之作用域链](https://github.com/mqyqingfeng/Blog/issues/6)  
