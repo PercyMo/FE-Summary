@@ -7,6 +7,11 @@
     [为什么要使用预处理器？](https://github.com/cssmagic/blog/issues/73)  
 
 ### - JavaScript
+* 闭包
+    [我从来不理解JavaScript闭包，直到有人这样向我解释它...](https://segmentfault.com/a/1190000017136436)  
+    [破解前端面试（80% 应聘者不及格系列）：从闭包说起](https://juejin.cn/post/6844903474212143117)  
+    [JavaScript闭包的底层运行机制](http://blog.leapoahead.com/2015/09/15/js-closure/)  
+    [[译]发现 JavaScript 中闭包的强大威力](https://juejin.cn/post/6844903769646317576)  
 * Service Worker / PWA  
     [Service Worker: 简介](https://developers.google.com/web/fundamentals/primers/service-workers)  
     [借助Service Worker和cacheStorage缓存及离线开发](https://www.zhangxinxu.com/wordpress/2017/07/service-worker-cachestorage-offline-develop/)  
@@ -26,6 +31,10 @@
 * DNS 基础  
     [DNS解析](https://imweb.io/topic/55e3ba46771670e207a16bc8)  
     [写给前端工程师的DNS基础知识](http://www.sunhao.win/articles/netwrok-dns.html)  
+* CDN 基础
+    [漫话：如何给女朋友解释什么是CDN？](https://juejin.cn/post/6844903906296725518)  
+    [CDN是什么？使用CDN有什么优势？](https://www.zhihu.com/question/36514327)  
+    [五分钟了解CDN](https://juejin.cn/post/6844903605888090125)  
 
 ### - Vue
 * 剖析 Vue 中的 MVVM 原理  
