@@ -2,6 +2,8 @@
 * position  
     [position MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/position)  
     [杀了个回马枪，还是说说position:sticky吧](https://www.zhangxinxu.com/wordpress/2018/12/css-position-sticky/)  
+* flex
+    [写给自己看的display: flex布局教程](https://www.zhangxinxu.com/wordpress/2018/10/display-flex-css3-css/)  
 * 其他  
     [2019年，你是否可以抛弃 CSS 预处理器？](https://jelly.jd.com/article/5dcb9c73641a030153732a89)  
     [为什么要使用预处理器？](https://github.com/cssmagic/blog/issues/73)  
@@ -43,6 +45,17 @@
     [不好意思！耽误你的十分钟，让MVVM原理还给你](https://juejin.cn/post/6844903586103558158)  
     [50行代码的MVVM，感受闭包的艺术](https://juejin.cn/post/6844903619808985095)  
     [250行实现一个简单的MVVM](https://zhuanlan.zhihu.com/p/24475845)  
+* Vue源码剖析
+    * 7.虚拟DOM
+        [让虚拟DOM和DOM-diff不再成为你的绊脚石](https://juejin.cn/post/6844903806132568072)  
+        [探索Virtual DOM的前世今生](https://zhuanlan.zhihu.com/p/35876032)  
+        [虚拟 DOM 到底是什么？(长文建议收藏)](https://mp.weixin.qq.com/s/oAlVmZ4Hbt2VhOwFEkNEhw)  
+        [Virtual DOM](https://ustbhuangyi.github.io/vue-analysis/v2/data-driven/virtual-dom.html)  
+        [snabbdom github](https://github.com/snabbdom/snabbdom)  
+        [如何理解虚拟DOM?](https://www.zhihu.com/question/29504639)  
+        [增量 DOM 与虚拟 DOM 的对比使用](https://mp.weixin.qq.com/s/kwwkaXi9L-4j5Jucb3HdeA)  
+        [Virtual DOM 认知误区](https://mp.weixin.qq.com/s/gQCFEBsB3SIz9c5sp7uuhA)  
+
 * 组件化实战  
     * 2.组件通讯N种策略  
         [Vue 组件间通信六种方式（完整版）](https://juejin.cn/post/6844903845642911752#heading-11)  
