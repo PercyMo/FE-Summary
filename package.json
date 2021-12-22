@@ -1,6 +1,6 @@
 {
   "name": "FE-Summary",
-  "script": {
+  "scripts": {
     "commit": "git-cz"
   },
   "devDependencies": {
