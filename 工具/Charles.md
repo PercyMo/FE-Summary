@@ -14,3 +14,8 @@
     ![Breakpoint Settings](http://img.vanilla.ink/me/webproject/FE-Summary/Tools/Charles/02.png?x-oss-process=image/resize,w_600)
 
     命中断点后，`Edit Response` 修改响应数据。点击 `Execute` 执行下一步，就可以看到被修改的请求已经生效了。
+
+### 二. Mac 上配置抓包
+[Mac下用Charles实现Android http和https抓包](https://blog.csdn.net/luochoudan/article/details/72801573)  
+
+[Mac上使用Charles抓包](https://zhuanlan.zhihu.com/p/26182135)  
