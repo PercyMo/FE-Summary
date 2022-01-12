@@ -74,6 +74,12 @@
 ### - NodeJs
 
 ### - 前端工程
+* PM2
+    [10分钟快速过一遍PM2核心知识点](https://mp.weixin.qq.com/s/5xGhV-70yjUGgyYHesHTRA)  
+* 容器技术
+    [Docker 入门看这一篇就够了！](https://mp.weixin.qq.com/s/CClZ9xRMN9mEgEXMm9MuGw)  
+    [Docker 入门教程 阮一峰](http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html)  
+    [Docker 搭建你的第一个 Node 项目到服务器(完整版)](https://juejin.im/post/5dff84e051882512290f2fc2)  
 
 ### - 前端设计模式
 
