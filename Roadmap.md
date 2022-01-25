@@ -4,6 +4,8 @@
     [杀了个回马枪，还是说说position:sticky吧](https://www.zhangxinxu.com/wordpress/2018/12/css-position-sticky/)  
 * flex  
     [写给自己看的display: flex布局教程](https://www.zhangxinxu.com/wordpress/2018/10/display-flex-css3-css/)  
+* gid  
+    [CSS Grid 网格布局教程](https://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html)  
 * 其他  
     [2019年，你是否可以抛弃 CSS 预处理器？](https://jelly.jd.com/article/5dcb9c73641a030153732a89)  
     [为什么要使用预处理器？](https://github.com/cssmagic/blog/issues/73)  
@@ -65,10 +67,10 @@
     * 2.组件通讯N种策略  
         [Vue 组件间通信六种方式（完整版）](https://juejin.cn/post/6844903845642911752#heading-11)  
         [vue中8种组件通信方式, 值得收藏!](https://juejin.cn/post/6844903887162310669#heading-19)  
-* Vue 对比 React
+* Vue 对比 React  
     [面试官：谈谈Vue和React的区别？](https://mp.weixin.qq.com/s/oiNmF8knHfnvbmZfYTv_ZQ)  
     [React 与 Vue 框架的设计思路大 PK](https://mp.weixin.qq.com/s/fdDfgmksNoXP3oR56bsmMw)  
-    [建议收藏】11+实战技巧，让你轻松从Vue过渡到React](https://mp.weixin.qq.com/s/OuwyqWvLE-7AxHXw7trSNw)  
+    [【建议收藏】11+实战技巧，让你轻松从Vue过渡到React](https://mp.weixin.qq.com/s/OuwyqWvLE-7AxHXw7trSNw)  
     [一名 vueCoder 总结的 React 基础](https://juejin.cn/post/6960556335092269063)  
     [从Vue2.0到React17——React开发入门](https://juejin.cn/post/6975864046058733576)  
 
