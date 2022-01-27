@@ -76,3 +76,306 @@
     4. 源码结构和调试环境搭建
     5. vue3响应式原理剖析
     6. 手写实现vue3数据响应式
+
+## React
+1. 手写React16.13源码
+    1. 实现render、Component、createElement、cloneElement
+    2. 实现虚拟DOM
+    3. 实现类组件、函数组件、原生组件和Fragment的渲染
+    4. **实现DIFF算法**
+    5. 实现DOM更新
+    6. **实现fiber架构**
+    7. **hooks核心实现**
+2. React16.13源码剖析
+    1. context原理
+    2. **细解setState、forceUpdate、render**
+    3. 事件系统
+    4. React渲染与更新过程
+    5. 任务调度过程
+    6. suspense、lazy
+3. React Hooks
+    1. **自定义Hook、useState、useEffect、useCallback、useMemo使用**
+    2. **useContext、useReducer、useLayout、useRef、uselmperativeHandle使用**
+    3. **Hooks原理解析**
+4. React组件化
+    1. 高阶组件
+    2. 组件通讯
+    3. **antd Form使用及实现**
+    4. 弹窗组件实现
+5. React Router
+    1. 路由配置
+    2. 路由守卫
+    3. 路由重定向
+    4. 动态路由
+    5. 嵌套路由
+    6. **手写一个完整的react-router5**
+6. React项目最佳实践
+    1. **基于cra，手动搭建一个仿umi的React项目框架**
+    2. **umi搭建项目**
+    3. 按需加载
+    4. **layout框架实现**
+    5. 权限控制
+    6. 动态路由添加
+    7. 数据Mock
+    8. **umi、dva核心源码解读**
+7. 手写React SSR框架
+    1. **React如何实现SSR**
+    2. **同构框架新增redux支持**
+    3. **同构框架新增react**-router支持
+    4. **同构框架支持css**
+    5. **同构框架报错统一处理**
+    6. 同构框架SEO实战
+    7. 同构框架的性能优化和降级渲染
+8. mobx实战及原理
+    1. mobx实战
+    2. mobx原理
+    3. mobx与redux对比
+9. React + TS
+
+## NodeJs
+1. Node基础
+    1. 运行与调试-debug/nodemon/jest
+    2. 流程控制-promise、async/await
+    3. 事件循环异步I/O-promisify/buffer/stream
+    4. 网络编程-socket/http/websocket
+    5. 鉴权-cookie-session/jwt/Oauth/单点登录
+    6. 手写Koa源码-上下文/getter&setter
+    7. Jest单元测试
+2. Node服务
+    1. MVC模式与三层结构
+    2. Eggjs源码解析
+    3. Swagger文档
+    4. Restful服务
+    5. 表单校验
+    6. 生命周期函数的运用
+    7. 插件原理及运用
+    8. 文件上传功能
+3. Node工具
+    1. 代码模板拉取
+    2. Command命令界面定制
+    3. 依赖自动安装
+    4. 启动服务
+    5. 约定路由实现
+    6. npm发布项目
+    7. http爬虫工具
+    8. 无头浏览器爬虫Pupteer
+4. Node工程化
+    1. 手写Eggjs源码解析
+    2. 手写一个TS装饰器服务框架
+5. Mongodb
+    1. Mongodb安装和使用
+    2. Mongodb安全与权限
+    3. Mongodb高级数据查询
+    4. 零编码Restful接口
+6. Mysql
+    1. Mysql安装与使用
+    2. 数据处理之增删改查
+    3. 数据类型和完整性约束
+    4. 分组与聚合函数
+    5. 数据库涉及范式和反范式
+    6. 数据库连接池
+    7. 数据库事务和锁
+7. Redis
+    1. 五种数据结构及使用场景
+    2. 数据一致性及分布式锁
+    3. 订阅发布模式实现秒杀
+    4. 备份与恢复
+8. GraphQL
+    1. **GraphQL概念/操作类型/Schema/Resolve**
+    2. **实战GraphQL/Query/Mutation/Subscription**
+    3. **后端搭建GraphQL服务器**
+    4. **前端Apollo声明式请求GraphQL**
+
+## 微信公众号开发
+1. 微信开发入门
+    1. 环境搭建
+    2. 服务器校验
+    3. Nodejs后端接入指南
+    4. 消息管理
+2. 微信网页开发
+    1. 依赖微信Jssdk开发业务
+    2. 录音、地理位置、扫一扫功能展示
+3. 实战项目
+    1. 公众号客服机器人
+
+## React-native原生App和混合应用开发
+1. RN架构原理和环境搭建
+    1. RN架构原理
+    2. 环境和基础工具配置
+2. RN导航器使用和鉴权流程
+    1. 项目结构和初始配置
+    2. React-navigation-v5
+    3. 鉴权流程
+3. RN布局和列表渲染
+    1. 页面结构分析
+    2. 列表信息流与flex布局
+    3. 刷新与分页
+    4. 列表修改
+4. RN组件库和第三方UI组件
+    1. Webview高德地图
+    2. 第三方打补丁方案
+    3. redux-saga
+5. 项目实战
+    1. 热更新与打包发布
+
+## Flutter
+1. Flutter基础与控件使用
+    1. 环境安装
+    2. 构建项目
+    3. 组件讲解
+    4. 布局方式
+    5. 网络加载
+2. 基于Material Design风格App主体结构设计
+    1. MaterialApp
+    2. 主体设计
+    3. Scaffold
+    4. 主体设计
+    5. Pubspec.yaml文件配置
+    6. TabController创建
+3. Flutter实战
+    1. MVC设计
+    2. 实战布局
+    3. 列表渲染
+    4. 列表下拉刷新和上拉加载更多
+4. Flutter打包
+    1. App配置
+    2. 第三方登录，分享
+    3. App打包
+
+## 前端工程
+1. Git版本控制
+    1. git概念-集中式vs分布式 
+    2. 时光穿梭原理-工作区暂存区/管理/撤销/删除
+    3. 远程仓库管理
+    4. 分支管理
+    5. 标签管理
+    6. GitHooks
+    7. Github实战-issue/pullrequest/敏捷看板
+2. Linux
+    1. Linux概念与Unix
+    2. 阿里云ECS部署Linux
+    3. 软件管理
+    4. 用户与权限管理
+    5. 服务管理
+    6. 网络管理
+    7. 系统管理
+    8. 定时任务
+    9. 监控系统资源（内存 CPU 磁盘 网络）
+    10. Shell基础-管道/重定向/后台执行
+3. Nginx
+    1. 木块与基本配置
+    2. 反向代理/跨域
+    3. 反盗链
+    4. rewrite
+    5. 负载均衡
+    6. CDN
+    7. 浏览器缓存优化
+    8. 插件开发与OpenResty/Lua
+
+## Webpack工程化
+1. webpack原理分析
+    1. 自定义loader实现
+    2. 自定义plugin实现
+    3. **webpack打包原理**
+    4. **webpack打包手写实现**
+    5. **Babel核心API**
+2. webpack实战
+    1. 构建React、Vue开发环境
+    2. 构建骨架屏应用
+    3. 构建多页面应用
+    4. 构建公共组件库
+    5. 构建PWA离线应用
+3. webpack优化
+    时间久忘了再看下（使用HardSourceWebpackPlugin这个当时没整理）
+
+## 自动化测试
+1. 单元测试
+    1. 业务驱动开发 & 测试驱动开发
+    2. 黑盒测试和白盒测试
+    3. 测试覆盖率
+    4. 前端项目的单侧集成，node项目的单侧集成
+2. 端到端测试
+    1. 前端e2e测试
+
+## 前端性能优化
+1. 性能优化监控工具
+    1. 监控指标实现
+    2. 资源加载、页面加载
+    3. 数据上报
+2. React性能优化
+3. Vue性能优化
+4. 移动端性能优化
+    1. 长列表优化
+    2. 虚拟列表手写实现
+
+## 浏览器原理
+1. 浏览器渲染原理
+2. JS执行机制深入剖析
+3. V8引擎原理
+4. 浏览器中的安全机制
+
+## 微前端
+1. 什么是微前端
+2. 现代化前端应用
+3. 微前端核心概念
+4. 微前端框架实战
+5. Egg.js微服务解决方案
+
+## 网络安全
+1. XSS漏洞
+2. CSRF漏洞
+3. 点击劫持漏洞
+4. SQL注入漏洞
+5. OS注入漏洞
+6. DDOS漏洞
+7. 数据库加固
+8. 加密技术解析RSA、SSH、HTTPS、Node服务端安全加固
+
+## 数据可视化
+1. 可视化概念、信息图、BI
+2. Web可视化基石Canvas/SVG
+3. 数据可视化库Echart
+4. 数据驱动D3
+5. **图形语法与G2**
+
+## 爬虫
+1. 爬虫原理
+2. 豆瓣爬虫实现
+3. 通过爬虫实现信息收集系统
+4. 爬虫+钉钉实现信息提醒机器人
+5. SPA网站爬虫
+6. Puppeteer爬虫
+
+## 架构
+1. 中台
+    1. 中台概念-赋能与平台化
+    2. 中台的划分
+    3. 元数据/高阶函数/Proxy
+    4. 业务实践-表单配置页/海报配置页/RestfulAPI生成页
+2. 云端SeverLess
+    1. 架构演进-单体开发/微服务/Serverless
+    2. Infra架构-Iaas & PaaS & Saas
+    3. Baas - LeanClound/FireBase
+    4. Faas - AWS/Aliyun FC
+    5. Faas + Baas - 腾讯云函数
+
+## 软件设计理论
+1. 软件设计原则
+    1. 软件工程理论
+    2. 常见设计原则剖析
+    3. 单一职责
+    4. 依赖倒转
+    5. 开放封闭原则
+    6. 设计原则在vue和react源码中的实践
+2. 软件开发规范
+    1. 项目规划
+    2. 需求分析
+    3. 系统设计原则
+    4. 编码
+    5. 代码测试
+    6. 监控和维护
+3. 敏捷开发和软件工程
+    1. 敏捷开发介绍
+    2. 敏捷开发流程
+    3. 代码评审
+    4. 持续交付
