@@ -6,6 +6,9 @@
     [写给自己看的display: flex布局教程](https://www.zhangxinxu.com/wordpress/2018/10/display-flex-css3-css/)  
 * gid  
     [CSS Grid 网格布局教程](https://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html)  
+* css变量  
+    [CSS 变量教程](http://www.ruanyifeng.com/blog/2017/05/css-variables.html)  
+    [进阶：玩转 CSS 变量](https://github.com/wsafight/personBlog/issues/25)  
 * 其他  
     [2019年，你是否可以抛弃 CSS 预处理器？](https://jelly.jd.com/article/5dcb9c73641a030153732a89)  
     [为什么要使用预处理器？](https://github.com/cssmagic/blog/issues/73)  
