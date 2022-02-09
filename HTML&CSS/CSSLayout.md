@@ -355,10 +355,78 @@ footer {
 ```
 
 ### 七. 两端对齐
+卡片列表，流式排列，间隙均等。当卡片数量不能正好填满一排时，依然自左至右排列，且间隙相等。
+```html
+<div class="list">
+  <div class="item">
+    <div>item</div>
+  </div>
+  <div class="item">
+    <div>item</div>
+  </div>
+  <div class="item">
+    <div>item</div>
+  </div>
+  <div class="item">
+    <div>item</div>
+  </div>
+  <div class="item">
+    <div>item</div>
+  </div>
+  <div class="item">
+    <div>item</div>
+  </div>
+  <div class="item">
+    <div>item</div>
+  </div>
+</div>
+```
+```css
+:root {
+  --col: 5;
+  --gap: 1vh;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.item {
+  padding: calc(var(--gap) / 2);
+  flex: 0 1 calc(100% / var(--col));
+  box-sizing: border-box;
+}
+```
 
 ### 八. 选择最佳的值
+`clamp()` 函数接受三个参数，`clamp(MIN, VAL, MAX)`，其中 MIN 表示最小值，VAL 表示首选值，MAX 表示最大值。  
+      若 VAL 在 MIN 和 MAX 之间，则使用 VAL 作为返回值，超出边界，则返回对应的最大或者最小值。
+```css
+.element {
+  /**
+   * MIN = 100px
+   * VAL = 50vw ➜ 根据视窗的宽度计算
+   * MAX = 500px
+   */
+  width: clamp(100px, 50vw, 500px);
+}
+```
 
 ### 九. Logo 图标的对齐
+`object-fit`: 图片在容器内的裁剪、缩放模式  
+`mix-blend-mode`: 元素与父元素的内容背景混合  
+适用于产品图片、人物头像等布局，且图片本身含有背景，与容器背景不一致（注意：以上属性浏览器兼容性较差）
+```css
+img {
+  width: 130px;
+  height: 75px;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+```
+
+![MVC](http://img.vanilla.ink/me/webproject/FE-Summary/HTML%26CSS/CSSLayout/01.png?x-oss-process=image/resize,w_450)
 
 ### 十. 引用
 [40 个 CSS 布局技巧（大漠）](https://mp.weixin.qq.com/s/6jZibuthus7l5PlhAbpHEQ)
