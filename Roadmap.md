@@ -38,6 +38,12 @@
 ### - web安全
 
 ### - HTTP协议与数据请求
+* GET 和 POST 请求区别  
+    [都9102年了，还问GET和POST的区别](https://segmentfault.com/a/1190000018129846)  
+* HTTP 响应状态码  
+    [如何理解HTTP响应的状态码？](https://harttle.land/2015/08/15/http-status-code.html)  
+    [HTTP 响应代码](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status)  
+    [你所知道的3xx状态码](https://jelly.jd.com/article/6006b1035b6c6a01506c8791)  
 * DNS 基础  
     [DNS解析](https://imweb.io/topic/55e3ba46771670e207a16bc8)  
     [写给前端工程师的DNS基础知识](http://www.sunhao.win/articles/netwrok-dns.html)  
