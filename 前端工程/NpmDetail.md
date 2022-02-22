@@ -509,6 +509,23 @@ module.exports = {
 5. 使用`npm >= 5.2`版本
 6. 使用`npm scripts`与`npx(npm>=5.2)`脚本管理应用相关脚本
 
+### 九. npm 范围包
+范围是类似于 `npm` 模块的命名空间，以 `@` 开头
+```json
+{
+  "name": "@scope/project-name"
+}
+```
+使用范围包：`npm install @username/project-name --save`
+```json
+// package.json
+{
+  "dependencies": {
+    "@username/project-name": "^1.0.0"
+  }
+}
+```
+
 ### 九. 引用
 [2018 年了，你还是只会 npm install 吗？](https://juejin.im/post/5ab3f77df265da2392364341#heading-14)
 
