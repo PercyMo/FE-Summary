@@ -95,9 +95,6 @@
 ### - NodeJs
 
 ### - 前端工程
-* npm 私服  
-    [使用verdaccio搭建npm私有源](https://mp.weixin.qq.com/s/lTGV7XrsJCvoU3F2bEbovw)  
-    [Verdaccio 使用 Docker 安装及迁移教程](https://segmentfault.com/a/1190000020684605)  
 * PM2  
     [10分钟快速过一遍PM2核心知识点](https://mp.weixin.qq.com/s/5xGhV-70yjUGgyYHesHTRA)  
 * 容器技术  
