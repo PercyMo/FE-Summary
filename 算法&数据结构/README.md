@@ -31,7 +31,10 @@
 
 #### 7. 字符串
 
-#### 8. 引用
+#### 8. 集合和字典
+[集合和字典 =>>](./Set&Map.md)
+
+#### 9. 引用
 1. [awesome-coding-js](http://www.conardli.top/docs/dataStructure/)
 
 ### 三、算法
