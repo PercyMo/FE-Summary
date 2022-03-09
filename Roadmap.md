@@ -9,6 +9,9 @@
 * css变量  
     [CSS 变量教程](http://www.ruanyifeng.com/blog/2017/05/css-variables.html)  
     [进阶：玩转 CSS 变量](https://github.com/wsafight/personBlog/issues/25)  
+* css层叠上下文、z-index
+    [彻底搞懂CSS层叠上下文、层叠等级、层叠顺序、z-index](https://juejin.cn/post/6844903667175260174)  
+    [深入理解CSS中的层叠上下文和层叠顺序](https://www.zhangxinxu.com/wordpress/2016/01/understand-css-stacking-context-order-z-index/)  
 * 其他  
     [2019年，你是否可以抛弃 CSS 预处理器？](https://jelly.jd.com/article/5dcb9c73641a030153732a89)  
     [为什么要使用预处理器？](https://github.com/cssmagic/blog/issues/73)  
@@ -38,12 +41,17 @@
 ### - web安全
 
 ### - HTTP协议与数据请求
+* cookie
+    [聊一聊 cookie](https://segmentfault.com/a/1190000004556040)  
 * GET 和 POST 请求区别  
     [都9102年了，还问GET和POST的区别](https://segmentfault.com/a/1190000018129846)  
 * HTTP 响应状态码  
     [如何理解HTTP响应的状态码？](https://harttle.land/2015/08/15/http-status-code.html)  
     [HTTP 响应代码](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status)  
     [你所知道的3xx状态码](https://jelly.jd.com/article/6006b1035b6c6a01506c8791)  
+* HTTP keep-alive 模式
+    [HTTP keep-alive 二三事](https://lotabout.me/2019/Things-about-keepalive/)  
+    [HTTP协议头部与Keep-Alive模式详解](https://byvoid.com/zhs/blog/http-keep-alive-header/)  
 * DNS 基础  
     [DNS解析](https://imweb.io/topic/55e3ba46771670e207a16bc8)  
     [写给前端工程师的DNS基础知识](http://www.sunhao.win/articles/netwrok-dns.html)  
@@ -51,6 +59,7 @@
     [漫话：如何给女朋友解释什么是CDN？](https://juejin.cn/post/6844903906296725518)  
     [CDN是什么？使用CDN有什么优势？](https://www.zhihu.com/question/36514327)  
     [五分钟了解CDN](https://juejin.cn/post/6844903605888090125)  
+    [前端必会：CDN加速原理](https://mp.weixin.qq.com/s/fUEPR-jTP6cYPLWP4kKEHw)  
 
 ### - Vue
 * 剖析 Vue 中的 MVVM 原理  
@@ -74,8 +83,14 @@
         [Virtual DOM 认知误区](https://mp.weixin.qq.com/s/gQCFEBsB3SIz9c5sp7uuhA)  
 * 组件化实战  
     * 2.组件通讯N种策略  
-        [Vue 组件间通信六种方式（完整版）](https://juejin.cn/post/6844903845642911752#heading-11)  
-        [vue中8种组件通信方式, 值得收藏!](https://juejin.cn/post/6844903887162310669#heading-19)  
+        [Vue 组件间通信六种方式（完整版）](https://juejin.cn/post/6844903845642911752)  
+        [vue中8种组件通信方式, 值得收藏!](https://juejin.cn/post/6844903887162310669)  
+* vue 3.x
+    * vue 3.x 新特性 & 2.x 迁移
+        [Vue3文档【Vue2迁移Vue3】](https://juejin.cn/post/6858558735695937544)  
+        [使用 Vue3 重构 Vue2 项目(长文)](https://mp.weixin.qq.com/s/zPYV1bF6zxPAbe29Wpj6Mw)  
+        [抄笔记：尤雨溪在Vue3.0 Beta直播里聊到了这些…](https://juejin.cn/post/6844904134303301645)  
+        [Vue3新特性一篇搞懂](https://juejin.cn/post/6844904084512718861)  
 * Vue 对比 React  
     [面试官：谈谈Vue和React的区别？](https://mp.weixin.qq.com/s/oiNmF8knHfnvbmZfYTv_ZQ)  
     [React 与 Vue 框架的设计思路大 PK](https://mp.weixin.qq.com/s/fdDfgmksNoXP3oR56bsmMw)  
@@ -91,6 +106,17 @@
 * REM * VW 响应式布局  
     [细说移动端 经典的REM布局 与 新秀VW布局](https://cloud.tencent.com/developer/article/1352187)  
     [从网易与淘宝的font-size思考前端设计稿与工作流](https://www.cnblogs.com/lyzg/p/4877277.html)  
+* JSBridge
+    [前端需要懂的 APP 容器原理](https://mp.weixin.qq.com/s/MgMyAEVKKhuB16LdX07j1A)  
+    [Hybrid App技术解析 -- 原理篇](https://juejin.cn/post/6844903640520474637)  
+    [Hybrid App技术解析 -- 实战篇](https://juejin.cn/post/6844903648510607373)  
+    [JS Bridge 通信原理](https://mp.weixin.qq.com/s/pV0UFbMqwcjSikfG1aJW4g)  
+    [JSBridge实战](https://juejin.cn/post/6844903702721986568)  
+    [【万字长文】写给前端工程师的JSBridge原理](https://juejin.cn/post/6847902218763534349)  
+    [从零开始写一个 JSBridge](https://juejin.cn/post/6844903856418062350)  
+    [H5与Native交互之JSBridge技术](https://segmentfault.com/a/1190000010356403)  
+    [JSBridge的原理](https://juejin.cn/post/6844903585268891662)  
+    [小白必看，JSBridge 初探](https://www.zoo.team/article/jsbridge)  
 
 ### - NodeJs
 

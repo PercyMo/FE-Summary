@@ -70,8 +70,6 @@
     11. 装饰器应用及其原理
     12. vue-property-decorator源码分析
 6. Vue3.0
-    1. vue3变化分析
-    2. vue3初探
     3. Composition API实践
     4. 源码结构和调试环境搭建
     5. vue3响应式原理剖析
