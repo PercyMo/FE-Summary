@@ -8,100 +8,154 @@
 // TODO: 完全二叉树和普通的二叉树
 
 ### 二. 基本结构
-插入、遍历、深度
+插入、遍历、深度、删除(其中删除操作相对复杂)。  
+
+![二叉树删除节点](http://img.vanilla.ink/me/webproject/FE-Summary/Algorithm/DataStructure/01.png?x-oss-process=image/resize,w_600)
+
 ```js
 function Node(data, left, right) {
-    this.data = data
-    this.left = left
-    this.right = right
+    this.data = data;
+    this.left = left;
+    this.right = right;
 }
 
 Node.prototype = {
     show: function () {
-        console.log(this.data)
-    }
-}
+        console.log(this.data);
+    },
+};
 
 function Tree() {
-    this.root = null
+    this.root = null;
 }
 
 Tree.prototype = {
     insert: function (data) {
-        const node = new Node(data, null, null)
+        const node = new Node(data, null, null);
         if (!this.root) {
-            this.root = node
-            return
+            this.root = node;
+            return;
         }
-        let current = this.root
-        let parent = null
+        let current = this.root;
+        let parent = null;
         while (current) {
-            parent = current
+            parent = current;
             if (data < current.data) {
-                current = parent.left
+                current = parent.left;
                 if (!current) {
-                    parent.left = node
-                    return
+                    parent.left = node;
+                    return;
                 }
             } else {
-                current = parent.right
+                current = parent.right;
                 if (!current) {
-                    parent.right = node
-                    return
+                    parent.right = node;
+                    return;
                 }
             }
         }
     },
+    // 前序遍历
     preOrder: function (node) {
         if (node) {
-            node.show()
-            this.preOrder(node.left)
-            this.preOrder(node.right)
+            node.show();
+            this.preOrder(node.left);
+            this.preOrder(node.right);
         }
     },
+    // 中序遍历
     middleOrder: function (node) {
         if (node) {
-            this.middleOrder(node.left)
-            node.show()
-            this.middleOrder(node.right)
+            this.middleOrder(node.left);
+            node.show();
+            this.middleOrder(node.right);
         }
     },
+    // 后序遍历
     laterOrder: function (node) {
         if (node) {
-            this.laterOrder(node.left)
-            this.laterOrder(node.right)
-            node.show()
+            this.laterOrder(node.left);
+            this.laterOrder(node.right);
+            node.show();
         }
     },
     getMin: function () {
-        let current = this.root
+        let current = this.root;
         while (current) {
             if (!current.left) {
-                return current.data
+                return current.data;
             }
-            current = current.left
+            current = current.left;
+        }
+    },
+    getMinNode: function (node) {
+        if (!node) {
+            return null;
+        }
+        if (node.left) {
+            return this.getMinNode(node.left);
+        } else {
+            return node;
         }
     },
     getMax: function () {
-        let current = this.root
+        let current = this.root;
         while (current) {
             if (!current.right) {
-                return current.data
+                return current.data;
             }
-            current = current.right
+            current = current.right;
         }
     },
     getDeep: function (node, deep) {
-        deep = deep || 0
+        deep = deep || 0;
         if (!node) {
-            return deep
+            return deep;
         }
-        deep++
-        const deepLeft = this.getDeep(node.left, deep)
-        const deepRight = this.getDeep(node.right, deep)
-        return Math.max(deepLeft, deepRight)
+        deep++;
+        const deepLeft = this.getDeep(node.left, deep);
+        const deepRight = this.getDeep(node.right, deep);
+        return Math.max(deepLeft, deepRight);
     },
-}
+    // 移除节点，并返回传入的节点
+    removeNode: function (node, data) {
+        if (node === null) {
+            return null;
+        }
+
+        if (data < node.data) {
+            node.left = this.removeNode(node.left, data);
+            return node;
+        } else if (data > node.data) {
+            node.right = this.removeNode(node.right, data);
+            return node;
+        } else {
+            // 移除叶子节点
+            if (!node.left && !node.right) {
+                return null;
+            }
+
+            // 移除只有一个子节点的节点
+            if (!node.right) {
+                return node.left;
+            }
+            if (!node.left) {
+                return node.right;
+            }
+
+            // 移除两个子节点的节点
+            if (node.left && node.right) {
+                // 找到右侧树中最小的节点，它肯定是个叶子节点
+                const minNode = this.getMinNode(node.right);
+                // 将node的值修改为最小节点的值，模拟达到节点移动效果，但此时有两个一样的节点
+                node.data = minNode.data;
+                // 移除右侧树上的重复节点
+                minNode.right = this.removeNode(node.right, minNode.data);
+                return node;
+            }
+        }
+    },
+};
 ```
 ```js
 var t = new Tree();

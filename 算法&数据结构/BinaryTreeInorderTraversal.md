@@ -1,5 +1,7 @@
 ## 二叉树的中序遍历
 
+![二叉树的中序遍历](http://img.vanilla.ink/me/webproject/FE-Summary/Algorithm/DataStructure/03.png?x-oss-process=image/resize,w_600)
+
 ### 一. 题目
 给定一个二叉树，返回它的中序遍历
 ```js
@@ -17,11 +19,11 @@
 ```js
 var inorderTraversal = function (node, array = []) {
     if (node) {
-        this.inorderTraversal(node.left, array)
+        inorderTraversal(node.left, array)
         array.push(node.data)
-        this.inorderTraversal(node.right, array)
-        return array
+        inorderTraversal(node.right, array)
     }
+    return array
 }
 ```
 
