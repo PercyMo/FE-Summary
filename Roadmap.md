@@ -9,7 +9,7 @@
 * css变量  
     [CSS 变量教程](http://www.ruanyifeng.com/blog/2017/05/css-variables.html)  
     [进阶：玩转 CSS 变量](https://github.com/wsafight/personBlog/issues/25)  
-* css层叠上下文、z-index
+* css层叠上下文、z-index  
     [彻底搞懂CSS层叠上下文、层叠等级、层叠顺序、z-index](https://juejin.cn/post/6844903667175260174)  
     [深入理解CSS中的层叠上下文和层叠顺序](https://www.zhangxinxu.com/wordpress/2016/01/understand-css-stacking-context-order-z-index/)  
 * 其他  
@@ -41,7 +41,7 @@
 ### - web安全
 
 ### - HTTP协议与数据请求
-* cookie
+* cookie  
     [聊一聊 cookie](https://segmentfault.com/a/1190000004556040)  
 * GET 和 POST 请求区别  
     [都9102年了，还问GET和POST的区别](https://segmentfault.com/a/1190000018129846)  
@@ -86,7 +86,7 @@
         [Vue 组件间通信六种方式（完整版）](https://juejin.cn/post/6844903845642911752)  
         [vue中8种组件通信方式, 值得收藏!](https://juejin.cn/post/6844903887162310669)  
 * vue 3.x
-    * vue 3.x 新特性 & 2.x 迁移
+    * vue 3.x 新特性 & 2.x 迁移  
         [Vue3文档【Vue2迁移Vue3】](https://juejin.cn/post/6858558735695937544)  
         [使用 Vue3 重构 Vue2 项目(长文)](https://mp.weixin.qq.com/s/zPYV1bF6zxPAbe29Wpj6Mw)  
         [抄笔记：尤雨溪在Vue3.0 Beta直播里聊到了这些…](https://juejin.cn/post/6844904134303301645)  
@@ -106,7 +106,7 @@
 * REM * VW 响应式布局  
     [细说移动端 经典的REM布局 与 新秀VW布局](https://cloud.tencent.com/developer/article/1352187)  
     [从网易与淘宝的font-size思考前端设计稿与工作流](https://www.cnblogs.com/lyzg/p/4877277.html)  
-* JSBridge
+* JSBridge  
     [前端需要懂的 APP 容器原理](https://mp.weixin.qq.com/s/MgMyAEVKKhuB16LdX07j1A)  
     [Hybrid App技术解析 -- 原理篇](https://juejin.cn/post/6844903640520474637)  
     [Hybrid App技术解析 -- 实战篇](https://juejin.cn/post/6844903648510607373)  
