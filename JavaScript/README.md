@@ -74,3 +74,6 @@
 
 4. [jQuery & zepto =>>](./jq&zepto.md)
 5. [JS 常用代码片段 =>>](./JSSnippet.md)
+
+#### 1. 函数式编程
+1. [函数式编程指北 =>>](./FunctionalProgramming.md)
