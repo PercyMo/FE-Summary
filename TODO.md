@@ -271,12 +271,6 @@
     8. 插件开发与OpenResty/Lua
 
 ## Webpack工程化
-1. webpack原理分析
-    1. 自定义loader实现
-    2. 自定义plugin实现
-    3. **webpack打包原理**
-    4. **webpack打包手写实现**
-    5. **Babel核心API**
 2. webpack实战
     1. 构建React、Vue开发环境
     2. 构建骨架屏应用
@@ -285,6 +279,7 @@
     5. 构建PWA离线应用
 3. webpack优化
     时间久忘了再看下（使用HardSourceWebpackPlugin这个当时没整理）
+4. **Babel核心API**
 
 ## 自动化测试
 1. 单元测试

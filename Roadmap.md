@@ -37,6 +37,10 @@
     [1.5万字概括ES6全部特性(已更新ES2020)](https://juejin.cn/post/6844903959283367950)
 
 ### - 浏览器&性能优化
+* Vue 项目性能优化
+    [Vue 项目性能优化 — 实践指南（网上最全）](https://github.com/fengshi123/blog/issues/13)  
+    [Vue 应用性能优化指南](https://juejin.cn/post/6844903677262561293)  
+    [记一次vue长列表的内存性能分析和优化](https://www.cnblogs.com/imwtr/p/10428819.html)  
 
 ### - web安全
 
@@ -121,6 +125,16 @@
 ### - NodeJs
 
 ### - 前端工程
+* webpack
+    * loader/plugin简介及常用的loader和plugin
+        [webpack 之 loader 和 plugin 简介](https://juejin.cn/post/6844903489458405390)  
+    * loader 深入理解
+        [前端工程师都得掌握的 webpack Loader](https://github.com/axuebin/articles/issues/38)  
+        [【webpack进阶】你真的掌握了loader么？- loader十问](https://juejin.cn/post/6844903693070909447)  
+        [webpack loader 从上手到理解系列：vue-loader](https://mp.weixin.qq.com/s/NO5jZfoHZbjOwR8qiWnXmw)  
+        [webpack loader 从上手到理解系列：style-loader](https://mp.weixin.qq.com/s/alIKsKkGRU_yyjpeV8i0og)  
+    * 性能&编译速度优化
+        [使用webpack4提升180%编译速度](http://louiszhai.github.io/2019/01/04/webpack4/)  
 * PM2  
     [10分钟快速过一遍PM2核心知识点](https://mp.weixin.qq.com/s/5xGhV-70yjUGgyYHesHTRA)  
 * 容器技术  
