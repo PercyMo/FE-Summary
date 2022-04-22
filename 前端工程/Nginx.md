@@ -29,8 +29,16 @@ nginx -s quit
 ```
 
 ### 二. 配置
-mac：`/usr/local/etc/nginx/nginx.conf`
-
+1. mac  
+    `/usr/local/etc/nginx/nginx.conf`
+2. linux 下查看实际调用的配置文件  
+    ```sh
+    [root@b2cadm1294 ~]# ps -ef | grep nginx
+    root     23808 23611  0 16:34 pts/0    00:00:00 grep nginx
+    root     31017     1  0 00:01 ?        00:00:00 nginx: master process /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
+    apache   31018 31017  0 00:01 ?        00:00:00 nginx: worker process
+    apache   31019 31017  0 00:01 ?        00:00:00 nginx: worker process
+    ```
 ### 三. 反向代理
 
 ### 四. 负载均衡
