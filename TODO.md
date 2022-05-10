@@ -277,8 +277,6 @@
     3. 构建多页面应用
     4. 构建公共组件库
     5. 构建PWA离线应用
-3. webpack优化
-    时间久忘了再看下（使用HardSourceWebpackPlugin这个当时没整理）
 4. **Babel核心API**
 
 ## 自动化测试

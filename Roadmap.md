@@ -37,7 +37,7 @@
     [1.5万字概括ES6全部特性(已更新ES2020)](https://juejin.cn/post/6844903959283367950)
 
 ### - 浏览器&性能优化
-* Vue 项目性能优化
+* Vue 项目性能优化  
     [Vue 项目性能优化 — 实践指南（网上最全）](https://github.com/fengshi123/blog/issues/13)  
     [Vue 应用性能优化指南](https://juejin.cn/post/6844903677262561293)  
     [记一次vue长列表的内存性能分析和优化](https://www.cnblogs.com/imwtr/p/10428819.html)  
@@ -53,7 +53,7 @@
     [如何理解HTTP响应的状态码？](https://harttle.land/2015/08/15/http-status-code.html)  
     [HTTP 响应代码](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status)  
     [你所知道的3xx状态码](https://jelly.jd.com/article/6006b1035b6c6a01506c8791)  
-* HTTP keep-alive 模式
+* HTTP keep-alive 模式  
     [HTTP keep-alive 二三事](https://lotabout.me/2019/Things-about-keepalive/)  
     [HTTP协议头部与Keep-Alive模式详解](https://byvoid.com/zhs/blog/http-keep-alive-header/)  
 * DNS 基础  
@@ -126,15 +126,33 @@
 
 ### - 前端工程
 * webpack
-    * loader/plugin简介及常用的loader和plugin
+    * loader/plugin简介及常用的loader和plugin  
         [webpack 之 loader 和 plugin 简介](https://juejin.cn/post/6844903489458405390)  
-    * loader 深入理解
+    * loader 深入理解  
         [前端工程师都得掌握的 webpack Loader](https://github.com/axuebin/articles/issues/38)  
         [【webpack进阶】你真的掌握了loader么？- loader十问](https://juejin.cn/post/6844903693070909447)  
         [webpack loader 从上手到理解系列：vue-loader](https://mp.weixin.qq.com/s/NO5jZfoHZbjOwR8qiWnXmw)  
         [webpack loader 从上手到理解系列：style-loader](https://mp.weixin.qq.com/s/alIKsKkGRU_yyjpeV8i0og)  
-    * 性能&编译速度优化
+    * 性能&编译速度优化  
         [使用webpack4提升180%编译速度](http://louiszhai.github.io/2019/01/04/webpack4/)  
+    * 持久化缓存  
+        [webpack 持久化缓存实践](https://github.com/happylindz/blog/issues/7)  
+        [基于 webpack 的持久化缓存方案](https://github.com/pigcan/blog/issues/9)  
+    * socket 和 HMR 热更新  
+        [轻松理解webpack热更新原理](https://juejin.cn/post/6844904008432222215)  
+        [聊一聊webpack-dev-server和其中socket，HMR的实现](https://github.com/879479119/879479119.github.io/issues/5)  
+    * dll  
+    * tree-shaking  
+        [Webpack 原理系列九：Tree-Shaking 实现原理](https://segmentfault.com/a/1190000040814997)  
+        [Tree-Shaking性能优化实践 - 原理篇](https://juejin.cn/post/6844903544756109319)  
+        [你的 Tree-Shaking 真的起作用了吗？](https://mp.weixin.qq.com/s/8VN1heUsjoFePejuI3HFSg)  
+    * scope hosting  
+    * code splitting  
+        [Webpack 大法之 Code Splitting](https://zhuanlan.zhihu.com/p/26710831)  
+        [知多一点 webpack 的 CommonsChunkPlugin](https://juejin.im/post/5a1127666fb9a045023b3a63)  
+    * hard-source-webpack-plugin  
+    * webpack 构建进程间缓存设计
+        [从构建进程间缓存设计 谈 Webpack5 优化和工作原理](https://zhuanlan.zhihu.com/p/110995118)  
 * PM2  
     [10分钟快速过一遍PM2核心知识点](https://mp.weixin.qq.com/s/5xGhV-70yjUGgyYHesHTRA)  
 * 容器技术  
@@ -153,3 +171,5 @@
 ### - 面经
 
 ### - 其他
+* 如何阅读源码  
+    [如何阅读源码 —— 以 Vetur 为例](https://mp.weixin.qq.com/s/1nLzSyWYJkY3_9XqOXU1hg)  
