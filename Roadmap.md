@@ -43,8 +43,17 @@
     [记一次vue长列表的内存性能分析和优化](https://www.cnblogs.com/imwtr/p/10428819.html)  
 
 ### - web安全
+* HTTPS  
+    [深入理解HTTPS工作原理](https://juejin.cn/post/6844903830916694030)  
+    [九个问题从入门到熟悉HTTPS](https://juejin.cn/post/6844903521272201223)  
+    [看图学HTTPS](https://juejin.cn/post/6844903608421449742)  
+    [聊一聊 HTTPS 的工作原理](https://mp.weixin.qq.com/s/IOnlgxj4_De_ObuyC5W2Hw)  
+* HTTP/2 Server Push  
+    [浅谈 HTTP/2 Server Push](https://zhuanlan.zhihu.com/p/26757514)  
 
 ### - HTTP协议与数据请求
+* HTTP 基础  
+    [前端基础篇之HTTP协议](https://juejin.cn/post/6844903844216832007)  
 * cookie  
     [聊一聊 cookie](https://segmentfault.com/a/1190000004556040)  
 * GET 和 POST 请求区别  
@@ -141,7 +150,7 @@
     * socket 和 HMR 热更新  
         [轻松理解webpack热更新原理](https://juejin.cn/post/6844904008432222215)  
         [聊一聊webpack-dev-server和其中socket，HMR的实现](https://github.com/879479119/879479119.github.io/issues/5)  
-    * dll  
+    * dll & hard-source-webpack-plugin  
     * tree-shaking  
         [Webpack 原理系列九：Tree-Shaking 实现原理](https://segmentfault.com/a/1190000040814997)  
         [Tree-Shaking性能优化实践 - 原理篇](https://juejin.cn/post/6844903544756109319)  
@@ -150,8 +159,7 @@
     * code splitting  
         [Webpack 大法之 Code Splitting](https://zhuanlan.zhihu.com/p/26710831)  
         [知多一点 webpack 的 CommonsChunkPlugin](https://juejin.im/post/5a1127666fb9a045023b3a63)  
-    * hard-source-webpack-plugin  
-    * webpack 构建进程间缓存设计
+    * webpack 构建进程间缓存设计  
         [从构建进程间缓存设计 谈 Webpack5 优化和工作原理](https://zhuanlan.zhihu.com/p/110995118)  
 * PM2  
     [10分钟快速过一遍PM2核心知识点](https://mp.weixin.qq.com/s/5xGhV-70yjUGgyYHesHTRA)  
