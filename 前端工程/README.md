@@ -17,8 +17,7 @@
 7. [webpack优化 =>>](./WebpackOptimization.md)
 8. [实现一个简单的webpack =>>](./SimpleWebpack.md)
 9. [Babel详解 =>>](./Babel.md)
-10. 前端代码兼容方案，Polyfill
-11. [AST 与前端编译 =>>](./Ast&Compiler.md)
+10. [AST 与前端编译 =>>](./Ast&Compiler.md)
 
 ### 三、限定规范
 1. [ESLint详解 =>>](./ESLint.md)
