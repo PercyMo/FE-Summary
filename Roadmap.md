@@ -161,6 +161,12 @@
         [知多一点 webpack 的 CommonsChunkPlugin](https://juejin.im/post/5a1127666fb9a045023b3a63)  
     * webpack 构建进程间缓存设计  
         [从构建进程间缓存设计 谈 Webpack5 优化和工作原理](https://zhuanlan.zhihu.com/p/110995118)  
+* Babel 详解  
+    [前端工程师的自我修养-关于 Babel 那些事儿](https://juejin.cn/post/6844904079118827533)  
+    [深入浅出 Babel 上篇：架构和原理 + 实战](https://juejin.cn/post/6844903956905197576)  
+    [一口(很长的)气了解 babel](https://juejin.cn/post/6844903743121522701)  
+    [不容错过的 Babel7 知识](https://juejin.cn/post/6844904008679686152)  
+    [深入浅出 Babel 下篇：既生 Plugin 何生 Macros](https://juejin.cn/post/6844903961820921869)  
 * PM2  
     [10分钟快速过一遍PM2核心知识点](https://mp.weixin.qq.com/s/5xGhV-70yjUGgyYHesHTRA)  
 * 容器技术  
