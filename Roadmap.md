@@ -135,6 +135,9 @@
 
 ### - 前端工程
 * webpack
+    * 基础及编译流程深度解析  
+        [Webpack——从基础使用到手动实现(万字长文)](https://mp.weixin.qq.com/s/nhZNvKd_L8GoGjr00Nxbcw)  
+        [一文掌握Webpack编译流程](https://mp.weixin.qq.com/s/2h2dqGGEWTts7KQagGWEAg)  
     * loader/plugin简介及常用的loader和plugin  
         [webpack 之 loader 和 plugin 简介](https://juejin.cn/post/6844903489458405390)  
     * loader 深入理解  
