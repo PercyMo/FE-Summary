@@ -5,7 +5,7 @@
 ### 一、模块化
 1. [JavaScript模块化详解 =>>](./JavaScriptModules.md)
 2. CSS模块化
-3. 模板引擎
+3. [模板引擎原理 =>>](./TemplateEngine.md)
 
 ### 二、项目构建
 1. [npm详解 =>>](./NpmDetail.md)
