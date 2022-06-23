@@ -30,6 +30,12 @@
     [Service Worker：让你的 Web 应用牛逼起来](https://mp.weixin.qq.com/s/8mjrSeQfG2m5Kpkb13EPAg)  
 
 ### - TypeScript
+* TS 基础进阶  
+    [「1.9W字总结」一份通俗易懂的 TS 教程，入门 + 实战！](https://juejin.cn/post/7068081327857205261)  
+    [TypeScript进阶 之 重难点梳理](https://mp.weixin.qq.com/s/_lO3cd0FcF0Dg3TRnHPdwg)  
+    [你不知道的 TypeScript 高级技巧](https://mp.weixin.qq.com/s/HTn6RbyneNsGkqcTm1ypcg)  
+    [TypeScript真香系列——接口篇](https://mp.weixin.qq.com/s/06iBhb4ye6-1cAxgLX7ybA)  
+* TS 项目实践  
 
 ### - ES6
 * ES6 语法知识点  
@@ -188,5 +194,7 @@
 ### - 面经
 
 ### - 其他
+* 计算机原理  
+    [写给前端的 计算机组成原理 "十全大补文"](https://mp.weixin.qq.com/s/N4Kn97qZBLeWiJroQ0bvbg)  
 * 如何阅读源码  
     [如何阅读源码 —— 以 Vetur 为例](https://mp.weixin.qq.com/s/1nLzSyWYJkY3_9XqOXU1hg)  
