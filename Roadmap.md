@@ -116,6 +116,10 @@
     [【建议收藏】11+实战技巧，让你轻松从Vue过渡到React](https://mp.weixin.qq.com/s/OuwyqWvLE-7AxHXw7trSNw)  
     [一名 vueCoder 总结的 React 基础](https://juejin.cn/post/6960556335092269063)  
     [从Vue2.0到React17——React开发入门](https://juejin.cn/post/6975864046058733576)  
+* SSR 原理和 Vue SSR  
+    [服务端渲染(SSR) 通用技术解决方案](https://mp.weixin.qq.com/s/A-loxh4_vMZRqTV1kU5TCQ)  
+    [如何搭建一个高可用的服务端渲染工程](https://tech.youzan.com/server-side-render/)  
+    [探讨一下 To C 营销页面服务端渲染的必要性及其原理](https://mp.weixin.qq.com/s/05u1FElTq7GUbwiSsvuBBA)  
 
 ### - React
 * 生命周期  
@@ -176,6 +180,9 @@
     [一口(很长的)气了解 babel](https://juejin.cn/post/6844903743121522701)  
     [不容错过的 Babel7 知识](https://juejin.cn/post/6844904008679686152)  
     [深入浅出 Babel 下篇：既生 Plugin 何生 Macros](https://juejin.cn/post/6844903961820921869)  
+* 单元测试  
+    [一篇文章搞定前端单元测试框架jest](https://juejin.cn/post/7092188990471667749)  
+    [万字详文：彻底搞懂 Jest 单元测试框架](https://segmentfault.com/a/1190000040539268)  
 * PM2  
     [10分钟快速过一遍PM2核心知识点](https://mp.weixin.qq.com/s/5xGhV-70yjUGgyYHesHTRA)  
 * 容器技术  
