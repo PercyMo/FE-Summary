@@ -22,6 +22,10 @@
     [破解前端面试（80% 应聘者不及格系列）：从闭包说起](https://juejin.cn/post/6844903474212143117)  
     [JavaScript闭包的底层运行机制](http://blog.leapoahead.com/2015/09/15/js-closure/)  
     [[译]发现 JavaScript 中闭包的强大威力](https://juejin.cn/post/6844903769646317576)  
+* 前端异常处理  
+    [关于 JavaScript 错误处理的最完整指南](https://juejin.cn/post/6872867757407338509)  
+    [你不知道的前端异常处理（万字长文，建议收藏）](https://mp.weixin.qq.com/s/QEkzv237s3ZSfiIqcpBowQ)  
+    [如何优雅处理前端异常？](http://jartto.wang/2018/11/20/js-exception-handling/)  
 * Service Worker / PWA  
     [Service Worker: 简介](https://developers.google.com/web/fundamentals/primers/service-workers)  
     [借助Service Worker和cacheStorage缓存及离线开发](https://www.zhangxinxu.com/wordpress/2017/07/service-worker-cachestorage-offline-develop/)  
@@ -189,6 +193,13 @@
     [Docker 入门看这一篇就够了！](https://mp.weixin.qq.com/s/CClZ9xRMN9mEgEXMm9MuGw)  
     [Docker 入门教程 阮一峰](http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html)  
     [Docker 搭建你的第一个 Node 项目到服务器(完整版)](https://juejin.im/post/5dff84e051882512290f2fc2)  
+* 前端监控  
+    [腾讯三面：说说前端监控平台/监控SDK的架构设计和难点亮点？（系列文章，讲的巨详细）](https://juejin.cn/post/7108660942686126093)  
+    [腾讯CDC团队：前端异常监控解决方案](https://mp.weixin.qq.com/s/W0i-Iu6nqkWttsGZ-RmOqw)  
+    [5 分钟撸一个前端性能监控工具](https://juejin.cn/post/6844903662020460552)  
+    [把前端监控做到极致](https://zhuanlan.zhihu.com/p/32262716)  
+    [GMTC 大前端时代前端监控的最佳实践](https://juejin.cn/post/6844903629573324807)  
+    [超详细！搭建一个前端错误监控系统](https://zhuanlan.zhihu.com/p/51446011)  
 
 ### - 前端设计模式
 
