@@ -1083,7 +1083,7 @@ export default {
 
 2. **路由设计**  
     [RESTful API 设计指南](http://www.ruanyifeng.com/blog/2014/05/restful_api.html)
-    * 路由目录：`/server/routers/v1`
+    * 路由目录：`/app/routers/v1`
     * 路由路径：标签相关接口文件 `tags`；用户相关接口文件 `users`
         > 在RESAful 架构中，每个网址代表一种资源（resource），所以网址中不能有动词，只能有名词，而且所用的名词往往与数据库的表名对应。一般来说，数据库表都是同种记录的“集合”，所以 API 中的名词也应该使用复数。
     * 路由类型：由 `HTTP` 动词表示
@@ -1094,7 +1094,7 @@ export default {
 
 3. **路由逻辑**  
     ```js
-    // server/routers/users.js
+    // app/routers/users.js
     const Router = require('koa-router')
     const router = new Router()
 
@@ -1115,7 +1115,7 @@ export default {
     
 4. **注册路由**  
     ```js
-    // /server/index.js
+    // /app/index.js
     function useRouter(){
       let module = require('./routes/users')
       router.use('/v1/users', module.routes())
@@ -1125,14 +1125,12 @@ export default {
 
 #### 2. 路由自动化注册
 以 `routers` 作为路由主目录，向下寻找 `js` 文件注册路由，最终以 `js` 文件路径作为路由名。  
-例如：`/server/routers/v1/users.js` 中有用户信息接口 `/userInfo`，最终接口调用地址为 `localhost:3000/v1/users/userInfo`  
+例如：`/app/routers/v1/users.js` 中有用户信息接口 `/userInfo`，最终接口调用地址为 `localhost:3000/v1/users/userInfo`  
 ```js
 const fs = require('fs')
 const path = require('path')
 
-function useRouter(realPath) {
-  realPath = realPath || path.join(__dirname, '/routers')
-
+function useRouter(realPath = __dirname) {
   const urls = fs.readdirSync(realPath)
   urls.forEach((element) => {
     const elementPath = path.join(realPath, element)
@@ -1142,12 +1140,15 @@ function useRouter(realPath) {
       useRouter(elementPath)
     } else {
       const module = require(elementPath)
-      const routerPrefix = realPath.split('/routers')[1] || ''
-      // routers 里的文件路径作为 路由名
-      router.use(
-        path.join(routerPrefix, element.replace('.js', '')),
-        module.routes()
-      )
+      // 正确的路由文件应该返回 koa-router 实例
+      if (module.routes) {
+        const routerPrefix = realPath.split('/routers')[1] || ''
+        // routers 里的文件路径作为 路由名
+        router.use(
+          path.join(routerPrefix, element.replace('.js', '')),
+          module.routes()
+        )
+      }
     }
   })
 }
@@ -1158,36 +1159,34 @@ app.use(router.routes()).use(router.allowedMethods())
 ```
 
 #### 3. 统一返回格式 & 错误处理
-所有的返回值在 `server/middlewares/error.js` 里拦截一下，如果状态码是 200，用成功的工具函数包装返回，否则两种情况：一是自己业务抛错，使用失败工具函数包装返回；另一种是程序运行时报错，触发koa错误处理事件去处理
+所有的返回值在 `app/middlewares/error.js` 里拦截一下，如果状态码是 200，用成功的工具函数包装返回，否则两种情况：一是自己业务抛错，使用失败工具函数包装返回；另一种是程序运行时报错，触发koa错误处理事件去处理
 ```js
-// server/middlewares/response.js
-const response = () => {
-  return async function (ctx, next) {
-    ctx.res.fail = ({ code, data, message }) => {
-      ctx.body = {
-        code,
-        data,
-        message,
-      }
+// app/extend/context.js
+const context = async (ctx, next) => {
+  ctx.res.fail = ({ code, data, message }) => {
+    ctx.body = {
+      code,
+      data,
+      message,
     }
-
-    ctx.res.success = (message) => {
-      ctx.body = {
-        code: 0,
-        data: ctx.body,
-        message: message || 'success',
-      }
-    }
-
-    await next()
   }
+
+  ctx.res.success = (message) => {
+    ctx.body = {
+      code: 0,
+      data: ctx.body,
+      message: message || 'success',
+    }
+  }
+
+  await next()
 }
 
-module.exports = response
+module.exports = context
 ```
 ```js
-// server/middlewares/error.js
-const error = () => {
+// app/middlewares/response.js
+const response = () => {
   return async function (ctx, next) {
     try {
       await next()
@@ -1204,9 +1203,9 @@ const error = () => {
   }
 }
 
-module.exports = error
+module.exports = response
 ```
-在`server/middlewares/index.js` 文件中引入上面两个中间件：
+在`app/middlewares/index.js` 文件中引入上面两个中间件：
 ```js
 const bodyParser = require('koa-bodyparser')
 const response = require('./response')
@@ -1231,7 +1230,7 @@ const mdErrorHandler = error()
 
 module.exports = [mdResHandler, mdErrorHandler, mdBodyParser]
 ```
-启动文件`server/index.js`中，添加全局错误捕获
+启动文件`app/index.js`中，添加全局错误捕获
 ```js
 app.on('error', (err, ctx) => {
   if (ctx) {
@@ -1283,12 +1282,12 @@ router.get('/userInfo', (ctx) => {
 ```
 
 #### 4. 路由参数验证
-基于 `async-validator` 封装一个路由中间件，提前对参数验证，终止错误查询并告知使用者。
+基于 `async-validator` 封装一个工具函数，挂载到 `ctx` ，提前对参数验证，终止错误查询并告知使用者。
 ```js
 const { default: Schema } = require('async-validator')
 
-module.exports = (descriptor) => {
-  return async function (ctx, next) {
+module.exports = async (ctx, next) => {
+  ctx.validator = async (descriptor) => {
     const validator = new Schema(descriptor)
     const params = {}
     // 获取参数
@@ -1314,34 +1313,34 @@ module.exports = (descriptor) => {
       const error = new Error(JSON.stringify(errors))
       error.code = 9998
       throw error
-    } else {
-      await next()
     }
   }
+
+  await next()
 }
 ```
 使用：
 ```js
-const validator = require('../../middlewares/validator')
+// app/controller/users.js
+module.exports = {
+  userList: async (ctx) => {
+    await ctx.validator({
+      udid: { type: 'string', required: true },
+      pageSize: {
+        type: 'string',
+        required: true,
+        validator: (rule, value) => Number(value) > 0,
+        message: 'limit 需传入正整数',
+      },
+      order: { type: 'enum', enum: ['rankIndex', 'createdAt'] },
+    })
 
-router.get(
-  '/userList',
-  validator({
-    udid: { type: 'string', required: true },
-    pageSize: {
-      type: 'string',
-      required: true,
-      validator: (rule, value) => Number(value) > 0,
-      message: 'limit 需传入正整数',
-    },
-    order: { type: 'enum', enum: ['rankIndex', 'createdAt'] },
-  }),
-  (ctx) => {
     ctx.body = {
       list: [],
     }
-  }
-)
+  },
+}
+
 ```
 `type` 代表参数类型，`require` 代表是否必填。当 `type` 为 `enum` （枚举）类型时，参数值只能为 `enum` 数组中的某一项。  
 ```js
