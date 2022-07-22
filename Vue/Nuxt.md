@@ -1118,14 +1118,14 @@ export default {
     // /app/index.js
     function useRouter(){
       let module = require('./routes/users')
-      router.use('/v1/users', module.routes())
+      router.use('/api/v1/users', module.routes())
       app.use(router.routes()).use(router.allowedMethods())
     }
     ```
 
 #### 2. 路由自动化注册
 以 `routers` 作为路由主目录，向下寻找 `js` 文件注册路由，最终以 `js` 文件路径作为路由名。  
-例如：`/app/routers/v1/users.js` 中有用户信息接口 `/userInfo`，最终接口调用地址为 `localhost:3000/v1/users/userInfo`  
+例如：`/app/routers/v1/users.js` 中有用户信息接口 `/userInfo`，最终接口调用地址为 `localhost:3000/api/v1/users/userInfo`  
 ```js
 const fs = require('fs')
 const path = require('path')
@@ -1145,7 +1145,7 @@ function useRouter(realPath = __dirname) {
         const routerPrefix = realPath.split('/routers')[1] || ''
         // routers 里的文件路径作为 路由名
         router.use(
-          path.join(routerPrefix, element.replace('.js', '')),
+          path.join('/api', routerPrefix, element.replace('.js', '')),
           module.routes()
         )
       }
@@ -1392,20 +1392,224 @@ module.exports = [mdCors, mdHelmet, mdResHandler, mdErrorHandler, mdBodyParser]
 * `X-XSS-Protection`: 防止反射的 XSS 攻击
 * ... 
 
-#### 7. 缓存
+#### 7. 区分环境
+根据启动命令中的环境变量，获取不同的配置项
+```js
+// config/index.js
+const development = require('./config.development')
+const production = require('./config.production')
+const preprod = require('./config.preprod')
+
+module.exports = {
+  development,
+  preprod,
+  production,
+}[process.env.NODE_ENV || 'development']
+```
+```js
+// config/config.development.js
+module.exports = {
+  env: 'development',
+  baseURL: {
+    users: 'https://dev-api.users.com',
+  },
+  redis: {
+    client: {
+      port: 6379,
+      host: 'aaa.redis.rds.aliyuncs.com',
+      password: 'vvv',
+      db: 0,
+    },
+  },
+}
+```
+
+#### 8. 中间层发送 HTTP 请求
+中间层的数据可能来自于上游接口，因此需要在中间层发起 HTTP 请求。试用了 Axios，got 等，发现上游接口响应正常情况下会出现奇怪的请求超时问题，未找到原因。参照 egg 的 HttpClient 模块，使用官方团队维护的 urllib 库封装请求类
+```js
+// request/base.js
+const urllib = require('urllib')
+const CreateError = require('http-errors')
+
+class Request {
+  constructor(options) {
+    this._options = options
+  }
+
+  request(options) {
+    const { url, method = 'GET', data } = options
+    const {
+      baseURL,
+      timeout = 5000,
+      headers = {},
+      responseInterceptor,
+    } = this._options
+    const requestOptions = {
+      method: method.toUpperCase(),
+      timeout,
+      headers,
+      contentType: 'json',
+      dataType: 'json',
+      data,
+    }
+
+    return urllib
+      .request(baseURL + url, requestOptions)
+      .then(async (result) => {
+        if (!result.data) {
+          // logger.error(error) // 错误日志上报
+          throw new CreateError.ServiceUnavailable(
+            `数据服务层请求返回异常！错误码：${result.errno}，错误原因：${result.error}`
+          )
+        }
+        const responseData =
+          typeof responseInterceptor === 'function'
+            ? await responseInterceptor(result.data)
+            : result.data
+
+        return responseData
+      })
+      .catch((error) => {
+        console.log('数据服务层服务异常！', error)
+        // logger.error(error) // 错误日志上报
+        throw new CreateError.ServiceUnavailable('数据服务层服务异常！')
+      })
+  }
+}
+```
+因为项目中的上游接口可能来自于不同团队，不同的格式规范，灵活起见，实例化时可以配置 baseURL、响应拦截函数等
+```js
+// request/request.js
+const Request = require('./base')
+
+const Users = new Request({
+  baseURL: 'https://api.users.com',
+  timeout: 1000 * 5,
+  responseInterceptor: (response) => {
+    if (response.code === 0) {
+      return Promise.resolve(response.response)
+    } else {
+      return Promise.reject(new Error('上游接口数据错误！'))
+    }
+  },
+})
+```
+
+#### 9. 定时任务
+使用 `node-schedule` 设置定时任务
+```js
+// app/schedule/kernel.js
+const schedule = require('node-schedule')
+const UsersTask = require('./tasks/users')
+
+module.exports = () => {
+  /**
+   * 每天凌晨 0:20 点执行
+   */
+  schedule.scheduleJob('0 20 0 * * *', async () => {
+    await UsersTask.clearCache()
+  })
+}
+```
+```js
+// app/schedule/tasks/users.js
+const { Redis } = require('../../common/db')
+
+module.exports = {
+  async clearCache() {
+    const cacheKey = 'PRO:USERS:USER_LIST'
+    await Redis.del(cacheKey)
+  },
+}
+```
+
+#### 10. 缓存
 基于 LRU-Cache
 1. **页面缓存**  
 
 2. **组件缓存**  
 
 3. **API缓存**  
+    可以基于 redis 做接口数据的缓存
+    ```js
+    // app/common/db.js
+    const Redis = require('ioredis')
+    const config = require('../../config')
+    const { loggerSystem } = require('./logger')
 
-#### 8. 限流
+    class RedisClient {
+      constructor() {
+        this.isReady = false
+        this.client = new Redis(config.redis)
+        loggerSystem.trace('redis init')
+        this.client.on('connect', () => {
+          this.isReady = true
+          loggerSystem.trace('redis connect success')
+        })
+        this.client.on('error', (err) => {
+          this.isReady = false
+          loggerSystem.error('redis fail', err)
+        })
+      }
+
+      async get(key) {
+        try {
+          if (this.isReady) {
+            const result = await this.client.get(key)
+            if (!result) return
+            return JSON.parse(result)
+          }
+        } catch (error) {
+          loggerSystem.error('redis get fail', error)
+        }
+      }
+
+      async set(key, value, expires) {
+        try {
+          if (this.isReady) {
+            if (expires) {
+              await this.client.set(key, JSON.stringify(value), 'EX', expires)
+            } else {
+              await this.client.set(key, JSON.stringify(value))
+            }
+          }
+        } catch (error) {
+          loggerSystem.error('redis set fail', error)
+        }
+      }
+    }
+
+    module.exports = {
+      Redis: new RedisClient(),
+    }
+    ```
+    在 service 层使用 redis 缓存数据
+    ```js
+    // app/service/users.js
+    const users = require('../request/users')
+    const { Redis } = require('../common/db')
+
+    module.exports = {
+      userList: async () => {
+        const cacheKey = 'PRO:USERS:USER_LIST'
+        let userList = await Redis.get(cacheKey)
+        if (userList) {
+          return userList
+        } else {
+          userList = await users.getUserList()
+          await Redis.set(cacheKey, userList, 3600 * 2)
+          return userList
+        }
+      },
+    }
+    ```
+
+#### 11. 限流
 1. **单 IP 限流**  
 
 2. **IP 黑名单**  
 
-#### 9. 灾备
+#### 12. 灾备
 高并发或异常情况下，SSR降级为CSR
 1. **监控系统降级**  
     监测 Node 进程的CPU和内存使用率，设定阈值
@@ -1419,19 +1623,195 @@ module.exports = [mdCors, mdHelmet, mdResHandler, mdErrorHandler, mdBodyParser]
 4. **指定渲染方式**  
     url中增加参数isCsr=true，Nginx 层对参数isCsr进行拦截分流
 
-#### 10. 日志
-log4js
+#### 13. 日志
+日志采集后，接入公司 ELK 系统，可在 kibana 后台，查询相关日志
 1. **页面渲染日志**  
+    ```js
+    // nuxt.config.js
+    const { loggerPage } = require('./app/common/logger')
+
+    module.exports = {
+      hooks: {
+        // 在nuxt初始化时插入一个中间件，每次请求都生成一个logParams对象
+        'render:setupMiddleware': (app) => {
+          app.use((req, res, next) => {
+            // TODO: 渲染前生成唯一 RequestId，用于串联页面渲染时刻 api 请求日志，更方便排查页面渲染异常时的问题
+            // 但 log4js 在 nuxt 插件中使用报错，尚未解决
+            req.logParams = {
+              // requestId: generateRandomString(), // 生成requestId随机串
+              pageUrl: req.url,
+            }
+            next()
+          })
+        },
+        // 渲染完毕
+        'render:routeDone': (url, result, { req }) => {
+          const { method, headers } = req
+          loggerPage.info(
+            { type: 'render', ...req.logParams },
+            { url, method, headers }
+          )
+        },
+        // 渲染错误
+        'render:errorMiddleware': (app) => {
+          app.use((error, req, res, next) => {
+            const { url, method, headers } = req
+            loggerPage.error(
+              { type: 'render', error, ...req.logParams },
+              { url, method, headers }
+            )
+            next(error)
+          })
+        },
+      },
+    }
+    ```
 
 2. **接口日志**  
+    ```js
+    // app/middlewares/response.js
+    const config = require('../../config')
+    const { logger, loggerError } = require('../common/logger')
+
+    const response = () => {
+      return async function (ctx, next) {
+        const { request, response } = ctx
+        const fields = {
+          status: response.status,
+          url: request.url,
+          header: request.header,
+          method: request.method,
+          reqBody: request.body,
+        }
+
+        try {
+          await next()
+          // 忽略 client 文件请求，仅针对请求成功的 api 接口做统一数据格式处理
+          if (ctx.status === 200 && request.url.includes(config.apiPathPrefix)) {
+            ctx.res.success()
+            logger.trace(JSON.stringify(fields))
+          }
+        } catch (err) {
+          if (err.status) {
+            ctx.res.fail({ code: err.status, message: err.message })
+            loggerError.error(
+              { type: 'ResponseError' },
+              JSON.stringify(Object.assign({ message: err.message }, fields))
+            )
+          } else {
+            ctx.app.emit('error', err, ctx)
+          }
+        }
+      }
+    }
+    ```
 
 3. **中间层接口日志**  
+    中间层可能需要继续调用上游接口，也需要添加日志
+    ```js
+    const urllib = require('urllib')
+    const CreateError = require('http-errors')
+    const { loggerError } = require('../common/logger')
+
+    class Request {
+      constructor(options) {
+        this._options = options
+      }
+
+      request(options) {
+        ...
+
+        return urllib
+          .request(baseURL + url, requestOptions)
+          .then(async (result) => {
+            if (!result.data) {
+              loggerError.error(
+                { type: 'MidResponseError', options: requestOptions },
+                JSON.stringify(result)
+              )
+              throw new CreateError.ServiceUnavailable(
+                `数据服务层请求返回异常！错误码：${result.status}`
+              )
+            }
+            const responseData =
+              typeof responseInterceptor === 'function'
+                ? await responseInterceptor(result.data)
+                : result.data
+
+            return responseData
+          })
+          .catch((error) => {
+            loggerError.error(
+              { type: 'MidRequestError', options: requestOptions },
+              JSON.stringify(error)
+            )
+            throw new CreateError.ServiceUnavailable('数据服务层服务异常！')
+          })
+      }
+    }
+    ```
 
 4. **日志采集**  
+    ```js
+    // app/common/logger.js
+    const log4js = require('log4js')
 
-#### 11. 流量监控
+    const DAYS_TO_KEEP = 7 // 日志保留时间/天
 
-#### 12. 错误异常监控
+    log4js.configure({
+      appenders: {
+        // 错误日志
+        error: {
+          type: 'file',
+          filename: 'logs/error.log',
+          maxLogSize: 1024 * 1024 * 10, // 10M
+          backups: 5,
+        },
+        // 统计日志
+        stats: {
+          type: 'dateFile',
+          filename: 'logs/stats.log',
+          compress: true,
+          alwaysIncludePattern: true,
+          keepFileExt: true,
+          numBackups: DAYS_TO_KEEP,
+        },
+        // 系统日志
+        system: {
+          type: 'dateFile',
+          filename: 'logs/system.log',
+          compress: true,
+          alwaysIncludePattern: true,
+          keepFileExt: true,
+          numBackups: DAYS_TO_KEEP,
+        },
+        // 页面渲染日志
+        page: {
+          type: 'dateFile',
+          filename: 'logs/page.log',
+          compress: true,
+          alwaysIncludePattern: true,
+          keepFileExt: true,
+          numBackups: DAYS_TO_KEEP,
+        },
+      },
+      categories: {
+        default: { appenders: ['stats'], level: 'trace' },
+        error: { appenders: ['error'], level: 'error' },
+        system: { appenders: ['system'], level: 'trace' },
+        page: { appenders: ['page'], level: 'trace' },
+      },
+    })
+
+    const logger = log4js.getLogger()
+    const loggerError = log4js.getLogger('error')
+    const loggerSystem = log4js.getLogger('system')
+    const loggerPage = log4js.getLogger('page')
+    ```
+
+#### 14. 流量监控
+
+#### 15. 错误异常监控
 
 ### 四. 其它
 #### 1. 在 VS Code 中调试 server 端代码
