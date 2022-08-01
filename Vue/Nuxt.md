@@ -392,18 +392,18 @@ module.exports = {
     ```js
     export default {
       env: {
-        baseUrl: process.env.NODE_ENV === 'production' ? 'https://test.com' : 'http://localhost:3003'
+        baseURL: process.env.NODE_ENV === 'production' ? 'https://test.com' : 'http://localhost:3003'
       }
     }
     ```
 
 2. **使用环境变量**  
-    * `process.env.baseUrl`
-    * `context.env.baseUrl`
+    * `process.env.baseURL`
+    * `context.env.baseURL`
     ```js
-    // /plugins/axios.js
+    // /plugins/request.js
     export default function ({ app: { $axios } }) {
-      $axios.defaults.baseURL = process.env.baseUrl
+      baseURL: process.env.baseURL,
     }
     ```
 
@@ -1031,7 +1031,10 @@ export default {
     }
     ```
 
-#### 7. 封装触底事件
+#### 7. 在 layout 中使用服务端渲染
+在 layout 中是无法使用 `asyncData` 的，但比如页头的导航需要使用 ssr，可以借助 `nuxtServerInit` 实现，在服务端获取数据，存至 vuex，layout 中使用
+
+#### 8. 封装触底事件
 ```js
 // mixins/reachBottom.js
 export default {
@@ -1069,7 +1072,7 @@ export default {
 }
 ```
 
-#### 8. 命令式弹窗组件
+#### 9. 命令式弹窗组件
 
 ### 三. 中间层技术点
 代理、缓存、日志、监控、数据处理。中间层的存在让前后端职责分离更加彻底。
