@@ -47,7 +47,6 @@
     6. 客户端激活
     7. webpack构建配置
     8. 打包和部署注意事项
-    9. 通用框架nuxt.js实战
     10. nuxt架构分析
     11. 动态路由的使用(nuxt)
     12. 全局状态管理的变化(nuxt)
@@ -135,7 +134,6 @@
     3. 事件循环异步I/O-promisify/buffer/stream
     4. 网络编程-socket/http/websocket
     5. 鉴权-cookie-session/jwt/Oauth/单点登录
-    6. 手写Koa源码-上下文/getter&setter
     7. Jest单元测试
 2. Node服务
     1. MVC模式与三层结构
@@ -164,8 +162,6 @@
     3. Mongodb高级数据查询
     4. 零编码Restful接口
 6. Mysql
-    1. Mysql安装与使用
-    2. 数据处理之增删改查
     3. 数据类型和完整性约束
     4. 分组与聚合函数
     5. 数据库涉及范式和反范式

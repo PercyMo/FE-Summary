@@ -146,6 +146,11 @@
     [小白必看，JSBridge 初探](https://www.zoo.team/article/jsbridge)  
 
 ### - NodeJs
+* koa 实践  
+    [一杯茶的时间，上手 Koa2 + MySQL 开发(实战好文)](https://mp.weixin.qq.com/s/hJi7tZvkuUsPxTFiZ8exRg)  
+* mysql  
+    [一文达到Mysql实战水平](https://mp.weixin.qq.com/s/cJPyCs92QB-i2cIPGJk5kg)  
+    [学会Sequelize，让你操作数据更丝滑](https://mp.weixin.qq.com/s/9kTtbzo1UEODIW9avI1l0w)  
 
 ### - 前端工程
 * webpack
