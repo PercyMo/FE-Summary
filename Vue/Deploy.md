@@ -13,7 +13,8 @@
 .env.production
 .env.test
 ```
-.env.test 为例：
+.env.test 为例：  
+**NODE_ENV 这里总是犯迷糊，它决定了 webpack 的构建方式，无论部署测试还是预发布环境，正确方式都应该以 production 模式构建**
 ```
 NODE_ENV = production
 VUE_APP_BASE_API = 'http://test.api.xxx.com/'
