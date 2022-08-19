@@ -16,8 +16,9 @@ function myNew() {
     var obj = Object.create(Constructor.prototype);
     // 执行构造函数，并传入剩余参数
     var ret = Constructor.apply(obj, arguments);
-    // 确保构造器总是返回一个对象
-    return typeof ret === 'object' ? ret : obj;
+    // 确保构造器总是返回一个对象或者函数
+    var flag = ret && (typeof ret === 'object' || typeof ret === 'function')
+    return flag ? ret : obj;
 }
 ```
 
