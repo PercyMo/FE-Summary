@@ -108,12 +108,15 @@
     * 2.组件通讯N种策略  
         [Vue 组件间通信六种方式（完整版）](https://juejin.cn/post/6844903845642911752)  
         [vue中8种组件通信方式, 值得收藏!](https://juejin.cn/post/6844903887162310669)  
+* 状态管理  
+    [一文解析Pinia和Vuex，带你全面理解这两个Vue状态管理模式](https://juejin.cn/post/7121209657678364685)  
 * vue 3.x
     * vue 3.x 新特性 & 2.x 迁移  
         [Vue3文档【Vue2迁移Vue3】](https://juejin.cn/post/6858558735695937544)  
         [使用 Vue3 重构 Vue2 项目(长文)](https://mp.weixin.qq.com/s/zPYV1bF6zxPAbe29Wpj6Mw)  
         [抄笔记：尤雨溪在Vue3.0 Beta直播里聊到了这些…](https://juejin.cn/post/6844904134303301645)  
         [Vue3新特性一篇搞懂](https://juejin.cn/post/6844904084512718861)  
+        [一篇文章上手Vue3中新增的API](https://mp.weixin.qq.com/s/Iwo-fvQTeUO5H8mhf1sRRw)  
 * Vue 对比 React  
     [面试官：谈谈Vue和React的区别？](https://mp.weixin.qq.com/s/oiNmF8knHfnvbmZfYTv_ZQ)  
     [React 与 Vue 框架的设计思路大 PK](https://mp.weixin.qq.com/s/fdDfgmksNoXP3oR56bsmMw)  
@@ -126,6 +129,8 @@
     [探讨一下 To C 营销页面服务端渲染的必要性及其原理](https://mp.weixin.qq.com/s/05u1FElTq7GUbwiSsvuBBA)  
 
 ### - React
+* 生态  
+    [2022 年的 React 生态](https://juejin.cn/post/7085542534943883301#heading-1)  
 * 生命周期  
     [React 源码剖析系列 － 生命周期的管理艺术](https://zhuanlan.zhihu.com/p/20312691)  
 
