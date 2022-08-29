@@ -11,19 +11,6 @@ yarn add -D stylelint stylelint-scss postcss postcss-html postcss-scss stylelint
 
 #### 2. 配置
 ```js
-// .stylelintrc.js
-module.exports = {
-  extends: ['stylelint-config-standard', 'stylelint-config-recess-order'],
-  plugins: ['stylelint-scss'],
-  rules: {
-    // scss 在校验时对部分关键字不识别会报错，没看到有好的解决方案，暂时屏蔽掉该条规则
-    'at-rule-no-unknown': [true, {
-      ignoreAtRules: ['function', 'if', 'each', 'include', 'mixin']
-    }]
-  }
-}
-```
-```js
 // stylelint.config.js
 module.exports = {
   extends: [
@@ -136,6 +123,7 @@ module.exports = {
 #### 3. 结合 Git Hooks 使用
 ```js
 // lint-staged.config.js
+// 与 eslint、prettier 结合使用，可以只关注 stylelint 部分
 module.exports = {
   '*.{js,jsx,ts,tsx}': ['eslint --fix --max-warnings=0', 'prettier --write'],
   '*.json': ['prettier --write'],
