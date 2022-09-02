@@ -1,6 +1,7 @@
 ## JavaScript 手撕代码
 
-### - Promise 模拟实现
+### Promise 模拟实现
+---
 ```js
 const isFunction = (variable) => typeof variable === 'function';
 
@@ -218,7 +219,8 @@ class MyPromise {
 }
 ```
 
-### - 手动实现 ES5 继承
+### 手动实现 ES5 继承
+---
 ```js
 function People() {
   this.type = 'prople'
@@ -293,7 +295,8 @@ const man = new Man();
     inherits(Man, People);
     ```
 
-### - instanceof 模拟实现
+### instanceof 模拟实现
+---
 ```js
 const oInstanceof = function (ins, cons) {
   if (!ins) return false;
@@ -363,7 +366,8 @@ function ajax(url = '', method = 'get', params = {}) {
 }
 ```
 
-### - 异步循环打印
+### 异步循环打印
+---
 ```js
 const sleep = (i) => {
   return new Promise((resolve) => {
@@ -384,7 +388,8 @@ async function start() {
 start();
 ```
 
-### - 图片懒加载
+### 图片懒加载
+---
 1. 监听页面滚动  
     ```js
     import { throttle } from 'lodash-es';
