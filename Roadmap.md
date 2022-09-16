@@ -105,6 +105,8 @@
         [增量 DOM 与虚拟 DOM 的对比使用](https://mp.weixin.qq.com/s/kwwkaXi9L-4j5Jucb3HdeA)  
         [Virtual DOM 认知误区](https://mp.weixin.qq.com/s/gQCFEBsB3SIz9c5sp7uuhA)  
 * 组件化实战  
+    * 1.组件化开发思想  
+        [Hooks时代，如何写出高质量的react和vue组件？](https://juejin.cn/post/7123961170188304391)  
     * 2.组件通讯N种策略  
         [Vue 组件间通信六种方式（完整版）](https://juejin.cn/post/6844903845642911752)  
         [vue中8种组件通信方式, 值得收藏!](https://juejin.cn/post/6844903887162310669)  
@@ -210,10 +212,15 @@
     [把前端监控做到极致](https://zhuanlan.zhihu.com/p/32262716)  
     [GMTC 大前端时代前端监控的最佳实践](https://juejin.cn/post/6844903629573324807)  
     [超详细！搭建一个前端错误监控系统](https://zhuanlan.zhihu.com/p/51446011)  
+    [前端监控系列1｜ 字节的前端监控SDK是怎样设计的](https://mp.weixin.qq.com/s/o-zUiO97SFLSZITPrbZcqQ)  
+    [前端监控系列2 ｜聊聊 JS 错误监控那些事儿](https://zhuanlan.zhihu.com/p/551313367)  
+    [前端监控系列3 ｜ 如何衡量一个站点的性能好坏](https://mp.weixin.qq.com/s/Au_NNeamEoFEtlNvvVjpLw)  
 
 ### - 前端设计模式
 
 ### - 算法&数据结构&手撕代码
+* JS编码能力  
+    [JavaScript代码优化之道](https://juejin.cn/post/7131211363493347335)  
 * 算法复杂度  
     [JavaScript 算法之复杂度分析](https://juejin.im/post/5c2a1d9d6fb9a04a0f654581)
 
@@ -226,3 +233,5 @@
     [写给前端的 计算机组成原理 "十全大补文"](https://mp.weixin.qq.com/s/N4Kn97qZBLeWiJroQ0bvbg)  
 * 如何阅读源码  
     [如何阅读源码 —— 以 Vetur 为例](https://mp.weixin.qq.com/s/1nLzSyWYJkY3_9XqOXU1hg)  
+* 前端架构（！暂时理解的不是很好）  
+    [对前端架构的理解 - 分层与抽象](https://mp.weixin.qq.com/s/5TfAoS6nuFalfZuQ2Fv3_w)  
