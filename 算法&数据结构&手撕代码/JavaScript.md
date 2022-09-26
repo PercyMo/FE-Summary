@@ -1,5 +1,431 @@
 ## JavaScript 手撕代码
 
+### 手动实现 call、apply、bind
+1. call
+```js
+Function.prototype.myCall = function(context, ...args) {
+  if (this === Function.prototype) {
+    return; // 用于防止 Function.prototype.myCall() 直接调用
+  }
+  context = context || window;
+  const fn = Symbol();
+  context[fn] = this;
+  const reslut = context[fn](...args);
+  delete context[fn];
+  return reslut;
+};
+```
+
+2. apply
+```js
+Function.prototype.myApply = function(context, args) {
+  if (this === Function.prototype) {
+    return;
+  }
+  context = context || window;
+  const fn = Symbol();
+  context[fn] = this;
+  const result = Array.isArray(args) ? context[fn](...args) : context[fn]();
+  delete context[fn];
+  return result;
+};
+```
+
+3. bind
+```js
+Function.prototype.myBind = function(context, ...args) {
+  if (this === Function.prototype) {
+    throw new TypeError('Error');
+  }
+  const self = this;
+  return function F(...newArgs) {
+    // 判断是否用于构造函数
+    if (this instanceof F) {
+      return new self(...args, ...newArgs);
+    }
+    return self.apply(context, args.concat(newArgs));
+  };
+};
+```
+
+### 防抖节流
+**防抖**
+```js
+const debounce = function(fn, wait = 0, immediate) {
+  let timer = null;
+  return function(...args) {
+    clearTimeout(timer);
+    if (immediate && !timer) {
+      fn.apply(this, args);
+    }
+    timer = setTimeout(() => {
+      fn.apply(this, args);
+    }, wait);
+  };
+};
+```
+**节流**
+```js
+// 时间戳实现：第一次一定触发，最后一次不一定触发
+const throttle = function(fn, wait) {
+  let pre = 0;
+  return function(...args) {
+    const date = new Date();
+    if (date - pre >= wait) {
+      pre = date;
+      return fn.apply(this, args);
+    }
+  };
+};
+
+// 定时器实现：第一次一定触发，最后一次不一定触发
+const throttle = function(fn, wait) {
+  let timer = null;
+  return function(...args) {
+    if (!timer) {
+      timer = setTimeout(() => {
+        fn.apply(this, args);
+        clearTimeout(timer);
+        timer = null;
+      }, wait);
+    }
+  };
+};
+
+// 结合定时器与时间戳：第一次和最后一次都会触发
+const throttle = function(fn, wait) {
+  let timer = null;
+  let pre = 0;
+  return function(...args) {
+    clearTimeout(timer);
+    const date = new Date();
+
+    if (date - pre >= wait) {
+      pre = date;
+      fn.apply(this, args);
+    } else {
+      timer = setTimeout(() => {
+        fn.apply(this, args);
+      }, wait);
+    }
+  };
+};
+```
+
+### 深浅拷贝
+```js
+// 可继续遍历的数据类型
+const setTag = '[object Set]';
+const mapTag = '[object Map]';
+const arrayTag = '[object Array]';
+const objectTag = '[object Object]';
+const argsTag = '[object Arguments]';
+
+// 不可继续遍历的数据类型
+const boolTag = '[object Boolean]';
+const dateTag = '[object Date]';
+const errorTag = '[object Error]';
+const numberTag = '[object Number]';
+const regexpTag = '[object RegExp]';
+const stringTag = '[object String]';
+const symbolTag = '[object Symbol]';
+const funcTag = '[object Function]';
+
+const deepTag = [setTag, mapTag, arrayTag, objectTag, argsTag];
+
+// 使用while遍历，提升遍历性能
+function forEach(array, iteratee) {
+  let i = -1;
+  const len = array.length;
+  while (++i < len) {
+    iteratee(array[i], i);
+  }
+}
+
+// 判断是否为引用类型
+function isObject(target) {
+  const type = typeof target;
+  return target !== null && (type === 'object' || type === 'funciton');
+}
+
+// 获取数据实际类型
+function getType(target) {
+  return Object.prototype.toString.call(target);
+}
+
+// 初始化被克隆的对象，同时保持原型指向
+// target为对象时，返回{}；target为数组时，返回[]...
+function getInit(target) {
+  const Ctor = target.constructor;
+  return new Ctor;
+}
+
+// 克隆正则表达式
+function cloneReg(target) {
+  // 从正则末尾截取修饰符
+  const reFlags = /\w*$/;
+  const result = new target.constructor(target.source, reFlags.exec(target));
+  // RegExp对象是有状态的，克隆上一次匹配成功的位置
+  result.lastIndex = target.lastIndex;
+  return result;
+}
+
+// 克隆symbol类型
+function cloneSymbol(target) {
+  return Object(Symbol.prototype.valueOf.call(target));
+}
+
+// 克隆函数
+function cloneFunction(taget) {
+  // 蚂蚁金服一位哥们骚气的写法，目前没发现什么问题
+  return eval('(' + target.toString() + ')');
+}
+
+// 克隆不可遍历类型
+function cloneOtherType(target, type) {
+  const Ctor = target.constructor;
+  switch (type) {
+    case boolTag:
+    case numberTag:
+    case stringTag:
+    case errorTag:
+    case dateTag:
+      return new Ctor(target);
+    case regexpTag:
+      return cloneReg(target);
+    case symbolTag:
+      return cloneSymbol(target);
+    case funcTag:
+      return cloneFunction(target);
+    default:
+      return null;
+  }
+}
+
+// 使用WeakMap保存当前对象和拷贝对象关系，及时释放内存
+function clone(target, wm = new WeakMap()) {
+  // 克隆原始类型 排除了object(不包括null)和function
+  if (!isObject(target)) {
+    return target;
+  }
+
+  // 初始化
+  const type = getType(target);
+  let cloneTarget;
+  if (deepTag.includes(type)) {
+    cloneTarget = getInit(target);
+  } else {
+    return cloneOtherType(target, type);
+  }
+
+  // 防止循环引用
+  const stacked = wm.get(target);
+  if (stacked) {
+    return stacked;
+  }
+  wm.set(target, cloneTarget);
+
+  // 克隆set
+  if (type === setTag) {
+    target.forEach((value) => {
+      cloneTarget.add(clone(value, wm));
+    })
+    return cloneTarget;
+  }
+
+  // 克隆map
+  if (type === mapTag) {
+    target.forEach((value, key) => {
+      cloneTarget.set(key, clone(value, wm));
+    })
+  }
+
+  // 克隆对象和数组
+  const keys = type === arrayTag ? undefined : Object.keys(target);
+  forEach(keys || target, (value, key) => {
+    if (keys) {
+      key = value;
+    }
+    cloneTarget[key] = clone(target[key], wm);
+  })
+
+  return cloneTarget;
+};
+```
+
+### 数组去重
+**Object**
+```js
+// 开辟一个外部空间标记元素是否出现过
+const unique = (array) => {
+  const obj = {};
+  return array.filter((item) => obj[item] ? false : (obj[item] = true));
+};
+```
+**indexOf + filter**
+```js
+const unique = (array) => {
+  return array.filter((el, i) => array.indexOf(el) === i);
+};
+```
+**Set**
+```js
+const unique = (array) => [...new Set(array)];
+const unique = (array) => Array.from(new Set(array));
+```
+**先排序后去重**
+```js
+const unique = (array) => {
+  array.sort((a, b) => a - b);
+  return array.filter((item, index) => item !== array[index - 1]);
+};
+```
+**去除重复的值**
+```js
+// 不同于上面的去重，这里只要是重复的值，直接移除
+const unique = (array) => {
+  return array.filter((el) => array.indexOf(el) === array.lastIndexOf(el));
+};
+```
+
+### 数组扁平化
+```js
+// 基础实现
+const flatten = (array) => {
+  let result = [];
+  array.forEach((item) => {
+    if (Array.isArray(item)) {
+      result = result.concat(flatten(item));
+    } else {
+      result.push(item);
+    }
+  })
+  return result;
+};
+
+// 使用 reduce 简化
+const flatten = (array) => {
+  return array.reduce(
+    (pre, current) =>
+      Array.isArray(current) ?
+        pre.concat(flatten(current)) :
+        pre.concat(current)
+    , []);
+};
+
+// 指定深度扁平数组
+const flatten = (array, deep = 1) => {
+  return array.reduce(
+    (pre, current) => {
+      return Array.isArray(current) && deep > 1 ?
+        pre.concat(flatten(current, (deep - 1))) :
+        pre.concat(current);
+    }
+    , []);
+};
+```
+
+### 数组最值
+```js
+// 使用 reduce
+const returnMax = (array) => {
+  return array.reduce((pre, current) => pre > current ? pre : current);
+};
+
+// 使用 Math.max
+// Math.max 的参数原本是一组数字，只要让它接受数组即可
+Math.max(...array);
+Math.max.apply(null, array);
+```
+
+### 模拟实现数组方法
+**模拟实现 Array.map**
+```js
+Array.prototype.myMap = function(fn) {
+  return this.reduce((pre, current, index) => {
+    return pre.concat(fn.call(this, current, index, this));
+  }, []);
+};
+```
+**模拟实现 Array.filter**
+```js
+Array.prototype.myFilter = function(fn) {
+  return this.reduce(
+    (pre, current, index) => 
+      fn.call(this, current, index, this) ?
+        pre.concat(current) :
+        pre
+  , []);
+};
+```
+
+### 数组乱序-洗牌算法
+```js
+function shuffle(array) {
+  const _arr = array.slice();
+  for (let i = _arr.length - 1; i > 0; i--) {
+    const random = Math.floor(Math.random() * i);
+    [_arr[i], _arr[random]] = [_arr[random], _arr[i]];
+  }
+  return _arr;
+}
+```
+
+### 函数柯里化
+```js
+function curry(fn, ...args) {
+  if (args.length >= fn.length) {
+    return fn(...args);
+  } else {
+    return (...newArgs) => currying(fn, ...args, ...newArgs);
+  }
+}
+```
+
+### 手动实现 JSONP
+```js
+let count = 0;
+
+function generateUrl(url, params) {
+  let dataString = url.indexOf('?') > -1 ? '' : '?';
+  for (let key in params) {
+    dataString += `${key}=${params[key]}&`;
+  }
+  return url + dataString;
+}
+
+function noop() {};
+
+function jsonp(url, data = {}) {
+  return new Promise((resolve, reject) => {
+    const id = `__jp${count++}`;
+    let scriptEl;
+
+    data.jsonpCallback = id;
+
+    function cleanup() {
+      window[id] = noop;
+      document.body.removeChild(scriptEl);
+    }
+    
+    // 挂载回调函数
+    window[id] = function(data) {
+      cleanup();
+      resolve(data);
+    }
+    
+    // 创建 script 标签，发送请求
+    scriptEl = document.createElement('script');
+    scriptEl.src = generateUrl(url, data);
+    scriptEl.onerror = (err) => {
+      cleanup();
+      reject(err);
+    };
+    document.body.appendChild(scriptEl);
+  });
+};
+```
+
 ### Promise 模拟实现
 ```js
 const isFunction = (variable) => typeof variable === 'function';
