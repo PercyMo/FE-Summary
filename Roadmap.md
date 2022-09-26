@@ -17,6 +17,8 @@
     [为什么要使用预处理器？](https://github.com/cssmagic/blog/issues/73)  
 
 ### - JavaScript
+* 变量和类型  
+    [【JS进阶】你真的掌握变量和类型了吗](https://mp.weixin.qq.com/s/JR-kbof29LSD3hq_t3-KKg)  
 * 闭包  
     [我从来不理解JavaScript闭包，直到有人这样向我解释它...](https://segmentfault.com/a/1190000017136436)  
     [破解前端面试（80% 应聘者不及格系列）：从闭包说起](https://juejin.cn/post/6844903474212143117)  
@@ -45,6 +47,8 @@
 * ES6 语法知识点  
     [近一万字的ES6语法知识点补充](https://juejin.cn/post/6844903775329583112)  
     [1.5万字概括ES6全部特性(已更新ES2020)](https://juejin.cn/post/6844903959283367950)
+* Symbol  
+    [谈谈我对ES6 Symbol的理解](https://zhuanlan.zhihu.com/p/183874695)  
 
 ### - 浏览器&性能优化
 * Vue 项目性能优化  
