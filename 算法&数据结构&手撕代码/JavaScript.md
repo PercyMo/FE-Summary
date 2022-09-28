@@ -238,6 +238,7 @@ function clone(target, wm = new WeakMap()) {
     target.forEach((value, key) => {
       cloneTarget.set(key, clone(value, wm));
     })
+    return cloneTarget;
   }
 
   // 克隆对象和数组
@@ -566,6 +567,11 @@ class MyPromise {
           this._rejectedQueues.push(rejected);
           break;
         case FULFILLED:
+          /**
+           * p.then 时，promise 状态已经变了，比如:
+           * const p = Promise.resolve(1);
+           * setTimeout(() => { p.then((val) => console.log(val))}, 1000);
+           */
           fulfilled(_value);
           break;
         case REJECTED:
