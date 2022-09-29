@@ -458,8 +458,8 @@ class MyPromise {
     }
   }
   _resolve(val) {
-    if (this._status !== PENDING) return;
     const run = () => {
+      if (this._status !== PENDING) return;
       // 依次执行成功队列中的函数，并清空队列
       const runFulfilled = (value) => {
         let cb;
@@ -501,8 +501,8 @@ class MyPromise {
     setTimeout(run, 0);
   }
   _reject(err) {
-    if (this._status !== PENDING) return;
     const run = () => {
+      if (this._status !== PENDING) return;
       this._status = REJECTED;
       this._value = err;
       // 依次执行成功队列中的函数，并清空队列
