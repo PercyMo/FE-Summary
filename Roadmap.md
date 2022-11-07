@@ -1,7 +1,7 @@
 ### - HTML&CSS
 * position  
-    [position MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/position)  
-    [杀了个回马枪，还是说说position:sticky吧](https://www.zhangxinxu.com/wordpress/2018/12/css-position-sticky/)  
+    [++ position MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/position)  
+    [++ 杀了个回马枪，还是说说position:sticky吧](https://www.zhangxinxu.com/wordpress/2018/12/css-position-sticky/)  
 * flex  
     [写给自己看的display: flex布局教程](https://www.zhangxinxu.com/wordpress/2018/10/display-flex-css3-css/)  
 * gid  
@@ -18,7 +18,7 @@
 
 ### - JavaScript
 * 变量和类型  
-    [【JS进阶】你真的掌握变量和类型了吗](https://mp.weixin.qq.com/s/JR-kbof29LSD3hq_t3-KKg)  
+    [++ 【JS进阶】你真的掌握变量和类型了吗](https://mp.weixin.qq.com/s/JR-kbof29LSD3hq_t3-KKg)  
 * 闭包  
     [我从来不理解JavaScript闭包，直到有人这样向我解释它...](https://segmentfault.com/a/1190000017136436)  
     [破解前端面试（80% 应聘者不及格系列）：从闭包说起](https://juejin.cn/post/6844903474212143117)  
@@ -28,6 +28,8 @@
     [关于 JavaScript 错误处理的最完整指南](https://juejin.cn/post/6872867757407338509)  
     [你不知道的前端异常处理（万字长文，建议收藏）](https://mp.weixin.qq.com/s/QEkzv237s3ZSfiIqcpBowQ)  
     [如何优雅处理前端异常？](http://jartto.wang/2018/11/20/js-exception-handling/)  
+* 函数式编程
+    [函数式编程](./JavaScript//FunctionalProgramming.md)  
 * Service Worker / PWA  
     [Service Worker: 简介](https://developers.google.com/web/fundamentals/primers/service-workers)  
     [借助Service Worker和cacheStorage缓存及离线开发](https://www.zhangxinxu.com/wordpress/2017/07/service-worker-cachestorage-offline-develop/)  
@@ -48,13 +50,13 @@
     [近一万字的ES6语法知识点补充](https://juejin.cn/post/6844903775329583112)  
     [1.5万字概括ES6全部特性(已更新ES2020)](https://juejin.cn/post/6844903959283367950)
 * Symbol  
-    [谈谈我对ES6 Symbol的理解](https://zhuanlan.zhihu.com/p/183874695)  
+    [++ 谈谈我对ES6 Symbol的理解](https://zhuanlan.zhihu.com/p/183874695)  
 
 ### - 浏览器&性能优化
 * Vue 项目性能优化  
-    [Vue 项目性能优化 — 实践指南（网上最全）](https://github.com/fengshi123/blog/issues/13)  
-    [Vue 应用性能优化指南](https://juejin.cn/post/6844903677262561293)  
-    [记一次vue长列表的内存性能分析和优化](https://www.cnblogs.com/imwtr/p/10428819.html)  
+    [++ Vue 项目性能优化 — 实践指南（网上最全）](https://github.com/fengshi123/blog/issues/13)  
+    [++ Vue 应用性能优化指南](https://juejin.cn/post/6844903677262561293)  
+    [++ 记一次vue长列表的内存性能分析和优化](https://www.cnblogs.com/imwtr/p/10428819.html)  
 
 ### - web安全
 * HTTPS  
@@ -90,24 +92,23 @@
 
 ### - Vue
 * 剖析 Vue 中的 MVVM 原理  
-    [剖析Vue实现原理 - 如何实现双向绑定mvvm](https://github.com/DMQ/mvvm)  
-    [基于Vue实现一个简易MVVM](https://juejin.cn/post/6844904099704471559)  
-    [不好意思！耽误你的十分钟，让MVVM原理还给你](https://juejin.cn/post/6844903586103558158)  
-    [50行代码的MVVM，感受闭包的艺术](https://juejin.cn/post/6844903619808985095)  
-    [250行实现一个简单的MVVM](https://zhuanlan.zhihu.com/p/24475845)  
+    [++ 剖析Vue实现原理 - 如何实现双向绑定mvvm](https://github.com/DMQ/mvvm)  
+    [++ 基于Vue实现一个简易MVVM](https://juejin.cn/post/6844904099704471559)  
+    [++ 不好意思！耽误你的十分钟，让MVVM原理还给你](https://juejin.cn/post/6844903586103558158)  
+    [++ 50行代码的MVVM，感受闭包的艺术](https://juejin.cn/post/6844903619808985095)  
+    [++ 250行实现一个简单的MVVM](https://zhuanlan.zhihu.com/p/24475845)  
 * Vue源码剖析
     * 4.vue生命周期  
         [vue技术揭秘 - 生命周期](https://ustbhuangyi.github.io/vue-analysis/v2/components/lifecycle.html)  
         [你真的理解$nextTick么](https://juejin.cn/post/6844903843197616136)  
     * 7.虚拟DOM  
-        [让虚拟DOM和DOM-diff不再成为你的绊脚石](https://juejin.cn/post/6844903806132568072)  
-        [探索Virtual DOM的前世今生](https://zhuanlan.zhihu.com/p/35876032)  
-        [虚拟 DOM 到底是什么？(长文建议收藏)](https://mp.weixin.qq.com/s/oAlVmZ4Hbt2VhOwFEkNEhw)  
-        [Virtual DOM](https://ustbhuangyi.github.io/vue-analysis/v2/data-driven/virtual-dom.html)  
-        [snabbdom github](https://github.com/snabbdom/snabbdom)  
-        [如何理解虚拟DOM?](https://www.zhihu.com/question/29504639)  
-        [增量 DOM 与虚拟 DOM 的对比使用](https://mp.weixin.qq.com/s/kwwkaXi9L-4j5Jucb3HdeA)  
-        [Virtual DOM 认知误区](https://mp.weixin.qq.com/s/gQCFEBsB3SIz9c5sp7uuhA)  
+        [++ 让虚拟DOM和DOM-diff不再成为你的绊脚石](https://juejin.cn/post/6844903806132568072)  
+        [++ 探索Virtual DOM的前世今生](https://zhuanlan.zhihu.com/p/35876032)  
+        [++ 虚拟 DOM 到底是什么？(长文建议收藏)](https://mp.weixin.qq.com/s/oAlVmZ4Hbt2VhOwFEkNEhw)  
+        [++ Virtual DOM](https://ustbhuangyi.github.io/vue-analysis/v2/data-driven/virtual-dom.html)  
+        [++ 如何理解虚拟DOM?](https://www.zhihu.com/question/29504639)  
+        [++ 增量 DOM 与虚拟 DOM 的对比使用](https://mp.weixin.qq.com/s/kwwkaXi9L-4j5Jucb3HdeA)  
+        [++ Virtual DOM 认知误区](https://mp.weixin.qq.com/s/gQCFEBsB3SIz9c5sp7uuhA)  
 * 组件化实战  
     * 1.组件化开发思想  
         [Hooks时代，如何写出高质量的react和vue组件？](https://juejin.cn/post/7123961170188304391)  
@@ -124,21 +125,28 @@
         [Vue3新特性一篇搞懂](https://juejin.cn/post/6844904084512718861)  
         [一篇文章上手Vue3中新增的API](https://mp.weixin.qq.com/s/Iwo-fvQTeUO5H8mhf1sRRw)  
 * Vue 对比 React  
-    [面试官：谈谈Vue和React的区别？](https://mp.weixin.qq.com/s/oiNmF8knHfnvbmZfYTv_ZQ)  
-    [React 与 Vue 框架的设计思路大 PK](https://mp.weixin.qq.com/s/fdDfgmksNoXP3oR56bsmMw)  
-    [【建议收藏】11+实战技巧，让你轻松从Vue过渡到React](https://mp.weixin.qq.com/s/OuwyqWvLE-7AxHXw7trSNw)  
-    [一名 vueCoder 总结的 React 基础](https://juejin.cn/post/6960556335092269063)  
-    [从Vue2.0到React17——React开发入门](https://juejin.cn/post/6975864046058733576)  
+    [++ 面试官：谈谈Vue和React的区别？](https://mp.weixin.qq.com/s/oiNmF8knHfnvbmZfYTv_ZQ)  
+    [++ React 与 Vue 框架的设计思路大 PK](https://mp.weixin.qq.com/s/fdDfgmksNoXP3oR56bsmMw)  
+    [++ 【建议收藏】11+实战技巧，让你轻松从Vue过渡到React](https://mp.weixin.qq.com/s/OuwyqWvLE-7AxHXw7trSNw)  
+    [++ 一名 vueCoder 总结的 React 基础](https://juejin.cn/post/6960556335092269063)  
+    [++ 从Vue2.0到React17——React开发入门](https://juejin.cn/post/6975864046058733576)  
 * SSR 原理和 Vue SSR  
     [服务端渲染(SSR) 通用技术解决方案](https://mp.weixin.qq.com/s/A-loxh4_vMZRqTV1kU5TCQ)  
     [如何搭建一个高可用的服务端渲染工程](https://tech.youzan.com/server-side-render/)  
     [探讨一下 To C 营销页面服务端渲染的必要性及其原理](https://mp.weixin.qq.com/s/05u1FElTq7GUbwiSsvuBBA)  
+* Vue面试  
+    [++ 30 道 Vue 面试题，内含详细讲解](https://juejin.cn/post/6844903918753808398)  
+    [++ 最全的 Vue 面试题+详解答案](https://juejin.cn/post/6961222829979697165#heading-43)  
 
 ### - React
+* 其他  
+    [++ React 高频面试题梳理，看看面试怎么答？](https://blog.conardli.top/2019/09/11/react/interview/)  
 * 生态  
     [2022 年的 React 生态](https://juejin.cn/post/7085542534943883301#heading-1)  
 * 生命周期  
     [React 源码剖析系列 － 生命周期的管理艺术](https://zhuanlan.zhihu.com/p/20312691)  
+* Hooks  
+    [++ 从 Mixin 到 HOC 再到 Hook](https://blog.conardli.top/2019/04/09/react/xmin-hoc-hooks/)  
 
 ### - 多端开发
 * REM * VW 响应式布局  
