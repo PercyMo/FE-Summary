@@ -7,11 +7,11 @@
 * gid  
     [CSS Grid 网格布局教程](https://www.ruanyifeng.com/blog/2019/03/grid-layout-tutorial.html)  
 * css变量  
-    [CSS 变量教程](http://www.ruanyifeng.com/blog/2017/05/css-variables.html)  
-    [进阶：玩转 CSS 变量](https://github.com/wsafight/personBlog/issues/25)  
+    [++ CSS 变量教程](http://www.ruanyifeng.com/blog/2017/05/css-variables.html)  
+    [++ 进阶：玩转 CSS 变量](https://github.com/wsafight/personBlog/issues/25)  
 * css层叠上下文、z-index  
-    [彻底搞懂CSS层叠上下文、层叠等级、层叠顺序、z-index](https://juejin.cn/post/6844903667175260174)  
-    [深入理解CSS中的层叠上下文和层叠顺序](https://www.zhangxinxu.com/wordpress/2016/01/understand-css-stacking-context-order-z-index/)  
+    [++ 彻底搞懂CSS层叠上下文、层叠等级、层叠顺序、z-index](https://juejin.cn/post/6844903667175260174)  
+    [++ 深入理解CSS中的层叠上下文和层叠顺序](https://www.zhangxinxu.com/wordpress/2016/01/understand-css-stacking-context-order-z-index/)  
 * 其他  
     [2019年，你是否可以抛弃 CSS 预处理器？](https://jelly.jd.com/article/5dcb9c73641a030153732a89)  
     [为什么要使用预处理器？](https://github.com/cssmagic/blog/issues/73)  
@@ -101,14 +101,16 @@
     * 4.vue生命周期  
         [vue技术揭秘 - 生命周期](https://ustbhuangyi.github.io/vue-analysis/v2/components/lifecycle.html)  
         [你真的理解$nextTick么](https://juejin.cn/post/6844903843197616136)  
+    * 5. 响应式原理  
+        [++ 深入响应式原理-响应式对象/依赖收集/派发更新](https://ustbhuangyi.github.io/vue-analysis/v2/reactive/)  
+        [++ 为什么Vue3.0不再使用defineProperty实现数据监听？](https://mp.weixin.qq.com/s/O8iL4o8oPpqTm4URRveOIA)  
     * 7.虚拟DOM  
         [++ 让虚拟DOM和DOM-diff不再成为你的绊脚石](https://juejin.cn/post/6844903806132568072)  
         [++ 探索Virtual DOM的前世今生](https://zhuanlan.zhihu.com/p/35876032)  
         [++ 虚拟 DOM 到底是什么？(长文建议收藏)](https://mp.weixin.qq.com/s/oAlVmZ4Hbt2VhOwFEkNEhw)  
         [++ Virtual DOM](https://ustbhuangyi.github.io/vue-analysis/v2/data-driven/virtual-dom.html)  
         [++ 如何理解虚拟DOM?](https://www.zhihu.com/question/29504639)  
-        [++ 增量 DOM 与虚拟 DOM 的对比使用](https://mp.weixin.qq.com/s/kwwkaXi9L-4j5Jucb3HdeA)  
-        [++ Virtual DOM 认知误区](https://mp.weixin.qq.com/s/gQCFEBsB3SIz9c5sp7uuhA)  
+        [++ Virtual DOM 认知误区](https://juejin.cn/post/6898526276529684493)  
 * 组件化实战  
     * 1.组件化开发思想  
         [Hooks时代，如何写出高质量的react和vue组件？](https://juejin.cn/post/7123961170188304391)  
