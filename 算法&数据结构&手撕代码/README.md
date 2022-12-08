@@ -37,8 +37,8 @@
 2. [前端数据结构与算法入门](https://mp.weixin.qq.com/s/UgLUXLJ6bSnQ2ZIZnTqLUg)
 
 ### 三、算法
-#### 1. 排序
-1. [九大排序算法 =>>](./Sorting.md)
+1. [查找 =>>](./Search.md)  
+2. [九大排序算法 =>>](./Sorting.md)  
 
 #### 9. 引用
 1. [awesome-coding-js/算法分类](http://www.conardli.top/docs/algorithm/)
