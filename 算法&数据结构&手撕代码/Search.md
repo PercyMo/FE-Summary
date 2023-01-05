@@ -106,7 +106,7 @@ const minNumberInRotateArray = function(array) {
 #### 代码
 ```js
 const getNumberOfK = function(array, target) {
-  if (array && array.length > 0 && target) {
+  if (array && array.length > 0 && target !== null) {
     const len = array.length;
     const firstIndex = getFirstK(array, target, 0, len - 1);
     const lastIndex = getLastK(array, target, 0, len - 1);

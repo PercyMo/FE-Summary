@@ -25,6 +25,8 @@
 2. [二叉树的前序遍历 =>>](./BinaryTreePreorderTraversal.md)
 3. [二叉树的中序遍历 =>>](./BinaryTreeInorderTraversal.md)
 4. [二叉树的后序遍历 =>>](./BinaryTreePostorderTraversal.md)
+5. [从上到下打印二叉树 =>>](./BinaryTreePrint.md)
+6. [路径总和 =>>](./PathSum.md)
 
 #### 6. 堆
 
@@ -38,6 +40,7 @@
 
 ### 三、算法
 1. [查找 =>>](./Search.md)  
+2. [DFS和BFS =>>](./DFS&BFS.md)  
 2. [九大排序算法 =>>](./Sorting.md)  
 
 #### 9. 引用
