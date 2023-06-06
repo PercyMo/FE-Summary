@@ -71,6 +71,10 @@ a - b - c - d - f   Master
         \
         e - f - g Feature
 ```
+cherry-pick 多次提交时，出现代码冲突，可以解决冲突后
+```sh
+git cherry-pick --continue
+```
 
 #### 2. git rebase
 ```sh
