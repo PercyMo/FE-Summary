@@ -1818,11 +1818,10 @@ module.exports = {
 
 ### 四. 其它
 #### 1. 在 VS Code 中调试 server 端代码
-1. VS Code 安装 `Debugger for Chrome` 插件
-2. `package.json` 中点击 npm script 命令上方的`调试`
-3. 选择 `dev` 命令，启动服务与调试
-4. 代码中加入 `debugger`，刷新浏览器
-5. 之后就可以快乐的断点调试了
+1. `package.json` 中点击 npm script 命令上方的`调试`
+2. 选择 `dev` 命令，启动服务与调试
+3. 代码中加入 `debugger`，刷新浏览器
+4. 之后就可以快乐的断点调试了
 
 #### 2. 配置ip访问
 ```json
