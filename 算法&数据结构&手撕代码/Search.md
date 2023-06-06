@@ -79,7 +79,7 @@ const minNumberInRotateArray = function(array) {
   if (len === 0) return 0;
   let left = 0;
   let right = len - 1;
-  while (left < right) {
+  while (left <= right) {
     const mid = Math.floor((left + right) / 2);
     if (array[mid] > array[right]) {
       left = mid + 1;
