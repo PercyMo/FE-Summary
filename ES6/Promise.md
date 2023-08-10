@@ -168,11 +168,3 @@ Promise.race([requestImg, timeOut]).then(function(res) {
 [Promise实现原理](https://juejin.im/post/5b83cb5ae51d4538cc3ec354)
 
 [ES6 系列之我们来聊聊 Promise](https://github.com/mqyqingfeng/Blog/issues/98)
-
-TODO: 其他的Promise实现，大致思路是一样的，细节再看下（关于值穿透的处理不太一样）
-
-[* 剖析Promise内部结构 *](https://github.com/xieranmaya/blog/issues/3)
-
-[简单实现Promise](https://imweb.io/topic/5bbc264b6477d81e668cc930)
-
-[Promise原理讲解](https://juejin.im/post/5aa7868b6fb9a028dd4de672)

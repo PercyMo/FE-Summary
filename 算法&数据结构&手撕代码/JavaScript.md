@@ -1,434 +1,90 @@
 ## JavaScript 手撕代码
 
-### 手动实现 call、apply、bind
-1. call
-```js
-Function.prototype.myCall = function(context, ...args) {
-  if (this === Function.prototype) {
-    return; // 用于防止 Function.prototype.myCall() 直接调用
-  }
-  context = context || window;
-  const fn = Symbol();
-  context[fn] = this;
-  const reslut = context[fn](...args);
-  delete context[fn];
-  return reslut;
-};
-```
+---
 
-2. apply
+### Object.create
 ```js
-Function.prototype.myApply = function(context, args) {
-  if (this === Function.prototype) {
-    return;
+Object.create = function(proto, propertiesObject) {
+  if (typeof proto !== 'object' && typeof proto !== 'function') {
+    throw new TypeError('Object prototype may only be an Object or null.');
   }
-  context = context || window;
-  const fn = Symbol();
-  context[fn] = this;
-  const result = Array.isArray(args) ? context[fn](...args) : context[fn]();
-  delete context[fn];
+  if (propertiesObject === null) {
+    throw new TypeError('Cannot convert undefined or null to object');
+  }
+  function F() {};
+  F.prototype = proto;
+  const result = new F;
+  if (propertiesObject !== undefined) {
+    Object.defineProperties(result, propertiesObject);
+  }
+  if (proto === null) {
+    result.__proto__ = null;
+  }
   return result;
 };
+// 新对象.__proto__ === F.prototype === proto
 ```
 
-3. bind
+### Object.assign
 ```js
-Function.prototype.myBind = function(context, ...args) {
-  if (this === Function.prototype) {
-    throw new TypeError('Error');
+Object.assign = function(target, ...sources) {
+  if (target === null) {
+    throw new TypeError('Cannot convert undefined or null to object');
   }
-  const self = this;
-  return function F(...newArgs) {
-    // 判断是否用于构造函数
-    if (this instanceof F) {
-      return new self(...args, ...newArgs);
+  const ret = Object(target);
+  sources.forEach((source) => {
+    if (source !== null) {
+      for (let key in source) {
+        if (source.hasOwnProperty(key)) {
+          ret[key] = source[key];
+        }
+      }
     }
-    return self.apply(context, args.concat(newArgs));
-  };
-};
-```
-
-### 防抖节流
-**防抖**
-```js
-const debounce = function(fn, wait = 0, immediate) {
-  let timer = null;
-  return function(...args) {
-    clearTimeout(timer);
-    if (immediate && !timer) {
-      fn.apply(this, args);
-    }
-    timer = setTimeout(() => {
-      fn.apply(this, args);
-    }, wait);
-  };
-};
-```
-**节流**
-```js
-// 时间戳实现：第一次一定触发，最后一次不一定触发
-const throttle = function(fn, wait) {
-  let pre = 0;
-  return function(...args) {
-    const date = new Date();
-    if (date - pre >= wait) {
-      pre = date;
-      return fn.apply(this, args);
-    }
-  };
-};
-
-// 定时器实现：第一次一定触发，最后一次不一定触发
-const throttle = function(fn, wait) {
-  let timer = null;
-  return function(...args) {
-    if (!timer) {
-      timer = setTimeout(() => {
-        fn.apply(this, args);
-        clearTimeout(timer);
-        timer = null;
-      }, wait);
-    }
-  };
-};
-
-// 结合定时器与时间戳：第一次和最后一次都会触发
-const throttle = function(fn, wait) {
-  let timer = null;
-  let pre = 0;
-  return function(...args) {
-    clearTimeout(timer);
-    const date = new Date();
-
-    if (date - pre >= wait) {
-      pre = date;
-      fn.apply(this, args);
-    } else {
-      timer = setTimeout(() => {
-        fn.apply(this, args);
-      }, wait);
-    }
-  };
-};
-```
-
-### 深浅拷贝
-```js
-// 可继续遍历的数据类型
-const setTag = '[object Set]';
-const mapTag = '[object Map]';
-const arrayTag = '[object Array]';
-const objectTag = '[object Object]';
-const argsTag = '[object Arguments]';
-
-// 不可继续遍历的数据类型
-const boolTag = '[object Boolean]';
-const dateTag = '[object Date]';
-const errorTag = '[object Error]';
-const numberTag = '[object Number]';
-const regexpTag = '[object RegExp]';
-const stringTag = '[object String]';
-const symbolTag = '[object Symbol]';
-const funcTag = '[object Function]';
-
-const deepTag = [setTag, mapTag, arrayTag, objectTag, argsTag];
-
-// 使用while遍历，提升遍历性能
-function forEach(array, iteratee) {
-  let i = -1;
-  const len = array.length;
-  while (++i < len) {
-    iteratee(array[i], i);
-  }
-}
-
-// 判断是否为引用类型
-function isObject(target) {
-  const type = typeof target;
-  return target !== null && (type === 'object' || type === 'funciton');
-}
-
-// 获取数据实际类型
-function getType(target) {
-  return Object.prototype.toString.call(target);
-}
-
-// 初始化被克隆的对象，同时保持原型指向
-// target为对象时，返回{}；target为数组时，返回[]...
-function getInit(target) {
-  const Ctor = target.constructor;
-  return new Ctor;
-}
-
-// 克隆正则表达式
-function cloneReg(target) {
-  // 从正则末尾截取修饰符
-  const reFlags = /\w*$/;
-  const result = new target.constructor(target.source, reFlags.exec(target));
-  // RegExp对象是有状态的，克隆上一次匹配成功的位置
-  result.lastIndex = target.lastIndex;
-  return result;
-}
-
-// 克隆symbol类型
-function cloneSymbol(target) {
-  return Object(Symbol.prototype.valueOf.call(target));
-}
-
-// 克隆函数
-function cloneFunction(taget) {
-  // 蚂蚁金服一位哥们骚气的写法，目前没发现什么问题
-  return eval('(' + target.toString() + ')');
-}
-
-// 克隆不可遍历类型
-function cloneOtherType(target, type) {
-  const Ctor = target.constructor;
-  switch (type) {
-    case boolTag:
-    case numberTag:
-    case stringTag:
-    case errorTag:
-    case dateTag:
-      return new Ctor(target);
-    case regexpTag:
-      return cloneReg(target);
-    case symbolTag:
-      return cloneSymbol(target);
-    case funcTag:
-      return cloneFunction(target);
-    default:
-      return null;
-  }
-}
-
-// 使用WeakMap保存当前对象和拷贝对象关系，及时释放内存
-function clone(target, wm = new WeakMap()) {
-  // 克隆原始类型 排除了object(不包括null)和function
-  if (!isObject(target)) {
-    return target;
-  }
-
-  // 初始化
-  const type = getType(target);
-  let cloneTarget;
-  if (deepTag.includes(type)) {
-    cloneTarget = getInit(target);
-  } else {
-    return cloneOtherType(target, type);
-  }
-
-  // 防止循环引用
-  const stacked = wm.get(target);
-  if (stacked) {
-    return stacked;
-  }
-  wm.set(target, cloneTarget);
-
-  // 克隆set
-  if (type === setTag) {
-    target.forEach((value) => {
-      cloneTarget.add(clone(value, wm));
-    })
-    return cloneTarget;
-  }
-
-  // 克隆map
-  if (type === mapTag) {
-    target.forEach((value, key) => {
-      cloneTarget.set(key, clone(value, wm));
-    })
-    return cloneTarget;
-  }
-
-  // 克隆对象和数组
-  const keys = type === arrayTag ? undefined : Object.keys(target);
-  forEach(keys || target, (value, key) => {
-    if (keys) {
-      key = value;
-    }
-    cloneTarget[key] = clone(target[key], wm);
-  })
-
-  return cloneTarget;
-};
-```
-
-### 数组去重
-**Object**
-```js
-// 开辟一个外部空间标记元素是否出现过
-const unique = (array) => {
-  const obj = {};
-  return array.filter((item) => obj[item] ? false : (obj[item] = true));
-};
-```
-**indexOf + filter**
-```js
-const unique = (array) => {
-  return array.filter((el, i) => array.indexOf(el) === i);
-};
-```
-**Set**
-```js
-const unique = (array) => [...new Set(array)];
-const unique = (array) => Array.from(new Set(array));
-```
-**先排序后去重**
-```js
-const unique = (array) => {
-  array.sort((a, b) => a - b);
-  return array.filter((item, index) => item !== array[index - 1]);
-};
-```
-**去除重复的值**
-```js
-// 不同于上面的去重，这里只要是重复的值，直接移除
-const unique = (array) => {
-  return array.filter((el) => array.indexOf(el) === array.lastIndexOf(el));
-};
-```
-
-### 数组扁平化
-```js
-// 基础实现
-const flatten = (array) => {
-  let result = [];
-  array.forEach((item) => {
-    if (Array.isArray(item)) {
-      result = result.concat(flatten(item));
-    } else {
-      result.push(item);
-    }
-  })
-  return result;
-};
-
-// 使用 reduce 简化
-const flatten = (array) => {
-  return array.reduce(
-    (pre, current) =>
-      Array.isArray(current) ?
-        pre.concat(flatten(current)) :
-        pre.concat(current)
-    , []);
-};
-
-// 指定深度扁平数组
-const flatten = (array, deep = 1) => {
-  return array.reduce(
-    (pre, current) => {
-      return Array.isArray(current) && deep > 1 ?
-        pre.concat(flatten(current, (deep - 1))) :
-        pre.concat(current);
-    }
-    , []);
-};
-```
-
-### 数组最值
-```js
-// 使用 reduce
-const returnMax = (array) => {
-  return array.reduce((pre, current) => pre > current ? pre : current);
-};
-
-// 使用 Math.max
-// Math.max 的参数原本是一组数字，只要让它接受数组即可
-Math.max(...array);
-Math.max.apply(null, array);
-```
-
-### 模拟实现数组方法
-**模拟实现 Array.map**
-```js
-Array.prototype.myMap = function(fn) {
-  return this.reduce((pre, current, index) => {
-    return pre.concat(fn.call(this, current, index, this));
-  }, []);
-};
-```
-**模拟实现 Array.filter**
-```js
-Array.prototype.myFilter = function(fn) {
-  return this.reduce(
-    (pre, current, index) => 
-      fn.call(this, current, index, this) ?
-        pre.concat(current) :
-        pre
-  , []);
-};
-```
-
-### 数组乱序-洗牌算法
-```js
-function shuffle(array) {
-  const _arr = array.slice();
-  for (let i = _arr.length - 1; i > 0; i--) {
-    const random = Math.floor(Math.random() * i);
-    [_arr[i], _arr[random]] = [_arr[random], _arr[i]];
-  }
-  return _arr;
-}
-```
-
-### 函数柯里化
-```js
-function curry(fn, ...args) {
-  if (args.length >= fn.length) {
-    return fn(...args);
-  } else {
-    return (...newArgs) => currying(fn, ...args, ...newArgs);
-  }
-}
-```
-
-### 手动实现 JSONP
-```js
-let count = 0;
-
-function generateUrl(url, params) {
-  let dataString = url.indexOf('?') > -1 ? '' : '?';
-  for (let key in params) {
-    dataString += `${key}=${params[key]}&`;
-  }
-  return url + dataString;
-}
-
-function noop() {};
-
-function jsonp(url, data = {}) {
-  return new Promise((resolve, reject) => {
-    const id = `__jp${count++}`;
-    let scriptEl;
-
-    data.jsonpCallback = id;
-
-    function cleanup() {
-      window[id] = noop;
-      document.body.removeChild(scriptEl);
-    }
-    
-    // 挂载回调函数
-    window[id] = function(data) {
-      cleanup();
-      resolve(data);
-    }
-    
-    // 创建 script 标签，发送请求
-    scriptEl = document.createElement('script');
-    scriptEl.src = generateUrl(url, data);
-    scriptEl.onerror = (err) => {
-      cleanup();
-      reject(err);
-    };
-    document.body.appendChild(scriptEl);
   });
+  return ret;
+};
+```
+
+### instanceof 模拟实现
+```js
+const oInstanceof = function (ins, cons) {
+  if (!ins) return false;
+
+  return ins.__proto__ === cons.prototype
+    ? true
+    : oInstanceof(ins.__proto__, cons);
+};
+```
+
+### 手写 new
+```js
+function myNew() {
+  // 取出第一个参数，是我们的构造函数
+  // 通过shift，删除arguments中的第一个参数
+  const Constructor = [].shift.call(arguments);
+  if (typeof Constructor !== 'function') {
+    throw new TypeError('xx is not a constructor');
+  }
+  // 绑定原型指向，result.__proto__ 指向 Constructor.prototype
+  const result = Object.create(Constructor.prototype);
+  // 执行构造函数，并传入剩余参数
+  const ret = Constructor.apply(result, arguments);
+  // 确保构造器总是返回一个对象或者函数
+  const flag = ret && (typeof ret === 'object' || typeof ret === 'function');
+  return flag ? ret : result;
 };
 ```
 
 ### Promise 模拟实现
 ```js
+// TODO: .then 和 .catch 的返回值不能是 promise 本身，这个没有处理
+// 应该抛错：TypeError: Chaining cycle detected for promise #<Promise>
+// const promise = Promise.resolve()
+//   .then(() => {
+//     return promise
+//   })
+// promise.catch(console.error)
+
 const isFunction = (variable) => typeof variable === 'function';
 
 const PENDING = 'pending'; // 进行中
@@ -650,6 +306,350 @@ class MyPromise {
 }
 ```
 
+### 防抖节流
+**防抖**
+```js
+const debounce = function(fn, wait = 0, immediate) {
+  let timer = null;
+  return function(...args) {
+    clearTimeout(timer);
+    if (immediate && !timer) {
+      fn.apply(this, args);
+    }
+    timer = setTimeout(() => {
+      fn.apply(this, args);
+    }, wait);
+  };
+};
+```
+**节流**
+```js
+// 时间戳实现：第一次一定触发，最后一次不一定触发
+const throttle = function(fn, wait) {
+  let pre = 0;
+  return function(...args) {
+    const date = new Date();
+    if (date - pre >= wait) {
+      pre = date;
+      return fn.apply(this, args);
+    }
+  };
+};
+
+// 定时器实现：第一次一定触发，最后一次不一定触发
+const throttle = function(fn, wait) {
+  let timer = null;
+  return function(...args) {
+    if (!timer) {
+      timer = setTimeout(() => {
+        fn.apply(this, args);
+        clearTimeout(timer);
+        timer = null;
+      }, wait);
+    }
+  };
+};
+
+// 结合定时器与时间戳：第一次和最后一次都会触发
+const throttle = function(fn, wait) {
+  let timer = null;
+  let pre = 0;
+  return function(...args) {
+    clearTimeout(timer);
+    const date = new Date();
+
+    if (date - pre >= wait) {
+      pre = date;
+      fn.apply(this, args);
+    } else {
+      timer = setTimeout(() => {
+        fn.apply(this, args);
+      }, wait);
+    }
+  };
+};
+```
+
+### 手动实现 call、apply、bind
+1. call
+```js
+Function.prototype.myCall = function(context, ...args) {
+  if (this === Function.prototype) {
+    return; // 用于防止 Function.prototype.myCall() 直接调用
+  }
+  context = context || window;
+  const fn = Symbol();
+  context[fn] = this;
+  const reslut = context[fn](...args);
+  delete context[fn];
+  return reslut;
+};
+```
+
+2. apply
+```js
+Function.prototype.myApply = function(context, args) {
+  if (this === Function.prototype) {
+    return;
+  }
+  context = context || window;
+  const fn = Symbol();
+  context[fn] = this;
+  const result = Array.isArray(args) ? context[fn](...args) : context[fn]();
+  delete context[fn];
+  return result;
+};
+```
+
+3. bind
+```js
+Function.prototype.myBind = function(context, ...args) {
+  if (this === Function.prototype) {
+    throw new TypeError('Error');
+  }
+  const self = this;
+  return function F(...newArgs) {
+    // 判断是否用于构造函数
+    if (this instanceof F) {
+      return new self(...args, ...newArgs);
+    }
+    return self.apply(context, args.concat(newArgs));
+  };
+};
+```
+
+### 函数柯里化
+```js
+function curry(fn, ...args) {
+  if (args.length >= fn.length) {
+    return fn(...args);
+  } else {
+    return (...newArgs) => currying(fn, ...args, ...newArgs);
+  }
+}
+```
+
+### 偏函数
+```js
+const partial = function(fn, ...args) {
+  return function(...newArgs) {
+    for (let i = 0; i < args.length; i++) {
+      if (args[i] === '_') {
+        args[i] = newArgs.shift();
+      }
+    }
+    fn(...args.concat(newArgs));
+  };
+};
+```
+
+### JSON.stringify
+<!-- TODO: xx -->
+
+### JSON.parse
+<!-- TODO: xx -->
+
+### 基于 promise 的 ajax 封装
+```js
+function getStringParams(params) {
+  let str = '';
+  for (let key in params) {
+    str += `${key}=${params[key]}&`;
+  }
+  return str;
+}
+
+function ajax(url = '', method = 'get', params = {}) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+
+    // 拼接 get 请求 url
+    const stringParams = getStringParams(params);
+    if (method === 'get' && stringParams) {
+      url += url.indexOf('?') > -1 ? stringParams : `?${stringParams}`;
+    }
+
+    xhr.open(method, url, true);
+    xhr.onload = function() {
+      const result = {
+        status: xhr.status,
+        statusText: xhr.statusText,
+        headers: xhr.getAllResponseHeaders(),
+        data: xhr.response || xhr.responseText,
+      };
+      if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+        resolve(result);
+      } else {
+        reject(result);
+      }
+    };
+
+    // 请求头
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.withCredentials = true;
+
+    // 异常处理
+    xhr.onerror = function() {
+      reject(new TypeError('请求出错'));
+    };
+    xhr.timeout = function() {
+      reject(new TypeError('请求超时'));
+    };
+    xhr.onabort = function() {
+      reject(new TypeError('请求被终止'));
+    };
+    
+    if (method === 'post') {
+      xhr.send(stringParams);
+    } else {
+      xhr.send();
+    }
+  });
+}
+```
+
+### 深浅拷贝
+```js
+// 可继续遍历的数据类型
+const setTag = '[object Set]';
+const mapTag = '[object Map]';
+const arrayTag = '[object Array]';
+const objectTag = '[object Object]';
+const argsTag = '[object Arguments]';
+
+// 不可继续遍历的数据类型
+const boolTag = '[object Boolean]';
+const dateTag = '[object Date]';
+const errorTag = '[object Error]';
+const numberTag = '[object Number]';
+const regexpTag = '[object RegExp]';
+const stringTag = '[object String]';
+const symbolTag = '[object Symbol]';
+const funcTag = '[object Function]';
+
+const deepTag = [setTag, mapTag, arrayTag, objectTag, argsTag];
+
+// 使用while遍历，提升遍历性能
+function forEach(array, iteratee) {
+  let i = -1;
+  const len = array.length;
+  while (++i < len) {
+    iteratee(array[i], i);
+  }
+}
+
+// 判断是否为引用类型
+function isObject(target) {
+  const type = typeof target;
+  return target !== null && (type === 'object' || type === 'funciton');
+}
+
+// 获取数据实际类型
+function getType(target) {
+  return Object.prototype.toString.call(target);
+}
+
+// 初始化被克隆的对象，同时保持原型指向
+// target为对象时，返回{}；target为数组时，返回[]...
+function getInit(target) {
+  const Ctor = target.constructor;
+  return new Ctor;
+}
+
+// 克隆正则表达式
+function cloneReg(target) {
+  // 从正则末尾截取修饰符
+  const reFlags = /\w*$/;
+  const result = new target.constructor(target.source, reFlags.exec(target));
+  // RegExp对象是有状态的，克隆上一次匹配成功的位置
+  result.lastIndex = target.lastIndex;
+  return result;
+}
+
+// 克隆symbol类型
+function cloneSymbol(target) {
+  return Object(Symbol.prototype.valueOf.call(target));
+}
+
+// 克隆函数
+function cloneFunction(taget) {
+  // 蚂蚁金服一位哥们骚气的写法，目前没发现什么问题
+  return eval('(' + target.toString() + ')');
+}
+
+// 克隆不可遍历类型
+function cloneOtherType(target, type) {
+  const Ctor = target.constructor;
+  switch (type) {
+    case boolTag:
+    case numberTag:
+    case stringTag:
+    case errorTag:
+    case dateTag:
+      return new Ctor(target);
+    case regexpTag:
+      return cloneReg(target);
+    case symbolTag:
+      return cloneSymbol(target);
+    case funcTag:
+      return cloneFunction(target);
+    default:
+      return null;
+  }
+}
+
+// 使用WeakMap保存当前对象和拷贝对象关系，及时释放内存
+function clone(target, wm = new WeakMap()) {
+  // 克隆原始类型 排除了object(不包括null)和function
+  if (!isObject(target)) {
+    return target;
+  }
+
+  // 初始化
+  const type = getType(target);
+  let cloneTarget;
+  if (deepTag.includes(type)) {
+    cloneTarget = getInit(target);
+  } else {
+    return cloneOtherType(target, type);
+  }
+
+  // 防止循环引用
+  const stacked = wm.get(target);
+  if (stacked) {
+    return stacked;
+  }
+  wm.set(target, cloneTarget);
+
+  // 克隆set
+  if (type === setTag) {
+    target.forEach((value) => {
+      cloneTarget.add(clone(value, wm));
+    })
+    return cloneTarget;
+  }
+
+  // 克隆map
+  if (type === mapTag) {
+    target.forEach((value, key) => {
+      cloneTarget.set(key, clone(value, wm));
+    })
+    return cloneTarget;
+  }
+
+  // 克隆对象和数组
+  const keys = type === arrayTag ? undefined : Object.keys(target);
+  forEach(keys || target, (value, key) => {
+    if (keys) {
+      key = value;
+    }
+    cloneTarget[key] = clone(target[key], wm);
+  })
+
+  return cloneTarget;
+};
+```
+
 ### 手动实现 ES5 继承
 ```js
 function People() {
@@ -724,76 +724,205 @@ const man = new Man();
     }
     inherits(Man, People);
     ```
+6. class 实现继承
+    ```js
+    class Person {
+      constructor(name) {
+        this.name = name;
+      }
+      say() {
+        console.log('hello');
+      }
+    }
 
-### instanceof 模拟实现
+    class Man extends Person {
+      constructor(name, age) {
+        super(name);
+        this.age = age;
+      }
+    }
+    ```
+
+---
+
+### 日期格式化函数
+<!-- TODO: xx -->
+
+### 数组乱序-洗牌算法
 ```js
-const oInstanceof = function (ins, cons) {
-  if (!ins) return false;
+function shuffle(array) {
+  const _arr = array.slice();
+  for (let i = _arr.length - 1; i > 0; i--) {
+    const random = Math.floor(Math.random() * i);
+    [_arr[i], _arr[random]] = [_arr[random], _arr[i]];
+  }
+  return _arr;
+}
+```
 
-  return ins.__proto__ === cons.prototype
-    ? true
-    : oInstanceof(ins.__proto__, cons);
+### 数组去重
+**Object**
+```js
+// 开辟一个外部空间标记元素是否出现过
+const unique = (array) => {
+  const obj = {};
+  return array.filter((item) => obj[item] ? false : (obj[item] = true));
+};
+```
+**indexOf + filter**
+```js
+const unique = (array) => {
+  return array.filter((el, i) => array.indexOf(el) === i);
+};
+```
+**Set**
+```js
+const unique = (array) => [...new Set(array)];
+const unique = (array) => Array.from(new Set(array));
+```
+**先排序后去重**
+```js
+const unique = (array) => {
+  array.sort((a, b) => a - b);
+  return array.filter((item, index) => item !== array[index - 1]);
+};
+```
+**去除重复的值**
+```js
+// 不同于上面的去重，这里只要是重复的值，直接移除
+const unique = (array) => {
+  return array.filter((el) => array.indexOf(el) === array.lastIndexOf(el));
 };
 ```
 
-### - 基于 promise 的 ajax 封装
+### 数组扁平化
 ```js
-function getStringParams(params) {
-  let str = '';
-  for (let key in params) {
-    str += `${key}=${params[key]}&`;
-  }
-  return str;
-}
-
-function ajax(url = '', method = 'get', params = {}) {
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-
-    // 拼接 get 请求 url
-    const stringParams = getStringParams(params);
-    if (method === 'get' && stringParams) {
-      url += url.indexOf('?') > -1 ? stringParams : `?${stringParams}`;
-    }
-
-    xhr.open(method, url, true);
-    xhr.onload = function() {
-      const result = {
-        status: xhr.status,
-        statusText: xhr.statusText,
-        headers: xhr.getAllResponseHeaders(),
-        data: xhr.response || xhr.responseText,
-      };
-      if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
-        resolve(result);
-      } else {
-        reject(result);
-      }
-    };
-
-    // 请求头
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.withCredentials = true;
-
-    // 异常处理
-    xhr.onerror = function() {
-      reject(new TypeError('请求出错'));
-    };
-    xhr.timeout = function() {
-      reject(new TypeError('请求超时'));
-    };
-    xhr.onabort = function() {
-      reject(new TypeError('请求被终止'));
-    };
-    
-    if (method === 'post') {
-      xhr.send(stringParams);
+// 基础实现
+const flatten = (array) => {
+  let result = [];
+  array.forEach((item) => {
+    if (Array.isArray(item)) {
+      result = result.concat(flatten(item));
     } else {
-      xhr.send();
+      result.push(item);
     }
-  });
-}
+  })
+  return result;
+};
+
+// 使用 reduce 简化
+const flatten = (array) => {
+  return array.reduce(
+    (pre, current) =>
+      Array.isArray(current) ?
+        pre.concat(flatten(current)) :
+        pre.concat(current)
+    , []);
+};
+
+// 指定深度扁平数组
+const flatten = (array, deep = 1) => {
+  return array.reduce(
+    (pre, current) => {
+      return Array.isArray(current) && deep > 1 ?
+        pre.concat(flatten(current, (deep - 1))) :
+        pre.concat(current);
+    }
+    , []);
+};
 ```
+
+### 数组最值
+```js
+// 使用 reduce
+const returnMax = (array) => {
+  return array.reduce((pre, current) => pre > current ? pre : current);
+};
+
+// 使用 Math.max
+// Math.max 的参数原本是一组数字，只要让它接受数组即可
+Math.max(...array);
+Math.max.apply(null, array);
+```
+
+### 模拟实现数组方法
+**模拟实现 Array.push**
+<!-- TODO: xx -->
+
+**模拟实现 Array.forEach**
+<!-- TODO: xx -->
+
+**模拟实现 Array.map**
+```js
+Array.prototype.myMap = function(fn) {
+  return this.reduce((pre, current, index) => {
+    return pre.concat(fn.call(this, current, index, this));
+  }, []);
+};
+```
+**模拟实现 Array.filter**
+```js
+Array.prototype.myFilter = function(fn) {
+  return this.reduce(
+    (pre, current, index) => 
+      fn.call(this, current, index, this) ?
+        pre.concat(current) :
+        pre
+  , []);
+};
+```
+**模拟实现 Array.some**
+<!-- TODO: xx -->
+**模拟实现 Array.reduce**
+<!-- TODO: xx -->
+
+### 实现字符串 repeat 方法
+<!-- TODO: xx -->
+
+### 实现字符串翻转
+```js
+String.prototype._reverse = function() {
+  return this.split('').reverse().join('');
+};
+
+console.log('hello'._reverse()); // olleh
+```
+
+### 数字千分位逗号隔开
+<!-- TODO: xx -->
+
+### 非负大整数相加
+```js
+function sumBigNumber(a, b) {
+  let result = '';
+  let temp = 0;
+
+  a = a.split('');
+  b = b.split('');
+
+  while (a.length || b.length || temp) {
+    temp += ~~a.pop() + ~~b.pop();
+    result = `${temp % 10}${result}`;
+    temp = temp > 9;
+  }
+  // TODO: 忘了这里为什么要去除开头的0
+  return result.replace(/^0+/, '');
+};
+```
+
+### js对象转化为树形结构
+<!-- TODO: xx -->
+
+### 解析 URL Params 为对象
+<!-- TODO: xx -->
+
+---
+
+### DOM 事件代理
+<!-- TODO: xx -->
+
+### 循环打印红绿黄
+<!-- TODO: xx -->
 
 ### 异步循环打印
 ```js
@@ -816,6 +945,123 @@ async function start() {
 start();
 ```
 
+### 小孩报数问题
+```js
+const childNumber = function(array, count) {
+  let exitCount = 0; // 记录离开人数
+  let index = 0; // 当前下标
+  let counter = 0; // 当前报数
+  let len = array.length;
+
+  while (exitCount < len - 1) {
+    if (array[index] !== 0) {
+      counter++;
+    }
+    if (counter === count) {
+      array[index] = 0;
+      counter = 0;
+      exitCount++;
+    }
+    index++;
+    if (index === len) {
+      index = 0;
+    }
+  }
+  for (let i = 0; i < len; i++) {
+    if (array[i] !== 0) {
+      return array[i];
+    }
+  }
+};
+```
+
+### 查找文章中出现频率最高的单词
+```js
+const findMostWord = function(article) {
+  if (!article) return;
+
+  article = article.trim().toLowerCase();
+  const worldList = article.match(/[a-z]+/g);
+  const visited = [];
+  let word = '';
+  let num = 0;
+  // 为首尾的词添加空格，用于正则检索
+  // 使用 wordList.join(' ') 而不用 article 是为了去重文章中的标点
+  article = ' ' + wordList.join(' ') + ' ';
+
+  worldList.forEach((value) => {
+    if (visited.indexOf(value) < 0) {
+      visited.push(value);
+      const result = article.match(new RegExp(' ' + value + ' ', 'g'));
+      if (result && result.length > num) {
+        word = value;
+        num = result.length;
+      }
+    }
+  });
+  return word + ':' + num;
+};
+```
+
+### 实现简单路由
+<!-- TODO: xx -->
+
+### 实现斐波那契数列
+<!-- TODO: xx -->
+
+### 字符串出现的不重复最长长度
+<!-- TODO: xx -->
+
+### 使用 setTimeout 实现 setInterval
+<!-- TODO: xx -->
+
+### 判断对象是否存在循环引用
+<!-- TODO: xx -->
+
+### 手动实现 JSONP
+```js
+let count = 0;
+
+function generateUrl(url, params) {
+  let dataString = url.indexOf('?') > -1 ? '' : '?';
+  for (let key in params) {
+    dataString += `${key}=${params[key]}&`;
+  }
+  return url + dataString;
+}
+
+function noop() {};
+
+function jsonp(url, data = {}) {
+  return new Promise((resolve, reject) => {
+    const id = `__jp${count++}`;
+    let scriptEl;
+
+    data.jsonpCallback = id;
+
+    function cleanup() {
+      window[id] = noop;
+      document.body.removeChild(scriptEl);
+    }
+    
+    // 挂载回调函数
+    window[id] = function(data) {
+      cleanup();
+      resolve(data);
+    }
+    
+    // 创建 script 标签，发送请求
+    scriptEl = document.createElement('script');
+    scriptEl.src = generateUrl(url, data);
+    scriptEl.onerror = (err) => {
+      cleanup();
+      reject(err);
+    };
+    document.body.appendChild(scriptEl);
+  });
+};
+```
+
 ### 图片懒加载
 1. 监听页面滚动  
     ```js
@@ -825,7 +1071,10 @@ start();
     const windowHeigh = window.innerHeight;
     let count = 0;
     const lazyLoad = () => {
-      if (count >= imgs.length) return;
+      if (count >= imgs.length) {
+        window.removeEventListener('scroll', lazyLoad);
+        return;
+      };
       const scrollTop = document.documentElement.scrollTop;
       for (let i = count; i < imgs.length; i++) {
         const item = imgs[i];
@@ -861,3 +1110,6 @@ start();
       }
     }
     ```
+
+### 字符串模板
+<!-- TODO: xx -->

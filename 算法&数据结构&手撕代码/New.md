@@ -7,20 +7,7 @@
 4. 当构造函数执行返回结果为`object`时，返回该`object`，否则返回新对象
 
 ### 二. 模拟现实
-```js
-function myNew() {
-    // 取出第一个参数，是我们的构造函数
-    // 通过shift，删除arguments中的第一个参数
-    var Constructor = [].shift.call(arguments);
-    // 绑定原型指向，obj.__proto__ 指向 Constructor.prototype
-    var obj = Object.create(Constructor.prototype);
-    // 执行构造函数，并传入剩余参数
-    var ret = Constructor.apply(obj, arguments);
-    // 确保构造器总是返回一个对象或者函数
-    var flag = ret && (typeof ret === 'object' || typeof ret === 'function')
-    return flag ? ret : obj;
-}
-```
+[new 模拟实现 =>>](../算法&数据结构&手撕代码/JavaScript.md#手写-new)
 
 ### 三. 特性
 1. 当构造函数有返回值，且返回值类型为对象
@@ -61,14 +48,7 @@ function myNew() {
     ```
 
 ### 四. 顺带提一下Object.create的模拟现实
-```js
-Object.creat = function(o) {
-    var f = function() {};
-    f.prototype = o;
-    return new f;
-}
-// 新对象.__proto__ === f.prototype === o
-```
+[深浅拷贝 =>>](../算法&数据结构&手撕代码/JavaScript.md#objectcreate)
 
 ### 五. 引用
 [JavaScript深入之new的模拟实现](https://github.com/mqyqingfeng/Blog/issues/13)
