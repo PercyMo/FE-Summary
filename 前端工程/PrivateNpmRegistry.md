@@ -28,6 +28,10 @@
 无法发布范围包还可以忍，但不能安装，导致现有项目无法正常运行，安装过程就各种报错。  
 最后确认，Nexus2 不支持 npm 范围包，需要升级至 3.x，放弃了。
 
-### 二. 使用 Docker 部署 Verdaccio
+### 二. Verdaccio
+1. 如何删除已经发布的包  
+verdaccio 的本地存储在本地：`.local/share/verdaccio/storage`，可以进入直接删除对应的包即可(手动)
+
+### 三. 使用 Docker 部署 Verdaccio
 [使用verdaccio搭建npm私有源](https://mp.weixin.qq.com/s/lTGV7XrsJCvoU3F2bEbovw)  
 [Verdaccio 使用 Docker 安装及迁移教程](https://segmentfault.com/a/1190000020684605)  
