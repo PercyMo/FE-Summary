@@ -12,6 +12,8 @@
 * css层叠上下文、z-index  
     [++ 彻底搞懂CSS层叠上下文、层叠等级、层叠顺序、z-index](https://juejin.cn/post/6844903667175260174)  
     [++ 深入理解CSS中的层叠上下文和层叠顺序](https://www.zhangxinxu.com/wordpress/2016/01/understand-css-stacking-context-order-z-index/)  
+* 移动端1px问题  
+    [++ Retina屏的移动设备如何实现真正1px的线](https://jinlong.github.io/2015/05/24/css-retina-hairlines/)  
 * 其他  
     [2019年，你是否可以抛弃 CSS 预处理器？](https://jelly.jd.com/article/5dcb9c73641a030153732a89)  
     [为什么要使用预处理器？](https://github.com/cssmagic/blog/issues/73)  
@@ -51,6 +53,12 @@
     [1.5万字概括ES6全部特性(已更新ES2020)](https://juejin.cn/post/6844903959283367950)
 * Symbol  
     [++ 谈谈我对ES6 Symbol的理解](https://zhuanlan.zhihu.com/p/183874695)  
+* Promise  
+    [++ Promise详解](./ES6/Promise.md)  
+    [++ ES6 系列之我们来聊聊 Promise](https://github.com/mqyqingfeng/Blog/issues/98)  
+    [++ 剖析Promise内部结构，一步一步实现一个完整的、能通过所有Test case的Promise类](https://github.com/xieranmaya/blog/issues/3)  
+    [++ Promise实现原理（附源码）](https://juejin.cn/post/6844903665686282253)  
+    [++ Promise 必知必会（十道题）](https://juejin.cn/post/6844903509934997511)  
 
 ### - 浏览器&性能优化
 * Vue 项目性能优化  
@@ -97,6 +105,7 @@
     [++ 不好意思！耽误你的十分钟，让MVVM原理还给你](https://juejin.cn/post/6844903586103558158)  
     [++ 50行代码的MVVM，感受闭包的艺术](https://juejin.cn/post/6844903619808985095)  
     [++ 250行实现一个简单的MVVM](https://zhuanlan.zhihu.com/p/24475845)  
+    [++ 高级前端开发者必会的34道Vue面试题系列](https://juejin.cn/post/6844904097544405000)  
 * Vue源码剖析
     * 4.vue生命周期  
         [vue技术揭秘 - 生命周期](https://ustbhuangyi.github.io/vue-analysis/v2/components/lifecycle.html)  
@@ -121,11 +130,11 @@
     [一文解析Pinia和Vuex，带你全面理解这两个Vue状态管理模式](https://juejin.cn/post/7121209657678364685)  
 * vue 3.x
     * vue 3.x 新特性 & 2.x 迁移  
-        [Vue3文档【Vue2迁移Vue3】](https://juejin.cn/post/6858558735695937544)  
-        [使用 Vue3 重构 Vue2 项目(长文)](https://mp.weixin.qq.com/s/zPYV1bF6zxPAbe29Wpj6Mw)  
-        [抄笔记：尤雨溪在Vue3.0 Beta直播里聊到了这些…](https://juejin.cn/post/6844904134303301645)  
-        [Vue3新特性一篇搞懂](https://juejin.cn/post/6844904084512718861)  
-        [一篇文章上手Vue3中新增的API](https://mp.weixin.qq.com/s/Iwo-fvQTeUO5H8mhf1sRRw)  
+        [++ Vue3文档【Vue2迁移Vue3】](https://juejin.cn/post/6858558735695937544)  
+        [++ 使用 Vue3 重构 Vue2 项目(长文)](https://mp.weixin.qq.com/s/zPYV1bF6zxPAbe29Wpj6Mw)  
+        [++ 抄笔记：尤雨溪在Vue3.0 Beta直播里聊到了这些…](https://juejin.cn/post/6844904134303301645)  
+        [++ Vue3新特性一篇搞懂](https://juejin.cn/post/6844904084512718861)  
+        [++ 一篇文章上手Vue3中新增的API](https://mp.weixin.qq.com/s/Iwo-fvQTeUO5H8mhf1sRRw)  
 * Vue 对比 React  
     [++ 面试官：谈谈Vue和React的区别？](https://mp.weixin.qq.com/s/oiNmF8knHfnvbmZfYTv_ZQ)  
     [++ React 与 Vue 框架的设计思路大 PK](https://mp.weixin.qq.com/s/fdDfgmksNoXP3oR56bsmMw)  
@@ -138,13 +147,14 @@
     [探讨一下 To C 营销页面服务端渲染的必要性及其原理](https://mp.weixin.qq.com/s/05u1FElTq7GUbwiSsvuBBA)  
 * Vue面试  
     [++ 30 道 Vue 面试题，内含详细讲解](https://juejin.cn/post/6844903918753808398)  
-    [++ 最全的 Vue 面试题+详解答案](https://juejin.cn/post/6961222829979697165#heading-43)  
+    [++ 最全的 Vue 面试题+详解答案](https://juejin.cn/post/6961222829979697165)  
+    [++ 「面试题」20+Vue面试题整理(持续更新)](https://juejin.cn/post/6844904084374290446)  
 
 ### - React
 * 其他  
     [++ React 高频面试题梳理，看看面试怎么答？](https://blog.conardli.top/2019/09/11/react/interview/)  
 * 生态  
-    [2022 年的 React 生态](https://juejin.cn/post/7085542534943883301#heading-1)  
+    [++ 2022 年的 React 生态](https://juejin.cn/post/7085542534943883301)  
 * 生命周期  
     [React 源码剖析系列 － 生命周期的管理艺术](https://zhuanlan.zhihu.com/p/20312691)  
 * Hooks  
@@ -155,16 +165,20 @@
     [细说移动端 经典的REM布局 与 新秀VW布局](https://cloud.tencent.com/developer/article/1352187)  
     [从网易与淘宝的font-size思考前端设计稿与工作流](https://www.cnblogs.com/lyzg/p/4877277.html)  
 * JSBridge  
-    [前端需要懂的 APP 容器原理](https://mp.weixin.qq.com/s/MgMyAEVKKhuB16LdX07j1A)  
-    [Hybrid App技术解析 -- 原理篇](https://juejin.cn/post/6844903640520474637)  
-    [Hybrid App技术解析 -- 实战篇](https://juejin.cn/post/6844903648510607373)  
-    [JS Bridge 通信原理](https://mp.weixin.qq.com/s/pV0UFbMqwcjSikfG1aJW4g)  
-    [JSBridge实战](https://juejin.cn/post/6844903702721986568)  
-    [【万字长文】写给前端工程师的JSBridge原理](https://juejin.cn/post/6847902218763534349)  
-    [从零开始写一个 JSBridge](https://juejin.cn/post/6844903856418062350)  
-    [H5与Native交互之JSBridge技术](https://segmentfault.com/a/1190000010356403)  
-    [JSBridge的原理](https://juejin.cn/post/6844903585268891662)  
-    [小白必看，JSBridge 初探](https://www.zoo.team/article/jsbridge)  
+    [++ 前端需要懂的 APP 容器原理](https://mp.weixin.qq.com/s/MgMyAEVKKhuB16LdX07j1A)  
+    [++ Hybrid App技术解析 -- 原理篇](https://juejin.cn/post/6844903640520474637)  
+    [++ Hybrid App技术解析 -- 实战篇](https://juejin.cn/post/6844903648510607373)  
+    [++ JS Bridge 通信原理](https://mp.weixin.qq.com/s/pV0UFbMqwcjSikfG1aJW4g)  
+    [++ JSBridge实战](https://juejin.cn/post/6844903702721986568)  
+    [++ 【万字长文】写给前端工程师的JSBridge原理](https://juejin.cn/post/6847902218763534349)  
+    [++ 从零开始写一个 JSBridge](https://juejin.cn/post/6844903856418062350)  
+    [++ H5与Native交互之JSBridge技术](https://segmentfault.com/a/1190000010356403)  
+    [++ JSBridge的原理](https://juejin.cn/post/6844903585268891662)  
+    [++ 小白必看，JSBridge 初探](https://juejin.cn/post/6844904070881214471)  
+* Electron  
+    [++ 得物商家客服桌面端Electron技术实践](https://mp.weixin.qq.com/s/SXglmCL4WP9tKAVOZcT9UQ)  
+    [++ electron 应用开发优秀实践](https://mp.weixin.qq.com/s/YXH2QkB0FCJ63cbNpqK1AA)  
+    [++ Electron 实践笔记](https://juejin.cn/post/6844903966568873992)  
 
 ### - NodeJs
 * koa 实践  
@@ -204,6 +218,10 @@
         [知多一点 webpack 的 CommonsChunkPlugin](https://juejin.im/post/5a1127666fb9a045023b3a63)  
     * webpack 构建进程间缓存设计  
         [从构建进程间缓存设计 谈 Webpack5 优化和工作原理](https://zhuanlan.zhihu.com/p/110995118)  
+* Rollup  
+    [++ 说不清rollup能输出哪6种格式😥差点被鄙视](https://juejin.cn/post/7051236803344334862)  
+    [++ 一文入门rollup🪀！13组demo带你轻松驾驭](https://juejin.cn/post/7069555431303020580)  
+    [++ rollup 最佳实践！可调试、编译的小型开源项目思路](https://mp.weixin.qq.com/s/nnZFbNpLnrgfcsi1_y3rrA)  
 * Babel 详解  
     [前端工程师的自我修养-关于 Babel 那些事儿](https://juejin.cn/post/6844904079118827533)  
     [深入浅出 Babel 上篇：架构和原理 + 实战](https://juejin.cn/post/6844903956905197576)  
