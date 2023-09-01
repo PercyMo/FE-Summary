@@ -26,6 +26,11 @@
     [破解前端面试（80% 应聘者不及格系列）：从闭包说起](https://juejin.cn/post/6844903474212143117)  
     [JavaScript闭包的底层运行机制](http://blog.leapoahead.com/2015/09/15/js-closure/)  
     [[译]发现 JavaScript 中闭包的强大威力](https://juejin.cn/post/6844903769646317576)  
+* this  
+    [++ 关于this对象详解](./JavaScript/This.md)  
+    [++ 面试官问：JS的this指向](https://juejin.cn/post/6844903746984476686)  
+* call/apply/bind  
+    [++ bind、call、apply详解](./算法&数据结构&手撕代码/Bind&Call&Apply.md)  
 * 前端异常处理  
     [关于 JavaScript 错误处理的最完整指南](https://juejin.cn/post/6872867757407338509)  
     [你不知道的前端异常处理（万字长文，建议收藏）](https://mp.weixin.qq.com/s/QEkzv237s3ZSfiIqcpBowQ)  
@@ -228,6 +233,10 @@
     [一口(很长的)气了解 babel](https://juejin.cn/post/6844903743121522701)  
     [不容错过的 Babel7 知识](https://juejin.cn/post/6844904008679686152)  
     [深入浅出 Babel 下篇：既生 Plugin 何生 Macros](https://juejin.cn/post/6844903961820921869)  
+* 脚手架  
+    [++ 因为我经常配置重复的 eslint，我被孤立了](https://juejin.cn/post/7243393609491120186)  
+    [++ 别人休息我努力，悄悄写个 cli 工具，必须提升效率，skr~](https://juejin.cn/post/7256702654579310652)  
+    [++ 写给5年前端妹子的三万字脚手架教程](https://juejin.cn/post/7260144602471776311)  
 * 单元测试  
     [一篇文章搞定前端单元测试框架jest](https://juejin.cn/post/7092188990471667749)  
     [万字详文：彻底搞懂 Jest 单元测试框架](https://segmentfault.com/a/1190000040539268)  

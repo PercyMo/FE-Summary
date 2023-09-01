@@ -1,6 +1,6 @@
-### 关于this对象详解
+## 关于this对象详解
 
-#### 1. 前言
+### 一. 前言
 当JavaScript代码执行一段可执行代码(executable code)时，会创建对应的执行上下文(execution context)。
 
 对于每个执行上下文，都有三个重要属性
@@ -9,7 +9,7 @@
 * this
 this与上下文中可执行代码的类型有直接关系，this值在进入上下文时确定，并且在上下文运行期间永久不变。
 
-#### 2. this的指向
+### 二. this的指向
 比较粗暴的理解就是：this 永远指向最后调用它的那个对象
 
 1. 在全局上下文中
@@ -118,7 +118,7 @@ this与上下文中可执行代码的类型有直接关系，this值在进入上
     var point = new Point(1, 2);
     ```
 
-#### 3. 怎么改变 this 的指向
+### 三. 怎么改变 this 的指向
 * 使用 ES6 的箭头函数
 * 在函数内部使用 _this = this
 * 使用 apply、call、bind
@@ -178,12 +178,47 @@ a.func2()
     }.bind(a)(),100);
     ```
 
-#### 4. 引用
+### 四. 经典题目
+```js
+// 输出结果是什么，为什么？
+class Logger {
+  printName(name = 'world') {
+    this.print(`Hello ${name}`);
+  }
+  print(text) {
+    console.log(text);
+  }
+};
+
+const logger = new Logger();
+const  { printName } = logger;
+logger.printName(); // Hello world
+printName(); // 报错 Uncaught TypeError: Cannot read properties of undefined (reading 'print')
+```
+
+```js
+var length = 10;
+function fn() {
+  console.log(this.length);
+};
+var obj = {
+  length: 5,
+  method: function (fn) {
+    fn(); // 10 无明确调用对象，this 指向 window
+    arguments[0](); // 3 输出为 实参长度
+  }
+};
+obj.method(fn, 1, 2); // 改变下这一行，使 fn() 输出 5
+
+// obj.method(fn.bind(obj), 1, 2);
+```
+
+### 五. 引用
 [深入浅出 JavaScript 中的 this](https://www.ibm.com/developerworks/cn/web/1207_wangqf_jsthis/index.html)
 
 [Javascript中this关键字详解](http://www.cnblogs.com/justany/archive/2012/11/01/the_keyword_this_in_javascript.html)
 
-#### 5. 进阶
+**进阶**  
 [JavaScript深入之从ECMAScript规范解读this](https://github.com/mqyqingfeng/Blog/issues/7)
 
 [深入理解JavaScript系列（13）：This? Yes,this!](http://www.cnblogs.com/TomXu/archive/2012/01/17/2310479.html)
