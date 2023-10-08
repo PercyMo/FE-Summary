@@ -46,10 +46,10 @@
 
 ### - TypeScript
 * TS 基础进阶  
-    [「1.9W字总结」一份通俗易懂的 TS 教程，入门 + 实战！](https://juejin.cn/post/7068081327857205261)  
-    [TypeScript进阶 之 重难点梳理](https://mp.weixin.qq.com/s/_lO3cd0FcF0Dg3TRnHPdwg)  
-    [你不知道的 TypeScript 高级技巧](https://mp.weixin.qq.com/s/HTn6RbyneNsGkqcTm1ypcg)  
-    [TypeScript真香系列——接口篇](https://mp.weixin.qq.com/s/06iBhb4ye6-1cAxgLX7ybA)  
+    [++ 「1.9W字总结」一份通俗易懂的 TS 教程，入门 + 实战！](https://juejin.cn/post/7068081327857205261)  
+    [++ TypeScript进阶 之 重难点梳理](https://mp.weixin.qq.com/s/_lO3cd0FcF0Dg3TRnHPdwg)  
+    [++ 你不知道的 TypeScript 高级技巧](https://mp.weixin.qq.com/s/HTn6RbyneNsGkqcTm1ypcg)  
+    [++ TypeScript真香系列——接口篇](https://mp.weixin.qq.com/s/06iBhb4ye6-1cAxgLX7ybA)  
 * TS 项目实践  
 
 ### - ES6
@@ -173,13 +173,7 @@
     [++ 前端需要懂的 APP 容器原理](https://mp.weixin.qq.com/s/MgMyAEVKKhuB16LdX07j1A)  
     [++ Hybrid App技术解析 -- 原理篇](https://juejin.cn/post/6844903640520474637)  
     [++ Hybrid App技术解析 -- 实战篇](https://juejin.cn/post/6844903648510607373)  
-    [++ JS Bridge 通信原理](https://mp.weixin.qq.com/s/pV0UFbMqwcjSikfG1aJW4g)  
-    [++ JSBridge实战](https://juejin.cn/post/6844903702721986568)  
-    [++ 【万字长文】写给前端工程师的JSBridge原理](https://juejin.cn/post/6847902218763534349)  
-    [++ 从零开始写一个 JSBridge](https://juejin.cn/post/6844903856418062350)  
-    [++ H5与Native交互之JSBridge技术](https://segmentfault.com/a/1190000010356403)  
-    [++ JSBridge的原理](https://juejin.cn/post/6844903585268891662)  
-    [++ 小白必看，JSBridge 初探](https://juejin.cn/post/6844904070881214471)  
+    [++ JS Bridge 通信原理](https://mp.weixin.qq.com/s/pV0UFbMqwcjSikfG1aJW4g)   
 * Electron  
     [++ 得物商家客服桌面端Electron技术实践](https://mp.weixin.qq.com/s/SXglmCL4WP9tKAVOZcT9UQ)  
     [++ electron 应用开发优秀实践](https://mp.weixin.qq.com/s/YXH2QkB0FCJ63cbNpqK1AA)  
