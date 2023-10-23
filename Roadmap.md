@@ -49,7 +49,6 @@
     [++ 「1.9W字总结」一份通俗易懂的 TS 教程，入门 + 实战！](https://juejin.cn/post/7068081327857205261)  
     [++ TypeScript进阶 之 重难点梳理](https://mp.weixin.qq.com/s/_lO3cd0FcF0Dg3TRnHPdwg)  
     [++ 你不知道的 TypeScript 高级技巧](https://mp.weixin.qq.com/s/HTn6RbyneNsGkqcTm1ypcg)  
-    [++ TypeScript真香系列——接口篇](https://mp.weixin.qq.com/s/06iBhb4ye6-1cAxgLX7ybA)  
 * TS 项目实践  
 
 ### - ES6
