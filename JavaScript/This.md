@@ -92,11 +92,11 @@ this与上下文中可执行代码的类型有直接关系，this值在进入上
     var name = "windowsName";
 
     function fn() {
-        console.log(this)
+        console.log(this); // Window
         var name = 'Cherry';
         innerFunction();
         function innerFunction() {
-            console.log(this, this.name);
+            console.log(this, this.name); // Window windowsName
         }
     }
 
