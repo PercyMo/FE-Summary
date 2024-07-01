@@ -265,6 +265,10 @@
     [前端监控系列2 ｜聊聊 JS 错误监控那些事儿](https://zhuanlan.zhihu.com/p/551313367)  
     [前端监控系列3 ｜ 如何衡量一个站点的性能好坏](https://mp.weixin.qq.com/s/Au_NNeamEoFEtlNvvVjpLw)  
 
+### - Linux
+* Shell  
+    [++ 万字长文：带你走进shell世界](https://mp.weixin.qq.com/s/gtIWO3ItxyLdQeVorXtShQ)  
+
 ### - 前端设计模式
 
 ### - 算法&数据结构&手撕代码
