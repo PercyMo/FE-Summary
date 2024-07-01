@@ -684,7 +684,7 @@ module.exports = {
 1. **安装**  
     ```sh
     # 注意版本问题，高低版本可能出现不兼容问题
-    yarn add node-sass@5.0.0 sass-loader@10.1.1 --dev
+    yarn add sass sass-loader@10.1.1 --dev
     ```
     无需配置，模板内直接使用
     ```vue
