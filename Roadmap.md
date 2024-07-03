@@ -263,6 +263,10 @@
     [前端监控系列1｜ 字节的前端监控SDK是怎样设计的](https://mp.weixin.qq.com/s/o-zUiO97SFLSZITPrbZcqQ)  
     [前端监控系列2 ｜聊聊 JS 错误监控那些事儿](https://zhuanlan.zhihu.com/p/551313367)  
     [前端监控系列3 ｜ 如何衡量一个站点的性能好坏](https://mp.weixin.qq.com/s/Au_NNeamEoFEtlNvvVjpLw)  
+* monorepo  
+    [++ 2023 年了！ pnpm monorepo用起来！](https://juejin.cn/post/7184392660939964474)  
+    [++ All in one：项目级 monorepo 策略最佳实践](https://segmentfault.com/a/1190000039157365)  
+    [++ 现代前端工程化-彻底搞懂基于 Monorepo 的 lerna 模块(从原理到实战)](https://mp.weixin.qq.com/s/bRbEhMKRVKO3oAyMaUfVYA)  
 
 ### - Linux
 * Shell  
