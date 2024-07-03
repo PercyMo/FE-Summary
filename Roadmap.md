@@ -14,6 +14,10 @@
     [++ 深入理解CSS中的层叠上下文和层叠顺序](https://www.zhangxinxu.com/wordpress/2016/01/understand-css-stacking-context-order-z-index/)  
 * 移动端1px问题  
     [++ Retina屏的移动设备如何实现真正1px的线](https://jinlong.github.io/2015/05/24/css-retina-hairlines/)  
+* css原子化&Tailwind  
+    [++ 有了它 Antd 样式覆盖不要太爽](https://mp.weixin.qq.com/s/XUTwoXIObjClPLZoUZV9sw)  
+    [++ TailwindCSS实践，越用越香](https://mp.weixin.qq.com/s/rQ95q5-HojYw5M-6VGKPsw)  
+    [++ TailwindCSS的使用，看这一篇就够](https://juejin.cn/post/7200782261997338681)  
 * 其他  
     [2019年，你是否可以抛弃 CSS 预处理器？](https://jelly.jd.com/article/5dcb9c73641a030153732a89)  
     [为什么要使用预处理器？](https://github.com/cssmagic/blog/issues/73)  
@@ -155,6 +159,10 @@
     [++ 「面试题」20+Vue面试题整理(持续更新)](https://juejin.cn/post/6844904084374290446)  
 
 ### - React
+* 思想 & 核心理念  
+    [++ React 设计思想](https://github.com/camsong/react-basic)  
+    [++ 二十分钟掌握React核心理念，老鸟快速入门指南](https://juejin.cn/post/7278245697165197346)  
+    [++ 【5年以上前端】Vue 和 React 的区别看这里](https://mp.weixin.qq.com/s/pUWzh449FhmAd1QS3kZLBw)  
 * 其他  
     [++ React 高频面试题梳理，看看面试怎么答？](https://blog.conardli.top/2019/09/11/react/interview/)  
 * 生态  
@@ -163,6 +171,8 @@
     [React 源码剖析系列 － 生命周期的管理艺术](https://zhuanlan.zhihu.com/p/20312691)  
 * Hooks  
     [++ 从 Mixin 到 HOC 再到 Hook](https://blog.conardli.top/2019/04/09/react/xmin-hoc-hooks/)  
+    [++ 一文归纳 React Hooks 常用场景](https://juejin.cn/post/6918896729366462471)  
+    [++ React Hooks学习指北](https://mp.weixin.qq.com/s/rMGraYV-gr9xkkewyeTBjA)  
 
 ### - 多端开发
 * REM * VW 响应式布局  
@@ -254,6 +264,10 @@
     [前端监控系列2 ｜聊聊 JS 错误监控那些事儿](https://zhuanlan.zhihu.com/p/551313367)  
     [前端监控系列3 ｜ 如何衡量一个站点的性能好坏](https://mp.weixin.qq.com/s/Au_NNeamEoFEtlNvvVjpLw)  
 
+### - Linux
+* Shell  
+    [++ 万字长文：带你走进shell世界](https://mp.weixin.qq.com/s/gtIWO3ItxyLdQeVorXtShQ)  
+
 ### - 前端设计模式
 
 ### - 算法&数据结构&手撕代码
@@ -263,6 +277,13 @@
     [JavaScript 算法之复杂度分析](https://juejin.im/post/5c2a1d9d6fb9a04a0f654581)
 
 ### - 业务实践
+* 技术方案怎么写
+    [++ 如何画好一张架构图？](https://mp.weixin.qq.com/s/2P1cmF-g2_ih_niUh741yQ)  
+    [++ 如何写前端技术方案文档?](https://mp.weixin.qq.com/s/xJJuNAJVS0iwULGoI7GIKA)  
+* Chrome V3插件开发
+    [++ Chrome V3插件开发，只看这一篇文章就够了](https://mp.weixin.qq.com/s/5Dhj2nxlMj3m602pGNdk3w)  
+    [++ 全网最详细的谷歌插件开发小册](https://mp.weixin.qq.com/s/q5TaoNkW2aeDyHV9BQxqhg)  
+    [++ Chrome 插件开发指南和实践](https://mp.weixin.qq.com/s/qPeZZPwUGX2eRi4Q1AGfcw)  
 
 ### - 面经
 
