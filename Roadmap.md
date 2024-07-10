@@ -267,6 +267,14 @@
     [++ 2023 年了！ pnpm monorepo用起来！](https://juejin.cn/post/7184392660939964474)  
     [++ All in one：项目级 monorepo 策略最佳实践](https://segmentfault.com/a/1190000039157365)  
     [++ 现代前端工程化-彻底搞懂基于 Monorepo 的 lerna 模块(从原理到实战)](https://mp.weixin.qq.com/s/bRbEhMKRVKO3oAyMaUfVYA)  
+* Nginx  
+    * 基本配置/反向代理/跨域/rewrite/负载均衡/缓存/防盗链  
+        [++ 前端必备知识之Nginx](https://juejin.cn/post/7108394145068089374)  
+        [++ 作为前端开发，感受下 nginx 带来的魅力](https://juejin.cn/post/7368433531926052874)  
+        [++ 前端必会的 Nginx入门视频教程(共11集)](https://juejin.cn/post/6844903701459501070)  
+        [++ Nginx一网打尽：动静分离、压缩、缓存、黑白名单、跨域、高可用、性能优化...想要的这都有！](https://juejin.cn/post/7112826654291918855)  
+    * CDN  
+    * 插件开发与OpenResty/Lua  
 
 ### - Linux
 * Shell  
