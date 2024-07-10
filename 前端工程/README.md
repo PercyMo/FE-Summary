@@ -36,10 +36,6 @@
 4. [git忽略规则提交 =>>](./Gitignore.md)
 5. [本地项目上传git =>>](./GitLocalProject.md)
 
-### 六、nginx
-1. [Nginx =>>](./Nginx.md)
-2. nginx实现请求过滤、配置 gzip
-
 ### 七、持续集成交付
 1. [Jenkins自动化部署前端项目 =>>](./Jenkins.md)
 2. CI/CD （Jenkins）

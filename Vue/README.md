@@ -6,9 +6,6 @@
 4. [基于角色的权限控制 =>>](./PracticePermission.md)
 13. [项目部署 =>>](./Deploy.md)
 
-### 四、Vue SSR实战
-9. [Nuxt.js实践](./Nuxt.md)
-
 ### 五、Vue + TS
 
 ### 六、Vue3.0
