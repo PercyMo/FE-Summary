@@ -163,6 +163,8 @@
     [++ React 设计思想](https://github.com/camsong/react-basic)  
     [++ 二十分钟掌握React核心理念，老鸟快速入门指南](https://juejin.cn/post/7278245697165197346)  
     [++ 【5年以上前端】Vue 和 React 的区别看这里](https://mp.weixin.qq.com/s/pUWzh449FhmAd1QS3kZLBw)  
+* 基础
+    [++ React全部api解读+基础实践大全](https://juejin.cn/post/6950063294270930980)  
 * 其他  
     [++ React 高频面试题梳理，看看面试怎么答？](https://blog.conardli.top/2019/09/11/react/interview/)  
 * 生态  
@@ -189,8 +191,12 @@
     [++ Electron 实践笔记](https://juejin.cn/post/6844903966568873992)  
 
 ### - NodeJs
-* koa 实践  
-    [一杯茶的时间，上手 Koa2 + MySQL 开发(实战好文)](https://mp.weixin.qq.com/s/hJi7tZvkuUsPxTFiZ8exRg)  
+* 基础&整体知识  
+    [++ 一篇文章构建你的 NodeJS 知识体系](https://juejin.cn/post/6844903767926636558)  
+    [++ 一杯茶的时间，上手 Koa2 + MySQL 开发(实战好文)](https://mp.weixin.qq.com/s/hJi7tZvkuUsPxTFiZ8exRg)  
+    [++ 如何设计一个百万级用户的抽奖系统？](https://juejin.cn/post/6844903847031226382)  
+    [++ 《吊打面试官》系列 Node.js 全栈秒杀系统](https://mp.weixin.qq.com/s/SI9kEpDWD-JJ8ZQLDJCcVw)  
+    [++ (实战总结)我用EggJS开发了一个日增量过亿的数据可视化平台](https://mp.weixin.qq.com/s/KEwCmlqFzT0XKOUw-ZUT0w)  
 * mysql  
     [一文达到Mysql实战水平](https://mp.weixin.qq.com/s/cJPyCs92QB-i2cIPGJk5kg)  
     [学会Sequelize，让你操作数据更丝滑](https://mp.weixin.qq.com/s/9kTtbzo1UEODIW9avI1l0w)  
@@ -295,7 +301,7 @@
     [++ 如何画好一张架构图？](https://mp.weixin.qq.com/s/2P1cmF-g2_ih_niUh741yQ)  
     [++ 如何写前端技术方案文档?](https://mp.weixin.qq.com/s/xJJuNAJVS0iwULGoI7GIKA)  
 * Chrome V3插件开发
-    [++ Chrome V3插件开发，只看这一篇文章就够了](https://mp.weixin.qq.com/s/5Dhj2nxlMj3m602pGNdk3w)  
+    [++ Chrome V3插件开发，只看这一篇文章就够了](https://juejin.cn/post/7229238405406294074)  
     [++ 全网最详细的谷歌插件开发小册](https://mp.weixin.qq.com/s/q5TaoNkW2aeDyHV9BQxqhg)  
     [++ Chrome 插件开发指南和实践](https://mp.weixin.qq.com/s/qPeZZPwUGX2eRi4Q1AGfcw)  
 
