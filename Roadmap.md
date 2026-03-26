@@ -1,3 +1,40 @@
+### - AI
+* 基础概念  
+    * 系统认知  
+        [++ 10分钟讲清楚 Prompt, Agent, MCP 是什么](https://www.bilibili.com/video/BV1aeLqzUE6L/)  
+        [++ 一口气拆穿Skill/MCP/RAG/Agent/OpenClaw底层逻辑](https://www.bilibili.com/video/BV1ojfDBSEPv/)  
+        [++ 一文吃透AIGC、Agent、MCP的概念和关系](https://mp.weixin.qq.com/s/7DZFhZ-UV9k52m5orJy-SA)  
+    * LLM 基本原理（Token / 上下文窗口 / 温度参数）  
+    * Embedding & 向量数据库  
+    * RAG（检索增强生成）  
+
+* Prompt Engineering  
+    * 基础技巧（角色设定 / few-shot / CoT）  
+    * System Prompt 设计  
+
+* Function Calling & Tool Use  
+
+* MCP（Model Context Protocol）  
+
+* Skill  
+
+* Agent  
+    * Agent 基本原理（ReAct / 规划 / 记忆）  
+    * 多 Agent 协作  
+
+* AI Coding 实践  
+    * 方法论&最佳实践  
+        [++ AI Coding 长文分享：如何真正把工具用起来，从原理到实践](https://mp.weixin.qq.com/s/xYgkVAmUrd2Xu7QRhpjoIw)  
+    * Claude Code  
+    * Copilot  
+        [VSCode + Copilot 保姆级 AI 编程实战教程](https://x.com/yupi996/status/2029894874888278198?s=46)
+    * Cursor  
+
+* 前端 AI 工程实践  
+    * AI SDK 接入（Vercel AI SDK / OpenAI SDK）  
+    * Streaming 流式响应处理  
+    * 自定义智能体开发  
+
 ### - HTML&CSS
 * position  
     [++ position MDN](https://developer.mozilla.org/zh-CN/docs/Web/CSS/position)  
